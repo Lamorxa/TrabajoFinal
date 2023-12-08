@@ -40,15 +40,16 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
             {"Movimientos", "Tarjetas", "Recargas", "Consumos"},
             {"Rutas"},
             {"Transporte", "Empresa", "Unidades"},
-            {"~Configuración~"},
-            {"Proximamente"}
+            {"~Informes~"},
+            {"Reportes"}
                 
         };
         String iconos[] = {
             "user.svg",
             "pago.svg",
             "ruta.svg",
-            "transporte.svg"
+            "transporte.svg",
+            "reportes.svg"
             
         };
         return new SimpleMenuOption()

@@ -56,12 +56,16 @@ public class Vistaadministrador extends javax.swing.JFrame {
     
     public Vistaadministrador() {
         
+        //Centrar objetos tabla
+        
+        
         
         GlassPanePopup.install(this);
         ConstructorCajon constructorCajon = new ConstructorCajon(this);
         Drawer.getInstance().setDrawerBuilder(constructorCajon);
         initComponents();
         init();
+        
        // Controladordebugtarje a=new Controladordebugtarje( this);
 
         ControladorUsuarios users = new ControladorUsuarios(us, usDao, this);
@@ -154,6 +158,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             // Manejar la excepción, mostrar un mensaje de error, etc.
         }
     }
+    
 
     private void init(){
              
@@ -168,47 +173,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUsuarios.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
         txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
         txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        btnactaddper.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btnactmodper.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btnactdelper.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btnadduser.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btncancelusu.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btnactmoduser.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btnaddperso.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        btncancelper.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        
+
     }
     
 
@@ -487,6 +452,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btncanuni2 = new javax.swing.JButton();
         pnlBotonesBusqueda8 = new Clases.CrazyPanel();
         txtBuscar8 = new javax.swing.JTextField();
+        pnlReportes = new raven.crazypanel.CrazyPanel();
+        menuUnidades1 = new Clases.CrazyPanel();
+        btnmenu9 = new javax.swing.JButton();
+        jLabel51 = new javax.swing.JLabel();
+        tablaUnidades1 = new Clases.CrazyPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("frame"); // NOI18N
@@ -545,11 +519,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "A. Paterno", "A. Materno", "DNI", "Celular", "Tipo Usuario", "Email", "RUC Empresa", "Estado"
+                "DNI", "Nombre", "A. Paterno", "A. Materno", "Celular", "Email", "Tipo Usuario", "RUC Empresa", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2597,6 +2571,70 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         paneles.add(pnlUnidades, "card2");
 
+        pnlReportes.setLayout(new java.awt.BorderLayout());
+
+        menuUnidades1.setAlignmentX(1.0F);
+        menuUnidades1.setPreferredSize(new java.awt.Dimension(100, 80));
+
+        btnmenu9.setBackground(new java.awt.Color(30, 30, 30));
+        btnmenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icono/menu.png"))); // NOI18N
+        btnmenu9.setPreferredSize(new java.awt.Dimension(120, 123));
+        btnmenu9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenu9ActionPerformed(evt);
+            }
+        });
+
+        jLabel51.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel51.setText("Reportes");
+        jLabel51.setAlignmentX(1.0F);
+        jLabel51.setPreferredSize(new java.awt.Dimension(262, 40));
+
+        javax.swing.GroupLayout menuUnidades1Layout = new javax.swing.GroupLayout(menuUnidades1);
+        menuUnidades1.setLayout(menuUnidades1Layout);
+        menuUnidades1Layout.setHorizontalGroup(
+            menuUnidades1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuUnidades1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnmenu9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menuUnidades1Layout.setVerticalGroup(
+            menuUnidades1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuUnidades1Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(menuUnidades1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnmenu9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlReportes.add(menuUnidades1, java.awt.BorderLayout.PAGE_START);
+
+        tablaUnidades1.setPreferredSize(new java.awt.Dimension(1245, 530));
+        tablaUnidades1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setText("Fitro de Fechas");
+        tablaUnidades1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 120, 30));
+
+        jLabel59.setText("Fecha Inicial");
+        tablaUnidades1.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 80, -1));
+
+        jLabel60.setText("Fecha Final");
+        tablaUnidades1.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, -1));
+
+        jButton1.setText("jButton1");
+        tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 180, 30));
+
+        pnlReportes.add(tablaUnidades1, java.awt.BorderLayout.CENTER);
+
+        paneles.add(pnlReportes, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -3466,6 +3504,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminar13ActionPerformed
 
+    private void btnmenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnmenu9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3556,6 +3598,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JButton btnmenu6;
     private javax.swing.JButton btnmenu7;
     private javax.swing.JButton btnmenu8;
+    private javax.swing.JButton btnmenu9;
     public javax.swing.JButton btnmodemp;
     public javax.swing.JButton btnmodper;
     private javax.swing.JButton btnmodrut;
@@ -3573,6 +3616,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbxestadoUser;
     public javax.swing.JComboBox<String> cbxestadopersona;
     public javax.swing.JComboBox<String> cbxtipousupersona;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -3592,6 +3636,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -3620,9 +3665,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3643,6 +3691,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel menuRutas;
     private Clases.CrazyPanel menuTarjetas;
     private Clases.CrazyPanel menuUnidades;
+    private Clases.CrazyPanel menuUnidades1;
     private Clases.CrazyPanel menuUsuarios;
     public raven.crazypanel.CrazyPanel paneles;
     private Clases.CrazyPanel pnlBotonesBusqueda1;
@@ -3676,6 +3725,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel pnlRecargasForm;
     private Clases.CrazyPanel pnlRecargasForm1;
     private Clases.CrazyPanel pnlRecargasForm2;
+    public raven.crazypanel.CrazyPanel pnlReportes;
     public raven.crazypanel.CrazyPanel pnlRutas;
     private Clases.CrazyPanel pnlRutasForm;
     private javax.swing.JPanel pnlTarjeraopc;
@@ -3706,6 +3756,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public Clases.CrazyPanel tablaRutas;
     public Clases.CrazyPanel tablaTarjetas;
     public Clases.CrazyPanel tablaUnidades;
+    public Clases.CrazyPanel tablaUnidades1;
     public Clases.CrazyPanel tablaUsuarios;
     public javax.swing.JTable tblConsumos;
     public javax.swing.JTable tblEmpresastrans;

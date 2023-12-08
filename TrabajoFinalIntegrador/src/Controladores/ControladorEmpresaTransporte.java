@@ -25,7 +25,7 @@ public class ControladorEmpresaTransporte implements ActionListener{
         this.obj = obj;
         this.objDAO = objDAO;
         this.views = vobj;
-        this.views.btnaddunidad.addActionListener(this);
+        this.views.btnaddemp.addActionListener(this);
         this.views.btnmodemp.addActionListener(this);
         this.views.btndelemp.addActionListener(this);
         listar();
@@ -37,7 +37,7 @@ public class ControladorEmpresaTransporte implements ActionListener{
         modelo.removeRow(0);}}
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == views.btnaddunidad) {
+        if (e.getSource() == views.btnaddemp) {
     if (views.txtcolorempresa.getText().equals("") ||
             views.txtnombreempresa.getText().equals("") ||
             views.txtrucempresa.getText().equals("")) {
