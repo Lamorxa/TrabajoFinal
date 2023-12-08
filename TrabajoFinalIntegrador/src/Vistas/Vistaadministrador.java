@@ -164,6 +164,16 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 "borderWidth:0;" +
                 "focusWidth:0;" +
                 "innerFocusWidth:0");
+        btnaddperso.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btncancelper.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
         
     }
     

@@ -5,6 +5,7 @@
 package Vistas;
 
 import Cajon.ConstructorCajonConductor;
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
@@ -27,6 +28,11 @@ public class VistaConductor extends javax.swing.JFrame {
         ConstructorCajonConductor constructorCajonConductor = new ConstructorCajonConductor(this);
         Drawer.getInstance().setDrawerBuilder(constructorCajonConductor);
         initComponents();
+        init();
+    }
+    
+    public void init(){
+        
     }
 
     /**
