@@ -75,4 +75,8 @@ public class RegistroRecargas {
         this.estado = estado;
     }
 
+    public RegistroRecargas(int codRecarga) {
+        this.codRecarga = codRecarga;
+    }
+
 }

@@ -90,7 +90,7 @@ public boolean modificarConsumos(RegistroConsumos registroConsumos) {
 }
 
 public boolean eliminarConsumo(RegistroConsumos registroConsumos) {
-    String sql = "DELETE FROM registroconsumos WHERE CodConsumo = ?";
+    String sql = "UPDATE registroconsumos SET estado = 'inactivo' WHERE CodConsumo = ?;";
     Conexion cn = new Conexion();
     try {
         Connection con = cn.crearConexion();
@@ -104,5 +104,21 @@ public boolean eliminarConsumo(RegistroConsumos registroConsumos) {
         return false;
     }
 }
+public boolean actualizarsaldoconsumo(RegistroConsumos registroConsumos){
+String sql = "UPDATE tarjetas SET Saldo = Saldo - ? WHERE CodTarjeta = ?";
+    Conexion cn = new Conexion();
+    try {
+        Connection con = cn.crearConexion();
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setDouble(1, registroConsumos.getMontoConsumo());
+        ps.setString(2, registroConsumos.getCodTarjeta());
+        ps.execute();
+        cn.cierraConsultas();
+        return true;
+    } catch (SQLException e) {
+        System.out.println("Error al actualizar saldo" + e.toString());
+        return false;
+    }
 
+}
 }

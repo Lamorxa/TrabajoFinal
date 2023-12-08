@@ -13,12 +13,12 @@ import java.util.Date;
 
 public class ControladorRegistroConsumos implements ActionListener {
     private Vistaadministrador views;
-    private RegistroConsumos registroConsumos;
+    private RegistroConsumos obj;
     private RegistroConsumosDAO registroConsumosDAO;
     DefaultTableModel modelo = new DefaultTableModel();
 
-    public ControladorRegistroConsumos(RegistroConsumos registroConsumos, RegistroConsumosDAO registroConsumosDAO, Vistaadministrador views) {
-        this.registroConsumos = registroConsumos;
+    public ControladorRegistroConsumos(RegistroConsumos obj, RegistroConsumosDAO registroConsumosDAO, Vistaadministrador views) {
+        this.obj = obj;
         this.registroConsumosDAO = registroConsumosDAO;
         this.views = views;
         this.views.btnRegistrarConsumo.addActionListener(this);
@@ -32,8 +32,14 @@ public class ControladorRegistroConsumos implements ActionListener {
         // Boton Registrar Consumo
         if (e.getSource() == views.btnRegistrarConsumo) {
             // Obtener datos de la vista y validar
+            if (views.txtCodTarjetaconsu.getText().equals("") ||
+            views.txtCodUnidadconsu.getText().equals(""))
+              JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        else {
+                      
+            
             double montoConsumo = 1;
-            String codTarjeta = views.txtCodConsumo.getText();
+            String codTarjeta = views.txtCodTarjetaconsu.getText();
             String codUnidad = views.txtCodUnidadconsu.getText();
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime ahora = LocalDateTime.now();
@@ -49,14 +55,20 @@ public class ControladorRegistroConsumos implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Consumo Registrado Con Éxito");
                 limpiarTabla();
                 listarConsumos();
+                registroConsumosDAO.actualizarsaldoconsumo(nuevoConsumo);
             } else {
                 JOptionPane.showMessageDialog(null, "Error al registrar Consumo");
             }
         }
-
+        }
         // Boton Modificar Consumo
         if (e.getSource() == views.btnModificarConsumo) {
             // Obtener datos de la vista y validar
+            if (views.txtCodTarjetaconsu.getText().equals("") ||
+            views.txtCodUnidadconsu.getText().equals(""))
+              JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        else{
+        
             int codConsumo = Integer.parseInt(views.txtCodConsumo.getText());
             double montoConsumo = 1;
             String codTarjeta = views.txtCodConsumo.getText();
@@ -78,11 +90,15 @@ public class ControladorRegistroConsumos implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Error al Modificar Consumo");
             }
-        }
+        }}
 
         // Boton Eliminar Consumo
         if (e.getSource() == views.btnEliminarConsumo) {
             // Obtener datos de la vista y validar
+            if (views.txtCodTarjetaconsu.getText().equals("") ||
+            views.txtCodUnidadconsu.getText().equals(""))
+              JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        else{
             int codConsumo = Integer.parseInt(views.txtCodConsumo.getText());
 
             // Crear objeto de consumo
@@ -93,11 +109,12 @@ public class ControladorRegistroConsumos implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Consumo Eliminado Con Éxito");
                 limpiarTabla();
                 listarConsumos();
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Error al Eliminar Consumo");
             }
         }
-    }
+    }}
 
     // Método para limpiar la tabla
     public void limpiarTabla() {
