@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelos.Tarjetas;
 import modelos.TarjetaDAO;
-public class ControladorTarjetas implements ActionListener{
+public class ControladorTarjetas{
     
     private Tarjetas tar=new Tarjetas();
     private TarjetaDAO tardao=new TarjetaDAO();
@@ -23,15 +23,14 @@ public class ControladorTarjetas implements ActionListener{
         this.tar = tar;
         this.tardao = tardao;
         this.views = views;
-        this.views.btnaddtar.addActionListener(this);
+        /*this.views.btnaddtar.addActionListener(this);
         this.views.btndeltar.addActionListener(this);
         this.views.btnmodtar.addActionListener(this);
         this.views.btndeltar.addActionListener(this);
-        listar();   
+        listar();*/   
     } 
 
-    
-
+    /*
     private void listar() {
        List<Tarjetas> lista = tardao.listarTarjetas(); // Suponiendo que 'rutaDAO' es una instancia de tu clase 'RutaDAO'
     DefaultTableModel modelo = (DefaultTableModel) views.tbltarjetas.getModel(); // Asegúrate de tener 'tblRutas' definido en tu vista
@@ -81,4 +80,4 @@ public class ControladorTarjetas implements ActionListener{
         DefaultTableModel modelo = (DefaultTableModel) views.tbltarjetas.getModel(); // Asegúrate de ajustar 'tblRutas' con el nombre de tu tabla
     while (modelo.getRowCount() > 0) {
         modelo.removeRow(0);}}
-}
+*/}
