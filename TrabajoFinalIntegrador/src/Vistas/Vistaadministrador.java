@@ -313,6 +313,13 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jTextField33 = new javax.swing.JTextField();
         btnRecargar = new javax.swing.JButton();
         btnEliminar4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         pnlRecargasForm1 = new Clases.CrazyPanel();
         jLabel22 = new javax.swing.JLabel();
         numeroTarjetaRecarga = new javax.swing.JTextField();
@@ -339,6 +346,13 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jComboBox5 = new javax.swing.JComboBox<>();
         btnAgregar4 = new javax.swing.JButton();
         btnEliminar5 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
         pnlBotonesBusqueda5 = new Clases.CrazyPanel();
         txtBuscar5 = new javax.swing.JTextField();
         pnlRutas = new raven.crazypanel.CrazyPanel();
@@ -506,6 +520,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblpersonas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblpersonas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblpersonasMouseClicked(evt);
@@ -1384,7 +1399,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 btnRecargarActionPerformed(evt);
             }
         });
-        pnlRecargasForm3.add(btnRecargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        pnlRecargasForm3.add(btnRecargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 80, -1));
 
         btnEliminar4.setText("Eliminar");
         btnEliminar4.addActionListener(new java.awt.event.ActionListener() {
@@ -1392,7 +1407,33 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 btnEliminar4ActionPerformed(evt);
             }
         });
-        pnlRecargasForm3.add(btnEliminar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+        pnlRecargasForm3.add(btnEliminar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 80, -1));
+
+        jButton1.setText("Recargar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        pnlRecargasForm3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        jButton2.setText("Cancelar");
+        pnlRecargasForm3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+
+        jButton3.setText("Eliminar");
+        pnlRecargasForm3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 80, -1));
+
+        jButton4.setText("Cancelar");
+        pnlRecargasForm3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
+
+        jButton5.setText("Modificar");
+        pnlRecargasForm3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+
+        jButton6.setText("Cancelar");
+        pnlRecargasForm3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
+
+        jButton7.setText("Modificar");
+        pnlRecargasForm3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         pnlRecargasForm.add(pnlRecargasForm3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 340, 160));
 
@@ -1585,7 +1626,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 btnAgregar4ActionPerformed(evt);
             }
         });
-        pnlConsumosForm.add(btnAgregar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 20, -1, -1));
+        pnlConsumosForm.add(btnAgregar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 80, -1));
 
         btnEliminar5.setText("Eliminar");
         btnEliminar5.addActionListener(new java.awt.event.ActionListener() {
@@ -1593,7 +1634,28 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 btnEliminar5ActionPerformed(evt);
             }
         });
-        pnlConsumosForm.add(btnEliminar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, -1, -1));
+        pnlConsumosForm.add(btnEliminar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 100, 80, -1));
+
+        jButton8.setText("Modificar");
+        pnlConsumosForm.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 60, -1, -1));
+
+        jButton9.setText("Cancelar");
+        pnlConsumosForm.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, -1, -1));
+
+        jButton10.setText("Cancelar");
+        pnlConsumosForm.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 60, -1, -1));
+
+        jButton11.setText("Cancelar");
+        pnlConsumosForm.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 100, -1, -1));
+
+        jButton12.setText("Registrar");
+        pnlConsumosForm.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, -1));
+
+        jButton13.setText("Modificar");
+        pnlConsumosForm.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 60, -1, -1));
+
+        jButton14.setText("Eliminar");
+        pnlConsumosForm.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, -1, -1));
 
         ConsumoBotones.add(pnlConsumosForm, java.awt.BorderLayout.CENTER);
 
@@ -3343,6 +3405,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblusuariosMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3443,6 +3509,20 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbxtipousupersona;
     private javax.swing.JTextField codTarjeta;
     private javax.swing.JTextField dniTarjeta;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JFormattedTextField jFormattedTextField1;
