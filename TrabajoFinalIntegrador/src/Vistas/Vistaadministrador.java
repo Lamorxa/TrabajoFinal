@@ -1569,7 +1569,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jLabel31.setText("Estado");
         pnlConsumosForm2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 14, 101, -1));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         pnlConsumosForm2.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 36, 186, -1));
 
         pnlConsumosForm.add(pnlConsumosForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 220, 160));
