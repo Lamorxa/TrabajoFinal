@@ -37,6 +37,17 @@ public class RegistroConsumos  {
         this.estado = estado;
     }
 
+    public RegistroConsumos(int codConsumo) {
+        this.codConsumo = codConsumo;
+    }
+    
+ public RegistroConsumos( double montoConsumo, String codTarjeta, String codUnidad, String fechaConsumo, String estado) {
+        this.montoConsumo = montoConsumo;
+        this.codTarjeta = codTarjeta;
+        this.codUnidad = codUnidad;
+        this.fechaConsumo = fechaConsumo;
+        this.estado = estado;
+    }
     public int getCodConsumo() {
         return codConsumo;
     }

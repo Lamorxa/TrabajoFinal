@@ -42,7 +42,7 @@ public class TarjetaDAO {
 
     public List<Tarjetas> listarTarjetas() {
         List<Tarjetas> tarjetasLista = new ArrayList<>();
-        String sql = "SELECT * FROM tarjetas";
+        String sql = "SELECT * FROM `tarjetas`";
         try {
             con = cn.crearConexion();
             ps = con.prepareStatement(sql);
