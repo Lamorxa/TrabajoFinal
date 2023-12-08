@@ -13,24 +13,24 @@ import javax.swing.table.DefaultTableModel;
 
 import modelos.Tarjetas;
 import modelos.TarjetaDAO;
-public class ControladorTarjetas{
+public class ControladorTarjetas implements ActionListener{
     
     private Tarjetas tar=new Tarjetas();
     private TarjetaDAO tardao=new TarjetaDAO();
     private Vistaadministrador views=new Vistaadministrador();
     DefaultTableModel modelo= new DefaultTableModel();
-    public ControladorTarjetas(Tarjetas tar, TarjetaDAO tardao, Vistaadministrador views) {
+    public ControladorTarjetas (Tarjetas tar, TarjetaDAO tardao, Vistaadministrador views) {
         this.tar = tar;
         this.tardao = tardao;
         this.views = views;
-        /*this.views.btnaddtar.addActionListener(this);
+        this.views.btnaddtar.addActionListener(this);
         this.views.btndeltar.addActionListener(this);
         this.views.btnmodtar.addActionListener(this);
         this.views.btndeltar.addActionListener(this);
-        listar();*/   
+       /* listar();*/   
     } 
 
-    /*
+  
     private void listar() {
        List<Tarjetas> lista = tardao.listarTarjetas(); // Suponiendo que 'rutaDAO' es una instancia de tu clase 'RutaDAO'
     DefaultTableModel modelo = (DefaultTableModel) views.tbltarjetas.getModel(); // Asegúrate de tener 'tblRutas' definido en tu vista
@@ -58,8 +58,8 @@ public class ControladorTarjetas{
         tar.setCodTarjeta(views.txtcodtarjeta.getText());
         tar.setDni(views.txtdnipersonatarjeta.getText());
         tar.setSaldo(Double.parseDouble(views.txtsaldo.getText()));
-        tar.setFechaCaducidad(String.valueOf(views.jdcfechacaducTarjeta));
-        tar.setFechaCreacion(String.valueOf(views.jdcfechacreacionTarjeta));
+        tar.setFechaCaducidad(String.valueOf(views.jdcfechacaducTarjeta.getText()));
+        tar.setFechaCreacion(String.valueOf(views.jdcfechacreacionTarjeta.getText()));
         tar.setEstado(views.cbxEstadotarjeta.getSelectedItem().toString());
 
         if (tardao.registrarTarjeta(tar)) {
@@ -80,4 +80,4 @@ public class ControladorTarjetas{
         DefaultTableModel modelo = (DefaultTableModel) views.tbltarjetas.getModel(); // Asegúrate de ajustar 'tblRutas' con el nombre de tu tabla
     while (modelo.getRowCount() > 0) {
         modelo.removeRow(0);}}
-*/}
+}

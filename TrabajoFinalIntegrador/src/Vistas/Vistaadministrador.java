@@ -4,19 +4,22 @@ import Cajon.ConstructorCajon;
 import Controladores.ControladorEmpresaTransporte;
 import Controladores.ControladorPersonas;
 import Controladores.ControladorRutas;
+import Controladores.*;
 import Controladores.ControladorUnidades;
 import Controladores.ControladorUsuarios;
+import Controladores.Controladordebugtarje;
 import Controladores.Rellenarcombo;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import conexion.Conexion;
-import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.UIManager;
-import modelos.EmpresaTransporte;
+import javax.swing.table.DefaultTableModel;
+import modelos.*;
 import modelos.EmpresaTransporteDAO;
 import modelos.Personas;
 import modelos.PersonasDAO;
@@ -45,8 +48,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
     TarjetaDAO tarjdao=new TarjetaDAO();
     Unidades unidad=new Unidades();
     UnidadDAO unidadesDAO=new UnidadDAO();
+    RegistroConsumos consu= new RegistroConsumos();
+    RegistroConsumosDAO conconsu= new RegistroConsumosDAO();
     Rellenarcombo re=new Rellenarcombo();
     Conexion conec=new Conexion();
+    
     public Vistaadministrador() {
         
         
@@ -55,15 +61,18 @@ public class Vistaadministrador extends javax.swing.JFrame {
         Drawer.getInstance().setDrawerBuilder(constructorCajon);
         initComponents();
         init();
+       // Controladordebugtarje a=new Controladordebugtarje( this);
+
         ControladorUsuarios users = new ControladorUsuarios(us, usDao, this);
         ControladorRutas rutas= new ControladorRutas(rut, rutdao, this);
         ControladorEmpresaTransporte empresas=new ControladorEmpresaTransporte(emtrans, emtransdao, this);
          ControladorPersonas personas=new ControladorPersonas(this, person, persondao);
-         ControladorUnidades unidades =new ControladorUnidades(this, unidad, unidadesDAO);
-         //re.rellenar("tarjetas", "CodTarjeta",cbntarjetasrecarga,conec);
-   
-        /*ControladorTarjetas tarjetas=new ControladorTarjetas(tarj, tarjdao, this);
-      */
+        ControladorUnidades unidades =new ControladorUnidades(this, unidad, unidadesDAO);
+       ControladorRegistroConsumos consss= new ControladorRegistroConsumos(consu, conconsu, this);
+        
+//re.rellenar("tarjetas", "CodTarjeta",cbntarjetasrecarga,conec);
+         
+      
         
         this.setLocationRelativeTo(null);
         btnRegrut.setVisible(false);
@@ -121,7 +130,30 @@ public class Vistaadministrador extends javax.swing.JFrame {
   
 
     }
-    
+       
+    private void listarTarjetas() {
+        try {
+            List<Tarjetas> lista = tarjdao.listarTarjetas();
+            DefaultTableModel modelo = (DefaultTableModel) tbltarjetas.getModel();
+            modelo.setRowCount(0); // Limpiar las filas existentes en la tabla antes de agregar nuevas
+
+            Object[] obj = new Object[6];
+            for (int i = 0; i < lista.size(); i++) {
+                obj[0] = lista.get(i).getCodTarjeta();
+                obj[1] = lista.get(i).getSaldo();
+                obj[2] = lista.get(i).getDni();
+                obj[3] = lista.get(i).getFechaCreacion();
+                obj[4] = lista.get(i).getFechaCaducidad();
+                obj[5] = lista.get(i).getEstado();
+                modelo.addRow(obj);
+            }
+            tbltarjetas.setModel(modelo);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Manejar la excepción, mostrar un mensaje de error, etc.
+        }
+    }
+
     private void init(){
              
         tablaPersonas.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
@@ -133,49 +165,49 @@ public class Vistaadministrador extends javax.swing.JFrame {
         //pnlPersonaForm4.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         pnlBotonesBusqueda2.setLayout(new MigLayout("","[200]push[][]",""));
         tablaUsuarios.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
-        
-        //Diseño placeholder para las barras de busqueda
         txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
         txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar3.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar4.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar5.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar6.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar7.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar8.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        btnactaddper.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btnactmodper.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btnactdelper.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btnadduser.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btncancelusu.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btnactmoduser.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btnaddperso.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
+        btncancelper.putClientProperty(FlatClientProperties.STYLE,"" +
+                "background:$Component.accentColor;" +
+                "borderWidth:0;" +
+                "focusWidth:0;" +
+                "innerFocusWidth:0");
         
-        //Diseño placeholder para los txt
-        //Personas
-        txtnombrepersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre");
-        txtapepatpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Paterno");
-        txtapematpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Materno");
-        txtdnipersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
-        txtcelusuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Celular");
-        txtemail.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Correo Electrónico");
-        txtruc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"RUC de Empresa");
-        //Usuarios
-        txtUserUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de Usuario");
-        txtContraUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Contraseña");
-        txtDniUsers.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
-        //Tarjetas
-        codTarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Código de Tarjeta");
-        dniTarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
-        //Recargas
-        numeroTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
-        montoTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Monto de Recarga");
-        //Consumos
-        numeroTarjetaConsumos.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
-        unidadConsumos.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Unidad");
-        //Rutas
-        txtnombreruta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de la Ruta");
-        //Empresas
-        txtrucempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"RUC de la Empresa");
-        txtnombreempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de la Empresa");
-        txtcolorempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Color de la unidad");
-        //Unidades
-        txtCodUnidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Codigo de la Unidad");
-        txtCodSoat.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Codigo del Soat");
-        txtDniunidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Color de la Unidad");
     }
     
 
@@ -266,34 +298,34 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tablaTarjetas = new Clases.CrazyPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbltarjetas = new javax.swing.JTable();
         TarjetaBotones = new Clases.CrazyPanel();
         pnlTarjetaForm = new Clases.CrazyPanel();
         pnlTarjetaForm1 = new Clases.CrazyPanel();
         jLabel17 = new javax.swing.JLabel();
-        codTarjeta = new javax.swing.JTextField();
+        txtcodtarjeta = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cbxEstadotarjeta = new javax.swing.JComboBox<>();
         pnlTarjetaForm2 = new Clases.CrazyPanel();
         jLabel19 = new javax.swing.JLabel();
-        dniTarjeta = new javax.swing.JTextField();
+        txtdnipersonatarjeta = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        saldoTarjeta = new javax.swing.JTextField();
+        txtsaldo = new javax.swing.JTextField();
         pnlTarjeraopc = new javax.swing.JPanel();
-        btnaddtarjeta = new javax.swing.JButton();
-        btnadduser1 = new javax.swing.JButton();
-        btncancelar1 = new javax.swing.JButton();
-        btnModUser = new javax.swing.JButton();
-        btnmoduser1 = new javax.swing.JButton();
-        btncancelar2 = new javax.swing.JButton();
-        btndeluser1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnaddtar = new javax.swing.JButton();
+        btnEditar11 = new javax.swing.JButton();
+        btnEliminar10 = new javax.swing.JButton();
+        btndeltar = new javax.swing.JButton();
+        btnEditar12 = new javax.swing.JButton();
+        btnmodtar = new javax.swing.JButton();
         btnEliminar11 = new javax.swing.JButton();
-        btncancelar3 = new javax.swing.JButton();
+        btnEditar13 = new javax.swing.JButton();
         pnlTarjetaForm3 = new Clases.CrazyPanel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jdcfechacaducTarjeta = new javax.swing.JFormattedTextField();
+        jdcfechacreacionTarjeta = new javax.swing.JFormattedTextField();
         pnlBotonesBusqueda3 = new Clases.CrazyPanel();
         txtBuscar3 = new javax.swing.JTextField();
         pnlRecargas = new raven.crazypanel.CrazyPanel();
@@ -313,18 +345,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jTextField33 = new javax.swing.JTextField();
         btnRecargar = new javax.swing.JButton();
         btnEliminar4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         pnlRecargasForm1 = new Clases.CrazyPanel();
         jLabel22 = new javax.swing.JLabel();
-        numeroTarjetaRecarga = new javax.swing.JTextField();
+        jTextField15 = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        montoTarjetaRecarga = new javax.swing.JTextField();
+        jTextField16 = new javax.swing.JTextField();
         pnlBotonesBusqueda4 = new Clases.CrazyPanel();
         txtBuscar4 = new javax.swing.JTextField();
         pnlConsumos = new raven.crazypanel.CrazyPanel();
@@ -333,26 +358,29 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         tablaConsumos = new Clases.CrazyPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblConsumos = new javax.swing.JTable();
         ConsumoBotones = new Clases.CrazyPanel();
         pnlConsumosForm = new Clases.CrazyPanel();
         pnlConsumosForm1 = new Clases.CrazyPanel();
         jLabel27 = new javax.swing.JLabel();
-        numeroTarjetaConsumos = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        unidadConsumos = new javax.swing.JTextField();
+        txtCodUnidadconsu = new javax.swing.JTextField();
+        txtCodTarjeta1 = new javax.swing.JTextField();
         pnlConsumosForm2 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        btnAgregar4 = new javax.swing.JButton();
-        btnEliminar5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        pnlConsumosForm3 = new javax.swing.JPanel();
+        jLabel47 = new javax.swing.JLabel();
+        cbxestadoConsumo1 = new javax.swing.JComboBox<>();
+        txtCodConsumo = new javax.swing.JTextField();
+        btnRegistrarConsumo = new javax.swing.JButton();
+        btnModificarConsumo = new javax.swing.JButton();
+        btnEliminarConsumo = new javax.swing.JButton();
+        pnlConsumosForm4 = new javax.swing.JPanel();
+        jLabel48 = new javax.swing.JLabel();
+        cbxestadoConsumo = new javax.swing.JComboBox<>();
+        pnlConsumosForm5 = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        cbxestadoConsumo3 = new javax.swing.JComboBox<>();
         pnlBotonesBusqueda5 = new Clases.CrazyPanel();
         txtBuscar5 = new javax.swing.JTextField();
         pnlRutas = new raven.crazypanel.CrazyPanel();
@@ -520,7 +548,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        tblpersonas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblpersonas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblpersonasMouseClicked(evt);
@@ -1004,10 +1031,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addGroup(pnlUsuarioForm4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btndeluser)
                     .addComponent(btncancelusu2))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        pnlUsuarioForm.add(pnlUsuarioForm4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 220, 180));
+        pnlUsuarioForm.add(pnlUsuarioForm4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 220, 200));
 
         UsuarioBotones.add(pnlUsuarioForm, java.awt.BorderLayout.CENTER);
 
@@ -1076,7 +1103,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(918, Short.MAX_VALUE))
         );
         menuTarjetasLayout.setVerticalGroup(
             menuTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1094,26 +1121,23 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         tablaTarjetas.setPreferredSize(new java.awt.Dimension(1245, 530));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbltarjetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Cod Tarjeta", "Emisión", "Caducidad", "DNI", "Saldo", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbltarjetas);
 
         TarjetaBotones.setEnabled(false);
         TarjetaBotones.setPreferredSize(new java.awt.Dimension(900, 216));
@@ -1133,13 +1157,13 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel17.setText("Código de Tarjeta");
         pnlTarjetaForm1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlTarjetaForm1.add(codTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
+        pnlTarjetaForm1.add(txtcodtarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         jLabel21.setText("Estado");
         pnlTarjetaForm1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 101, -1));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo", "Inactivo" }));
-        pnlTarjetaForm1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+        cbxEstadotarjeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo", "Inactivo" }));
+        pnlTarjetaForm1.add(cbxEstadotarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 186, -1));
 
         pnlTarjetaForm.add(pnlTarjetaForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 160));
 
@@ -1147,66 +1171,71 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel19.setText("DNI");
         pnlTarjetaForm2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlTarjetaForm2.add(dniTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, -1));
+        pnlTarjetaForm2.add(txtdnipersonatarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
 
         jLabel20.setText("Saldo");
         pnlTarjetaForm2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-        pnlTarjetaForm2.add(saldoTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 180, -1));
+        pnlTarjetaForm2.add(txtsaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 150, -1));
 
         pnlTarjetaForm.add(pnlTarjetaForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 220, 160));
 
         pnlTarjeraopc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnaddtarjeta.setText("Agregar");
-        pnlTarjeraopc.add(btnaddtarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 6, -1, -1));
+        jButton2.setText("Agregar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        pnlTarjeraopc.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 6, -1, -1));
 
-        btnadduser1.setText("Agregar");
-        btnadduser1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnaddtar.setText("Agregar");
+        btnaddtar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnadduser1MouseClicked(evt);
+                btnaddtarMouseClicked(evt);
             }
         });
-        btnadduser1.addActionListener(new java.awt.event.ActionListener() {
+        btnaddtar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnadduser1ActionPerformed(evt);
+                btnaddtarActionPerformed(evt);
             }
         });
-        pnlTarjeraopc.add(btnadduser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 33, -1, -1));
+        pnlTarjeraopc.add(btnaddtar, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 33, -1, -1));
 
-        btncancelar1.setText("Cancelar");
-        btncancelar1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar11.setText("Cancelar");
+        btnEditar11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelar1ActionPerformed(evt);
+                btnEditar11ActionPerformed(evt);
             }
         });
-        pnlTarjeraopc.add(btncancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 33, -1, -1));
+        pnlTarjeraopc.add(btnEditar11, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 33, -1, -1));
 
-        btnModUser.setText("Modificar");
-        btnModUser.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar10.setText("Modificar");
+        btnEliminar10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModUserActionPerformed(evt);
+                btnEliminar10ActionPerformed(evt);
             }
         });
-        pnlTarjeraopc.add(btnModUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 62, -1, -1));
+        pnlTarjeraopc.add(btnEliminar10, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 62, -1, -1));
 
-        btnmoduser1.setText("Modificar");
-        btnmoduser1.addActionListener(new java.awt.event.ActionListener() {
+        btndeltar.setText("Modificar");
+        btndeltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmoduser1ActionPerformed(evt);
+                btndeltarActionPerformed(evt);
             }
         });
-        pnlTarjeraopc.add(btnmoduser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 91, -1, -1));
+        pnlTarjeraopc.add(btndeltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 91, -1, -1));
 
-        btncancelar2.setText("Cancelar");
-        btncancelar2.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar12.setText("Cancelar");
+        btnEditar12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelar2ActionPerformed(evt);
+                btnEditar12ActionPerformed(evt);
             }
         });
-        pnlTarjeraopc.add(btncancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 91, -1, -1));
+        pnlTarjeraopc.add(btnEditar12, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 91, -1, -1));
 
-        btndeluser1.setText("Eliminar");
-        pnlTarjeraopc.add(btndeluser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 149, -1, -1));
+        btnmodtar.setText("Eliminar");
+        pnlTarjeraopc.add(btnmodtar, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 149, -1, -1));
 
         btnEliminar11.setText("Eliminar");
         btnEliminar11.addActionListener(new java.awt.event.ActionListener() {
@@ -1216,8 +1245,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         });
         pnlTarjeraopc.add(btnEliminar11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
-        btncancelar3.setText("Cancelar");
-        pnlTarjeraopc.add(btncancelar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 149, -1, -1));
+        btnEditar13.setText("Cancelar");
+        pnlTarjeraopc.add(btnEditar13, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 149, -1, -1));
 
         pnlTarjetaForm.add(pnlTarjeraopc, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 220, 180));
 
@@ -1228,8 +1257,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel24.setText("Fecha de Caducidad");
         pnlTarjetaForm3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-        pnlTarjetaForm3.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 300, -1));
-        pnlTarjetaForm3.add(jFormattedTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 300, -1));
+        pnlTarjetaForm3.add(jdcfechacaducTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 300, -1));
+        pnlTarjetaForm3.add(jdcfechacreacionTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 300, -1));
 
         pnlTarjetaForm.add(pnlTarjetaForm3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 340, 160));
 
@@ -1250,7 +1279,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda3Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(806, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda3Layout.setVerticalGroup(
             pnlBotonesBusqueda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1266,7 +1295,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaTarjetas.setLayout(tablaTarjetasLayout);
         tablaTarjetasLayout.setHorizontalGroup(
             tablaTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TarjetaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(TarjetaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addGroup(tablaTarjetasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1314,7 +1343,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(918, Short.MAX_VALUE))
         );
         menuRecargasLayout.setVerticalGroup(
             menuRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1399,7 +1428,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 btnRecargarActionPerformed(evt);
             }
         });
-        pnlRecargasForm3.add(btnRecargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 80, -1));
+        pnlRecargasForm3.add(btnRecargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         btnEliminar4.setText("Eliminar");
         btnEliminar4.addActionListener(new java.awt.event.ActionListener() {
@@ -1407,33 +1436,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 btnEliminar4ActionPerformed(evt);
             }
         });
-        pnlRecargasForm3.add(btnEliminar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 80, -1));
-
-        jButton1.setText("Recargar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        pnlRecargasForm3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
-
-        jButton2.setText("Cancelar");
-        pnlRecargasForm3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
-
-        jButton3.setText("Eliminar");
-        pnlRecargasForm3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 80, -1));
-
-        jButton4.setText("Cancelar");
-        pnlRecargasForm3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
-
-        jButton5.setText("Modificar");
-        pnlRecargasForm3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
-
-        jButton6.setText("Cancelar");
-        pnlRecargasForm3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
-
-        jButton7.setText("Modificar");
-        pnlRecargasForm3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        pnlRecargasForm3.add(btnEliminar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
 
         pnlRecargasForm.add(pnlRecargasForm3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 340, 160));
 
@@ -1442,17 +1445,17 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel22.setText("N\" de Tarjeta");
         pnlRecargasForm1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlRecargasForm1.add(numeroTarjetaRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
+        pnlRecargasForm1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         jLabel25.setText("Monto");
         pnlRecargasForm1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
 
-        montoTarjetaRecarga.addActionListener(new java.awt.event.ActionListener() {
+        jTextField16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                montoTarjetaRecargaActionPerformed(evt);
+                jTextField16ActionPerformed(evt);
             }
         });
-        pnlRecargasForm1.add(montoTarjetaRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+        pnlRecargasForm1.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
 
         pnlRecargasForm.add(pnlRecargasForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 340, 160));
 
@@ -1473,7 +1476,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda4Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(806, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda4Layout.setVerticalGroup(
             pnlBotonesBusqueda4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1489,7 +1492,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaRecargas.setLayout(tablaRecargasLayout);
         tablaRecargasLayout.setHorizontalGroup(
             tablaRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(RecargaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(RecargaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addComponent(jScrollPane4)
         );
         tablaRecargasLayout.setVerticalGroup(
@@ -1552,26 +1555,23 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         tablaConsumos.setPreferredSize(new java.awt.Dimension(1245, 530));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblConsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Código de Consumo", "Tarjeta", "Monto de Consumo", "Fecha de Consumo", "Unidad", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tblConsumos);
 
         ConsumoBotones.setEnabled(false);
         ConsumoBotones.setPreferredSize(new java.awt.Dimension(900, 216));
@@ -1591,71 +1591,86 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel27.setText("N° de Tarjeta");
         pnlConsumosForm1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlConsumosForm1.add(numeroTarjetaConsumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         jLabel28.setText("Unidad");
         pnlConsumosForm1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
 
-        unidadConsumos.addActionListener(new java.awt.event.ActionListener() {
+        txtCodUnidadconsu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unidadConsumosActionPerformed(evt);
+                txtCodUnidadconsuActionPerformed(evt);
             }
         });
-        pnlConsumosForm1.add(unidadConsumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+        pnlConsumosForm1.add(txtCodUnidadconsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+        pnlConsumosForm1.add(txtCodTarjeta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         pnlConsumosForm.add(pnlConsumosForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 340, 160));
 
         pnlConsumosForm2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel31.setText("Estado");
+        jLabel31.setText("CodConsumo");
         pnlConsumosForm2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 14, 101, -1));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        pnlConsumosForm2.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 36, 186, -1));
+        pnlConsumosForm3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlConsumosForm.add(pnlConsumosForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 220, 160));
+        jLabel47.setText("Estado");
+        pnlConsumosForm3.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 14, 101, -1));
 
-        btnAgregar4.setText("Registar");
-        btnAgregar4.addMouseListener(new java.awt.event.MouseAdapter() {
+        cbxestadoConsumo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
+        pnlConsumosForm3.add(cbxestadoConsumo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 36, 186, -1));
+
+        pnlConsumosForm2.add(pnlConsumosForm3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 220, 160));
+        pnlConsumosForm2.add(txtCodConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 140, -1));
+
+        pnlConsumosForm.add(pnlConsumosForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 160));
+
+        btnRegistrarConsumo.setText("Registar");
+        btnRegistrarConsumo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAgregar4MouseClicked(evt);
+                btnRegistrarConsumoMouseClicked(evt);
             }
         });
-        btnAgregar4.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarConsumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregar4ActionPerformed(evt);
+                btnRegistrarConsumoActionPerformed(evt);
             }
         });
-        pnlConsumosForm.add(btnAgregar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 80, -1));
+        pnlConsumosForm.add(btnRegistrarConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, -1, -1));
 
-        btnEliminar5.setText("Eliminar");
-        btnEliminar5.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarConsumo.setText("Eliminar");
+        btnModificarConsumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar5ActionPerformed(evt);
+                btnModificarConsumoActionPerformed(evt);
             }
         });
-        pnlConsumosForm.add(btnEliminar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 100, 80, -1));
+        pnlConsumosForm.add(btnModificarConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, -1, -1));
 
-        jButton8.setText("Modificar");
-        pnlConsumosForm.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 60, -1, -1));
+        btnEliminarConsumo.setText("Eliminar");
+        btnEliminarConsumo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarConsumoActionPerformed(evt);
+            }
+        });
+        pnlConsumosForm.add(btnEliminarConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 20, -1, -1));
 
-        jButton9.setText("Cancelar");
-        pnlConsumosForm.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, -1, -1));
+        pnlConsumosForm4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton10.setText("Cancelar");
-        pnlConsumosForm.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 60, -1, -1));
+        jLabel48.setText("Estado");
+        pnlConsumosForm4.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 14, 101, -1));
 
-        jButton11.setText("Cancelar");
-        pnlConsumosForm.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 100, -1, -1));
+        cbxestadoConsumo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
+        pnlConsumosForm4.add(cbxestadoConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 36, 186, -1));
 
-        jButton12.setText("Registrar");
-        pnlConsumosForm.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, -1));
+        pnlConsumosForm5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton13.setText("Modificar");
-        pnlConsumosForm.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 60, -1, -1));
+        jLabel49.setText("Estado");
+        pnlConsumosForm5.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 14, 101, -1));
 
-        jButton14.setText("Eliminar");
-        pnlConsumosForm.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, -1, -1));
+        cbxestadoConsumo3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
+        pnlConsumosForm5.add(cbxestadoConsumo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 36, 186, -1));
+
+        pnlConsumosForm4.add(pnlConsumosForm5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 220, 160));
+
+        pnlConsumosForm.add(pnlConsumosForm4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 220, 160));
 
         ConsumoBotones.add(pnlConsumosForm, java.awt.BorderLayout.CENTER);
 
@@ -1738,7 +1753,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(918, Short.MAX_VALUE))
         );
         menuRutasLayout.setVerticalGroup(
             menuRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1924,7 +1939,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda6Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(806, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda6Layout.setVerticalGroup(
             pnlBotonesBusqueda6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1940,7 +1955,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaRutas.setLayout(tablaRutasLayout);
         tablaRutasLayout.setHorizontalGroup(
             tablaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaRutasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6)
@@ -1988,7 +2003,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         menuEmpresasLayout.setVerticalGroup(
             menuEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2216,7 +2231,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda7Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda7Layout.setVerticalGroup(
             pnlBotonesBusqueda7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2232,7 +2247,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaEmpresas.setLayout(tablaEmpresasLayout);
         tablaEmpresasLayout.setHorizontalGroup(
             tablaEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(EmpresasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(EmpresasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaEmpresasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7)
@@ -2526,7 +2541,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda8Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(806, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda8Layout.setVerticalGroup(
             pnlBotonesBusqueda8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2542,7 +2557,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades.setLayout(tablaUnidadesLayout);
         tablaUnidadesLayout.setHorizontalGroup(
             tablaUnidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaUnidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8)
@@ -2691,9 +2706,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
         Drawer.getInstance().showDrawer();
     }//GEN-LAST:event_btnmenu4ActionPerformed
 
-    private void montoTarjetaRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_montoTarjetaRecargaActionPerformed
+    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_montoTarjetaRecargaActionPerformed
+    }//GEN-LAST:event_jTextField16ActionPerformed
 
     private void txtBuscar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar4ActionPerformed
         // TODO add your handling code here:
@@ -2719,25 +2734,25 @@ public class Vistaadministrador extends javax.swing.JFrame {
         Drawer.getInstance().showDrawer();
     }//GEN-LAST:event_btnmenu5ActionPerformed
 
-    private void unidadConsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unidadConsumosActionPerformed
+    private void txtCodUnidadconsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodUnidadconsuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_unidadConsumosActionPerformed
+    }//GEN-LAST:event_txtCodUnidadconsuActionPerformed
 
     private void txtBuscar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscar5ActionPerformed
 
-    private void btnAgregar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregar4MouseClicked
+    private void btnRegistrarConsumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarConsumoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregar4MouseClicked
+    }//GEN-LAST:event_btnRegistrarConsumoMouseClicked
 
-    private void btnAgregar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar4ActionPerformed
+    private void btnRegistrarConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarConsumoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregar4ActionPerformed
+    }//GEN-LAST:event_btnRegistrarConsumoActionPerformed
 
-    private void btnEliminar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar5ActionPerformed
+    private void btnModificarConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarConsumoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar5ActionPerformed
+    }//GEN-LAST:event_btnModificarConsumoActionPerformed
 
     private void ConsumoBotonesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_ConsumoBotonesComponentAdded
         // TODO add your handling code here:
@@ -2859,29 +2874,29 @@ public class Vistaadministrador extends javax.swing.JFrame {
     btnactmoduser.setVisible(false);
     }//GEN-LAST:event_btncancelusu1ActionPerformed
 
-    private void btnadduser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnadduser1MouseClicked
+    private void btnaddtarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddtarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnadduser1MouseClicked
+    }//GEN-LAST:event_btnaddtarMouseClicked
 
-    private void btnadduser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadduser1ActionPerformed
+    private void btnaddtarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddtarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnadduser1ActionPerformed
+    }//GEN-LAST:event_btnaddtarActionPerformed
 
-    private void btncancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar1ActionPerformed
+    private void btnEditar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar11ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btncancelar1ActionPerformed
+    }//GEN-LAST:event_btnEditar11ActionPerformed
 
-    private void btnModUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModUserActionPerformed
+    private void btnEliminar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar10ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnModUserActionPerformed
+    }//GEN-LAST:event_btnEliminar10ActionPerformed
 
-    private void btnmoduser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmoduser1ActionPerformed
+    private void btndeltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeltarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnmoduser1ActionPerformed
+    }//GEN-LAST:event_btndeltarActionPerformed
 
-    private void btncancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelar2ActionPerformed
+    private void btnEditar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar12ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btncancelar2ActionPerformed
+    }//GEN-LAST:event_btnEditar12ActionPerformed
 
     private void btnEliminar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar11ActionPerformed
         // TODO add your handling code here:
@@ -3405,9 +3420,14 @@ public class Vistaadministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblusuariosMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        listarTarjetas();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnEliminarConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarConsumoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarConsumoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3416,8 +3436,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("Temas");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-        Color colorbtns = Color.decode("#5856D6");
-        UIManager.put("Button.background", colorbtns);
         FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3436,16 +3454,20 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public Clases.CrazyPanel UnidadesBotones;
     public Clases.CrazyPanel UsuarioBotones;
     private javax.swing.JButton btnAddRut;
-    private javax.swing.JButton btnAgregar4;
     private javax.swing.JButton btnCancelarManRut;
     private javax.swing.JButton btnCancelarManRut1;
     private javax.swing.JButton btnCancelarManRut2;
+    private javax.swing.JButton btnEditar11;
+    private javax.swing.JButton btnEditar12;
+    private javax.swing.JButton btnEditar13;
+    private javax.swing.JButton btnEliminar10;
     private javax.swing.JButton btnEliminar11;
     private javax.swing.JButton btnEliminar4;
-    private javax.swing.JButton btnEliminar5;
+    public javax.swing.JButton btnEliminarConsumo;
     public javax.swing.JButton btnModRut;
-    private javax.swing.JButton btnModUser;
+    public javax.swing.JButton btnModificarConsumo;
     private javax.swing.JButton btnRecargar;
+    public javax.swing.JButton btnRegistrarConsumo;
     public javax.swing.JButton btnRegrut;
     private javax.swing.JButton btnactaddemp;
     private javax.swing.JButton btnactaddper;
@@ -3461,13 +3483,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JButton btnactmoduser;
     public javax.swing.JButton btnaddemp;
     public javax.swing.JButton btnaddperso;
-    private javax.swing.JButton btnaddtarjeta;
+    public javax.swing.JButton btnaddtar;
     public javax.swing.JButton btnaddunidad;
     public javax.swing.JButton btnadduser;
-    public javax.swing.JButton btnadduser1;
-    private javax.swing.JButton btncancelar1;
-    private javax.swing.JButton btncancelar2;
-    private javax.swing.JButton btncancelar3;
     private javax.swing.JButton btncancelper;
     private javax.swing.JButton btncancelper1;
     private javax.swing.JButton btncancelper2;
@@ -3483,9 +3501,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JButton btndelemp;
     public javax.swing.JButton btndelper;
     public javax.swing.JButton btndelrut;
+    public javax.swing.JButton btndeltar;
     public javax.swing.JButton btndeluni;
     public javax.swing.JButton btndeluser;
-    public javax.swing.JButton btndeluser1;
     private javax.swing.JButton btnelirut;
     private javax.swing.JButton btnmenu1;
     private javax.swing.JButton btnmenu2;
@@ -3498,35 +3516,20 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JButton btnmodemp;
     public javax.swing.JButton btnmodper;
     private javax.swing.JButton btnmodrut;
+    public javax.swing.JButton btnmodtar;
     public javax.swing.JButton btnmodunidad;
     public javax.swing.JButton btnmoduser;
-    public javax.swing.JButton btnmoduser1;
     public javax.swing.JComboBox<String> cbxEstadoRuta;
     public javax.swing.JComboBox<String> cbxEstadoTranporte;
     public javax.swing.JComboBox<String> cbxEstadoUnidad;
+    public javax.swing.JComboBox<String> cbxEstadotarjeta;
+    public javax.swing.JComboBox<String> cbxestadoConsumo;
+    public javax.swing.JComboBox<String> cbxestadoConsumo1;
+    public javax.swing.JComboBox<String> cbxestadoConsumo3;
     public javax.swing.JComboBox<String> cbxestadoUser;
     public javax.swing.JComboBox<String> cbxestadopersona;
     public javax.swing.JComboBox<String> cbxtipousupersona;
-    private javax.swing.JTextField codTarjeta;
-    private javax.swing.JTextField dniTarjeta;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3568,6 +3571,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
@@ -3583,11 +3589,13 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField jTextField33;
+    public javax.swing.JFormattedTextField jdcfechacaducTarjeta;
+    public javax.swing.JFormattedTextField jdcfechacreacionTarjeta;
     private Clases.CrazyPanel menuConsumos;
     private Clases.CrazyPanel menuEmpresas;
     private Clases.CrazyPanel menuPersonas;
@@ -3596,9 +3604,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel menuTarjetas;
     private Clases.CrazyPanel menuUnidades;
     private Clases.CrazyPanel menuUsuarios;
-    private javax.swing.JTextField montoTarjetaRecarga;
-    private javax.swing.JTextField numeroTarjetaConsumos;
-    private javax.swing.JTextField numeroTarjetaRecarga;
     public raven.crazypanel.CrazyPanel paneles;
     private Clases.CrazyPanel pnlBotonesBusqueda1;
     private Clases.CrazyPanel pnlBotonesBusqueda2;
@@ -3612,6 +3617,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel pnlConsumosForm;
     private Clases.CrazyPanel pnlConsumosForm1;
     private javax.swing.JPanel pnlConsumosForm2;
+    private javax.swing.JPanel pnlConsumosForm3;
+    private javax.swing.JPanel pnlConsumosForm4;
+    private javax.swing.JPanel pnlConsumosForm5;
     public raven.crazypanel.CrazyPanel pnlEmpresas;
     private Clases.CrazyPanel pnlEmpresasForm;
     private Clases.CrazyPanel pnlEmpresasForm1;
@@ -3651,7 +3659,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JPanel pnlUsuarioForm3;
     private javax.swing.JPanel pnlUsuarioForm4;
     public raven.crazypanel.CrazyPanel pnlUsuarios;
-    private javax.swing.JTextField saldoTarjeta;
     public Clases.CrazyPanel tablaConsumos;
     public Clases.CrazyPanel tablaEmpresas;
     public Clases.CrazyPanel tablaPersonas;
@@ -3660,9 +3667,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public Clases.CrazyPanel tablaTarjetas;
     public Clases.CrazyPanel tablaUnidades;
     public Clases.CrazyPanel tablaUsuarios;
+    public javax.swing.JTable tblConsumos;
     public javax.swing.JTable tblEmpresastrans;
     public javax.swing.JTable tblpersonas;
     public javax.swing.JTable tblrutas;
+    public javax.swing.JTable tbltarjetas;
     public javax.swing.JTable tblunidades;
     public javax.swing.JTable tblusuarios;
     private javax.swing.JTextField txtBuscar1;
@@ -3673,8 +3682,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscar6;
     private javax.swing.JTextField txtBuscar7;
     private javax.swing.JTextField txtBuscar8;
+    public javax.swing.JTextField txtCodConsumo;
     public javax.swing.JTextField txtCodSoat;
+    public javax.swing.JTextField txtCodTarjeta1;
     public javax.swing.JTextField txtCodUnidad;
+    public javax.swing.JTextField txtCodUnidadconsu;
     public javax.swing.JTextField txtContraUser;
     public javax.swing.JTextField txtDniUsers;
     public javax.swing.JTextField txtDniunidad;
@@ -3684,8 +3696,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JTextField txtapematpersona;
     public javax.swing.JTextField txtapepatpersona;
     public javax.swing.JTextField txtcelusuario;
+    public javax.swing.JTextField txtcodtarjeta;
     public javax.swing.JTextField txtcolorempresa;
     public javax.swing.JTextField txtdnipersona;
+    public javax.swing.JTextField txtdnipersonatarjeta;
     public javax.swing.JTextField txtemail;
     public javax.swing.JTextField txtidrutman;
     public javax.swing.JTextField txtmontoruta;
@@ -3694,7 +3708,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JTextField txtnombreruta;
     public javax.swing.JTextField txtruc;
     public javax.swing.JTextField txtrucempresa;
-    private javax.swing.JTextField unidadConsumos;
+    public javax.swing.JTextField txtsaldo;
     // End of variables declaration//GEN-END:variables
     
 }
