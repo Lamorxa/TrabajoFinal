@@ -8,6 +8,7 @@ import Cajon.ConstructorCajonUsuario;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
 import raven.drawer.Drawer;
@@ -588,9 +589,11 @@ public class VistaUsuario extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Color color = Color.decode("#5856D6");
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("Temas");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
+        UIManager.put("Button.background", color);
         FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
