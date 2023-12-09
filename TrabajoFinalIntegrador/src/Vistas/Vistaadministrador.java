@@ -172,9 +172,50 @@ public class Vistaadministrador extends javax.swing.JFrame {
         //pnlPersonaForm4.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         pnlBotonesBusqueda2.setLayout(new MigLayout("","[200]push[][]",""));
         tablaUsuarios.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
+        //Place holder panel personas
         txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtnombrepersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre");
+        txtapepatpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Paterno");
+        txtapematpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Materno");
+        txtdnipersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        txtcelusuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Celular");
+        txtemail.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Correo Electrónico");
+        txtruc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"RUC de empresa");
+        
+        //Place holder panel usuarios
         txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-
+        txtUserUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de Usuario");
+        txtContraUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Contraseña");
+        txtDniUsers.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        
+        //Place holder panel Tarjetas
+        txtBuscar3.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtcodtarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Código de tarjeta");
+        txtdnipersonatarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        
+        //Place holder panel Recargas
+        txtBuscar4.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtCodTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
+        txtmontorecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Monto de recarga");
+        
+        //Place holder panel Consumos}
+        txtBuscar5.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtCodTarjetaconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
+        txtCodUnidadconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Unidad");
+        
+        //Place holder panel Rutas
+        txtBuscar6.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtnombreruta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de ruta");
+        
+        //Place holder panel Empresas
+        txtBuscar7.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtnombreempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de la Empresa");
+        txtrucempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Ruc de empresa");
+        txtcolorempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Color");
+        
+        //Place holder panel Unidades
+        txtBuscar8.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtDniunidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
     }
     
 
@@ -784,7 +825,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(893, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuUsuariosLayout.setVerticalGroup(
             menuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,11 +848,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Usuario", "Usuario", "Contraseña", "DNI", "Estado"
+                "Id Usuario", "DNI", "Usuario", "Contraseña", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1038,7 +1079,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUsuarios.setLayout(tablaUsuariosLayout);
         tablaUsuariosLayout.setHorizontalGroup(
             tablaUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UsuarioBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+            .addComponent(UsuarioBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(tablaUsuariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1533,7 +1574,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(893, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuConsumosLayout.setVerticalGroup(
             menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1556,7 +1597,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Consumo", "Tarjeta", "Monto de Consumo", "Fecha de Consumo", "Unidad", "Estado"
+                "Código de Consumo", "Monto de Consumo", "Tarjeta", "Unidad", "Fecha de Consumo", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -1685,7 +1726,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda5Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(781, Short.MAX_VALUE))
+                .addContainerGap(788, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda5Layout.setVerticalGroup(
             pnlBotonesBusqueda5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1701,7 +1742,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaConsumos.setLayout(tablaConsumosLayout);
         tablaConsumosLayout.setHorizontalGroup(
             tablaConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaConsumosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5)
@@ -2630,6 +2671,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades1.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, -1));
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 180, 30));
 
         pnlReportes.add(tablaUnidades1, java.awt.BorderLayout.CENTER);
@@ -3506,8 +3552,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminar13ActionPerformed
 
     private void btnmenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu9ActionPerformed
-        // TODO add your handling code here:
+        Drawer.getInstance().showDrawer();
     }//GEN-LAST:event_btnmenu9ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
