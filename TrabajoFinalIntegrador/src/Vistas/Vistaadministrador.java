@@ -67,6 +67,7 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.management.Notification;
 import raven.toast.Notifications;
+import raven.toast.ToastClientProperties;
 
 public class Vistaadministrador extends javax.swing.JFrame {
     UsuarioDAO usDao= new UsuarioDAO();
