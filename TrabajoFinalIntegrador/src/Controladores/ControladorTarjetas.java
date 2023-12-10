@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelos.Tarjetas;
 import modelos.TarjetaDAO;
+import raven.toast.Notifications;
 public class ControladorTarjetas implements ActionListener{
     
     private Tarjetas tar=new Tarjetas();
@@ -53,7 +54,7 @@ public class ControladorTarjetas implements ActionListener{
     if (views.txtcodtarjeta.getText().equals("") ||
             views.txtdnipersonatarjeta.getText().equals("") ||
             views.txtsaldo.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         tar.setCodTarjeta(views.txtcodtarjeta.getText());
         tar.setDni(views.txtdnipersonatarjeta.getText());
@@ -63,11 +64,11 @@ public class ControladorTarjetas implements ActionListener{
         tar.setEstado(views.cbxEstadotarjeta.getSelectedItem().toString());
 
         if (tardao.registrarTarjeta(tar)) {
-            JOptionPane.showMessageDialog(null, "Empresa modificada con exito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Agregado correctamente");
             limpiarTabla();
             listar();
         } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar la Empresa");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al agregar");
         }
     }
          }

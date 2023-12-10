@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.UsuarioDAO;
 import modelos.Usuarios;
+import raven.toast.Notifications;
 
 public class ControladorUsuarios implements ActionListener{
     private Vistaadministrador views;
@@ -34,7 +35,7 @@ public class ControladorUsuarios implements ActionListener{
             views.txtDniUsers.getText().equals("")||
             views.txtUserUsuario.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         }else   {
             us.setUser(views.txtUserUsuario.getText());
             us.setContrasena(views.txtContraUser.getText());
@@ -43,9 +44,9 @@ public class ControladorUsuarios implements ActionListener{
             if (UsDao.registrar(us)) {
                 limpiarTabla();
                 listarusuarios();
-                JOptionPane.showMessageDialog(null, "Usuario Registrado Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Agregado correctamente");
             } else {
-                 JOptionPane.showMessageDialog(null, "Error a resgistrar Usuario");
+                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al agregar");
                    }
                 }  
         }//cierra el iff del btnadduser
@@ -55,7 +56,7 @@ public class ControladorUsuarios implements ActionListener{
             views.txtDniUsers.getText().equals("")||
             views.txtUserUsuario.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         }else   {
             us.setIdUsuario(Integer.parseInt(views.txtIdUser.getText()));
             us.setUser(views.txtUserUsuario.getText());
@@ -64,11 +65,11 @@ public class ControladorUsuarios implements ActionListener{
             us.setEstado(views.cbxestadoUser.getSelectedItem().toString());
             }
             if (UsDao.modificar(us)) {
-                JOptionPane.showMessageDialog(null, "Usuario Modificado Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
                 limpiarTabla();
                 listarusuarios();
             } else {
-                 JOptionPane.showMessageDialog(null, "Error a Modificar Usuario");
+                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
                    }
         }//cierra el if de mod user
         //botonEliminarUsuario
@@ -77,7 +78,7 @@ public class ControladorUsuarios implements ActionListener{
             views.txtDniUsers.getText().equals("")||
             views.txtUserUsuario.getText().equals(""))
         {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         }else   {
             us.setIdUsuario(Integer.parseInt(views.txtIdUser.getText()));
             us.setUser(views.txtUserUsuario.getText());
@@ -85,11 +86,11 @@ public class ControladorUsuarios implements ActionListener{
             us.setDni(views.txtDniUsers.getText());
             us.setEstado(views.cbxestadoUser.getSelectedItem().toString());
             } if (UsDao.eliminar(us)) {
-                JOptionPane.showMessageDialog(null, "Usuario eliminado Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
                 limpiarTabla();
                 listarusuarios();
             } else {
-                 JOptionPane.showMessageDialog(null, "Error a Eliminar Usuario");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
                    }
                         
              }
