@@ -13,8 +13,24 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import conexion.Conexion;
+import java.sql.Connection;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +49,22 @@ import modelos.Usuarios;
 import net.miginfocom.swing.MigLayout;
 import raven.drawer.Drawer;
 import raven.popup.GlassPanePopup;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 
 public class Vistaadministrador extends javax.swing.JFrame {
     UsuarioDAO usDao= new UsuarioDAO();
@@ -71,11 +103,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         ControladorUsuarios users = new ControladorUsuarios(us, usDao, this);
         ControladorRutas rutas= new ControladorRutas(rut, rutdao, this);
         ControladorEmpresaTransporte empresas=new ControladorEmpresaTransporte(emtrans, emtransdao, this);
-         ControladorPersonas personas=new ControladorPersonas(this, person, persondao);
+        ControladorPersonas personas=new ControladorPersonas(this, person, persondao);
         ControladorUnidades unidades =new ControladorUnidades(this, unidad, unidadesDAO);
-       ControladorRegistroConsumos consss= new ControladorRegistroConsumos(consu, conconsu, this);
-       ControladorRegistroRecargas con=new ControladorRegistroRecargas(conrecar,recar, this);
-//re.rellenar("tarjetas", "CodTarjeta",cbntarjetasrecarga,conec);
+        ControladorRegistroConsumos consss= new ControladorRegistroConsumos(consu, conconsu, this);
+        ControladorRegistroRecargas con=new ControladorRegistroRecargas(conrecar,recar, this);
+        //re.rellenar("tarjetas", "CodTarjeta",cbntarjetasrecarga,conec);
          
       
         
@@ -171,9 +203,50 @@ public class Vistaadministrador extends javax.swing.JFrame {
         //pnlPersonaForm4.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         pnlBotonesBusqueda2.setLayout(new MigLayout("","[200]push[][]",""));
         tablaUsuarios.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
+        //Place holder panel personas
         txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtnombrepersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre");
+        txtapepatpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Paterno");
+        txtapematpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Materno");
+        txtdnipersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        txtcelusuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Celular");
+        txtemail.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Correo Electrónico");
+        txtruc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"RUC de empresa");
+        
+        //Place holder panel usuarios
         txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-
+        txtUserUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de Usuario");
+        txtContraUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Contraseña");
+        txtDniUsers.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        
+        //Place holder panel Tarjetas
+        txtBuscar3.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtcodtarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Código de tarjeta");
+        txtdnipersonatarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        
+        //Place holder panel Recargas
+        txtBuscar4.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtCodTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
+        txtmontorecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Monto de recarga");
+        
+        //Place holder panel Consumos}
+        txtBuscar5.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtCodTarjetaconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
+        txtCodUnidadconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Unidad");
+        
+        //Place holder panel Rutas
+        txtBuscar6.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtnombreruta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de ruta");
+        
+        //Place holder panel Empresas
+        txtBuscar7.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtnombreempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de la Empresa");
+        txtrucempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Ruc de empresa");
+        txtcolorempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Color");
+        
+        //Place holder panel Unidades
+        txtBuscar8.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        txtDniunidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
     }
     
 
@@ -323,6 +396,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnEliminarRecarga = new javax.swing.JButton();
         btnEliminar13 = new javax.swing.JButton();
         btnEditar16 = new javax.swing.JButton();
+        btnVerTicket = new javax.swing.JButton();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        txtEmailDestino = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
         pnlBotonesBusqueda4 = new Clases.CrazyPanel();
         txtBuscar4 = new javax.swing.JTextField();
         pnlConsumos = new raven.crazypanel.CrazyPanel();
@@ -460,6 +538,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel59 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
+        pnlUnidadesForm5 = new Clases.CrazyPanel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jdcFinal = new com.toedter.calendar.JDateChooser();
+        jdcInicial = new com.toedter.calendar.JDateChooser();
+        pnlTarjeraopc5 = new javax.swing.JPanel();
+        btnReporte1 = new javax.swing.JButton();
+        btnReporte2 = new javax.swing.JButton();
+        btnReporte3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -783,7 +870,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(893, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuUsuariosLayout.setVerticalGroup(
             menuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,11 +893,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Usuario", "Usuario", "Contraseña", "DNI", "Estado"
+                "Id Usuario", "DNI", "Usuario", "Contraseña", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1037,7 +1124,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUsuarios.setLayout(tablaUsuariosLayout);
         tablaUsuariosLayout.setHorizontalGroup(
             tablaUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UsuarioBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+            .addComponent(UsuarioBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(tablaUsuariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1382,7 +1469,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel22.setText("CodRecarga");
         pnlRecargasForm1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlRecargasForm1.add(txtcodrecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
+        pnlRecargasForm1.add(txtcodrecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 190, -1));
 
         cbxestadoRecarga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
         pnlRecargasForm1.add(cbxestadoRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 186, -1));
@@ -1390,7 +1477,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jLabel54.setText("Estado");
         pnlRecargasForm1.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 101, -1));
 
-        pnlRecargasForm.add(pnlRecargasForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 340, 160));
+        pnlRecargasForm.add(pnlRecargasForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 160));
 
         pnlRecargasForm2.setPreferredSize(new java.awt.Dimension(200, 200));
         pnlRecargasForm2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1409,7 +1496,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         });
         pnlRecargasForm2.add(txtmontorecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
 
-        pnlRecargasForm.add(pnlRecargasForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 340, 160));
+        pnlRecargasForm.add(pnlRecargasForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 340, 160));
 
         pnlTarjeraopc4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1482,6 +1569,30 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         pnlRecargasForm.add(pnlTarjeraopc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 220, 180));
 
+        btnVerTicket.setText("Ver Ticket");
+        btnVerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerTicketActionPerformed(evt);
+            }
+        });
+        pnlRecargasForm.add(btnVerTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 130, 40));
+
+        jLabel66.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel66.setText("Enviar ticket a un Email");
+        pnlRecargasForm.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 160, 30));
+
+        jLabel56.setText("Email de Destino");
+        pnlRecargasForm.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 150, 30));
+        pnlRecargasForm.add(txtEmailDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 180, 40));
+
+        btnEnviar.setText("Enviar Ticket ");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+        pnlRecargasForm.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 130, 100, 40));
+
         RecargaBotones.add(pnlRecargasForm, java.awt.BorderLayout.CENTER);
 
         pnlBotonesBusqueda4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1532,7 +1643,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(893, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuConsumosLayout.setVerticalGroup(
             menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1555,7 +1666,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Consumo", "Tarjeta", "Monto de Consumo", "Fecha de Consumo", "Unidad", "Estado"
+                "Código de Consumo", "Monto de Consumo", "Tarjeta", "Unidad", "Fecha de Consumo", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -1684,7 +1795,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda5Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(781, Short.MAX_VALUE))
+                .addContainerGap(788, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda5Layout.setVerticalGroup(
             pnlBotonesBusqueda5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1700,7 +1811,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaConsumos.setLayout(tablaConsumosLayout);
         tablaConsumosLayout.setHorizontalGroup(
             tablaConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaConsumosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5)
@@ -2536,7 +2647,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda8Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(806, Short.MAX_VALUE))
+                .addContainerGap(788, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda8Layout.setVerticalGroup(
             pnlBotonesBusqueda8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2552,7 +2663,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades.setLayout(tablaUnidadesLayout);
         tablaUnidadesLayout.setHorizontalGroup(
             tablaUnidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaUnidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8)
@@ -2628,8 +2739,68 @@ public class Vistaadministrador extends javax.swing.JFrame {
         jLabel60.setText("Fecha Final");
         tablaUnidades1.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, -1));
 
+        pnlUnidadesForm5.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlUnidadesForm5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel52.setText("Fecha Inicial:");
+        pnlUnidadesForm5.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel55.setText("Fecha Final");
+        pnlUnidadesForm5.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
+        pnlUnidadesForm5.add(jdcFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 40));
+        pnlUnidadesForm5.add(jdcInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, 40));
+
+        tablaUnidades1.add(pnlUnidadesForm5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 240, 160));
+
+        btnReporte1.setText("PAGOS TRANSPORTISTAS POR RUTAS");
+        btnReporte1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporte1ActionPerformed(evt);
+            }
+        });
+
+        btnReporte2.setText("SERVICIOS POR PASAJEROS");
+        btnReporte2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporte2ActionPerformed(evt);
+            }
+        });
+
+        btnReporte3.setText("SERVICIOS POR FECHAS");
+        btnReporte3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporte3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlTarjeraopc5Layout = new javax.swing.GroupLayout(pnlTarjeraopc5);
+        pnlTarjeraopc5.setLayout(pnlTarjeraopc5Layout);
+        pnlTarjeraopc5Layout.setHorizontalGroup(
+            pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTarjeraopc5Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnReporte1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(btnReporte2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
+        );
+        pnlTarjeraopc5Layout.setVerticalGroup(
+            pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTarjeraopc5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(btnReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReporte2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReporte3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        tablaUnidades1.add(pnlTarjeraopc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 290, 160));
+
         jButton1.setText("jButton1");
-        tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 180, 30));
+        tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 150, -1, -1));
 
         pnlReportes.add(tablaUnidades1, java.awt.BorderLayout.CENTER);
 
@@ -3039,9 +3210,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         // Resto del código
         txtnombreempresa.setText("");
         txtrucempresa.setText("");
-        txtcolorempresa.setText("");
-        
-        
+        txtcolorempresa.setText("");    
 
     }//GEN-LAST:event_btncantransActionPerformed
 
@@ -3113,16 +3282,16 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdRutaUnidadActionPerformed
 
     private void tblrutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblrutasMouseClicked
- if(evt.getClickCount() == 1) {  
-     JTable receptor = (JTable)evt.getSource();
-    txtidrutman.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
-    txtnombreruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
-    txtmontoruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
-    cbxEstadoRuta.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
-    btnmodrut.setVisible(true);
-    btnelirut.setVisible(true);
-    btnAddRut.setVisible(false);
- }
+        if(evt.getClickCount() == 1) {  
+            JTable receptor = (JTable)evt.getSource();
+           txtidrutman.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+           txtnombreruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+           txtmontoruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+           cbxEstadoRuta.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
+           btnmodrut.setVisible(true);
+           btnelirut.setVisible(true);
+           btnAddRut.setVisible(false);
+        }
     }//GEN-LAST:event_tblrutasMouseClicked
 
     private void btnAddRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRutActionPerformed
@@ -3189,18 +3358,18 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private void tblunidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblunidadesMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount() == 1) {
-    JTable receptor = (JTable)evt.getSource();
-    // Asegúrate de tener los nombres de los elementos correctos para la clase Unidad
-    txtCodUnidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
-    txtDniunidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
-    txtIdRutaUnidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
-    txtCodSoat.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3).toString());
-    cbxEstadoUnidad.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4));
-     btnactmodiunidad.setVisible(true);
-        btnactdelunidad.setVisible(true);
-        btnactaddunidad.setVisible(false);
+            JTable receptor = (JTable)evt.getSource();
+            // Asegúrate de tener los nombres de los elementos correctos para la clase Unidad
+            txtCodUnidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtDniunidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtIdRutaUnidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            txtCodSoat.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3).toString());
+            cbxEstadoUnidad.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4));
+            btnactmodiunidad.setVisible(true);
+            btnactdelunidad.setVisible(true);
+            btnactaddunidad.setVisible(false);
 
-}
+        }
     }//GEN-LAST:event_tblunidadesMouseClicked
 
     private void btnactdelunidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactdelunidadActionPerformed
@@ -3392,23 +3561,24 @@ public class Vistaadministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(evt.getClickCount() == 1) {
-    JTable receptor = (JTable)evt.getSource();
-    txtdnipersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-    txtnombrepersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-    txtapepatpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
-    txtapematpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
-    txtcelusuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),4).toString());
-    txtemail.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),5).toString());
-        btnactaddper.setVisible(false);
-        btnactmodper.setVisible(true);
-        btnactdelper.setVisible(true);
+            JTable receptor = (JTable)evt.getSource();
+            txtdnipersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
+            txtnombrepersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
+            txtapepatpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
+            txtapematpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
+            txtcelusuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),4).toString());
+            txtemail.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),5).toString());
+            btnactaddper.setVisible(false);
+            btnactmodper.setVisible(true);
+            btnactdelper.setVisible(true);
           
-    Object value = receptor.getModel().getValueAt(receptor.getSelectedRow(), 7);
-    if (value == null) {
-        txtruc.setText("");
-    } else {
-        txtruc.setText(value.toString());
-    }}
+            Object value = receptor.getModel().getValueAt(receptor.getSelectedRow(), 7);
+            if (value == null) {
+                txtruc.setText("");
+            } else {
+                txtruc.setText(value.toString());
+            }
+        }
      
     }//GEN-LAST:event_tblpersonasMouseClicked
 
@@ -3440,22 +3610,22 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtContraUser.setText("");
         txtDniUsers.setText("");
         btnactadduser.setVisible(true);
-    btnactdeluser.setVisible(false);
-    btnactmoduser.setVisible(false);
+        btnactdeluser.setVisible(false);
+        btnactmoduser.setVisible(false);
     }//GEN-LAST:event_btncancelusu2ActionPerformed
 
     private void tblusuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblusuariosMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount() == 1) {
-    JTable receptor = (JTable)evt.getSource();
-    txtIdUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-    txtDniUsers.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-    txtUserUsuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
-    txtContraUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
-    cbxestadoUser.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4));
-    btnactadduser.setVisible(false);
-    btnactdeluser.setVisible(true);
-    btnactmoduser.setVisible(true);
+            JTable receptor = (JTable)evt.getSource();
+            txtIdUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
+            txtDniUsers.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
+            txtUserUsuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
+            txtContraUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
+            cbxestadoUser.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4));
+            btnactadduser.setVisible(false);
+            btnactdeluser.setVisible(true);
+            btnactmoduser.setVisible(true);
         }
     }//GEN-LAST:event_tblusuariosMouseClicked
 
@@ -3505,16 +3675,210 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminar13ActionPerformed
 
     private void btnmenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu9ActionPerformed
-        // TODO add your handling code here:
+        Drawer.getInstance().showDrawer();
     }//GEN-LAST:event_btnmenu9ActionPerformed
+
+    private void btnReporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte1ActionPerformed
+        try {
+
+            Conexion con = new Conexion();
+            Connection conn = con.crearConexion();
+            System.out.println("CONEXION");
+            // Compilar el archivo .jasper
+            JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReportePT.jrxml");
+
+            System.out.println("PASO LA COMPILACION");
+            // Paso 3: Llenar el informe con datos desde la base de datos.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            System.out.println("PASO LA LECTURA");
+            // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
+            JasperViewer.viewReport(jasperPrint);
+            System.out.println("PASO LA PARTE DE VIEW");
+            // O exportarlo a PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Transportistas.pdf");
+
+            //return jasperPrint;
+        } catch (JRException  err) {
+            err.printStackTrace();
+            System.out.println("INGRESO AL CATCH ERROR");
+            System.out.println("ERROR.... " + err);
+            //return null;
+        }
+    }//GEN-LAST:event_btnReporte1ActionPerformed
+
+    private void btnReporte2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte2ActionPerformed
+        try {
+
+            Conexion con = new Conexion();
+            Connection conn = con.crearConexion();
+
+            // Compilar el archivo .jasper
+            JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReporteSP.jrxml");
+            //JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\LuisDev\\Downloads\\FinalIntegrador\\FinalIntegrador\\Formatos\\src\\Reportes\\ReporteSP.jrxml");
+
+            // Paso 3: Llenar el informe con datos desde la base de datos.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+
+            // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
+            JasperViewer.viewReport(jasperPrint);
+
+            // O exportarlo a PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Pasajeros.pdf");
+
+            //return jasperPrint;
+        } catch (JRException  err) {
+            err.printStackTrace();
+            System.out.println("INGRESO AL CATCH ERROR");
+            System.out.println("ERROR.... " + err);
+            //return null;
+        }
+    }//GEN-LAST:event_btnReporte2ActionPerformed
+
+    private void btnReporte3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporte3ActionPerformed
+        try {
+
+            Conexion con = new Conexion();
+            Connection conn = con.crearConexion();
+
+            // Compilar el archivo .jasper
+            JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReporteSF.jrxml");
+
+            // Paso 3: Llenar el informe con datos desde la base de datos.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+
+            // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
+            JasperViewer.viewReport(jasperPrint);
+
+            // O exportarlo a PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Servicios.pdf");
+
+            //return jasperPrint;
+        } catch (JRException  err) {
+            err.printStackTrace();
+            System.out.println("INGRESO AL CATCH ERROR");
+            System.out.println("ERROR.... " + err);
+            //return null;
+        }
+    }//GEN-LAST:event_btnReporte3ActionPerformed
+
+    private void btnVerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTicketActionPerformed
+        try {
+
+            Conexion con = new Conexion();
+            Connection conn = con.crearConexion();
+
+            // Compilar el archivo .jasper
+            JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\TicketRecarga.jrxml");
+
+            // Paso 3: Llenar el informe con datos desde la base de datos.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+
+            // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
+            JasperViewer.viewReport(jasperPrint);
+
+            // O exportarlo a PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf");
+
+            //return jasperPrint;
+        } catch (JRException  err) {
+            err.printStackTrace();
+            System.out.println("INGRESO AL CATCH ERROR");
+            System.out.println("ERROR.... " + err);
+            //return null;
+        }
+    }//GEN-LAST:event_btnVerTicketActionPerformed
+
+    public static void enviarCorreo(String destinatario, String asunto, String cuerpo, String rutaArchivo) {
+        
+        // Configuración para el servidor SMTP de Outlook
+        String host = "smtp.office365.com";
+        String port = "587";
+        String username = "luchitozabalaga@outlook.es";
+        String password = "Jorgezabalag@90";
+
+        // Propiedades para la sesión
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", port);
+
+        // Crear una sesión con autenticación
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Crear un mensaje de correo
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+            message.setSubject(asunto);
+
+            // Crear el cuerpo del mensaje
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(cuerpo);
+
+            // Crear la parte adjunta para el archivo PDF
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            String filePath = rutaArchivo; // Reemplazar con la ruta del archivo PDF
+            DataSource source = new FileDataSource(filePath);
+            attachmentPart.setDataHandler(new DataHandler(source));
+            attachmentPart.setFileName("TicketRecarga.pdf");
+
+            // Combinar las partes del mensaje
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            multipart.addBodyPart(attachmentPart);
+
+            // Establecer el contenido del mensaje como la combinación de partes
+            message.setContent(multipart);
+
+            // Enviar el mensaje
+            Transport.send(message);
+            
+            JOptionPane.showMessageDialog(null, "Email enviado correctamente!!!");
+            
+            System.out.println("Correo enviado correctamente.");
+            
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+
+        /*enviarCorreo(
+            "luchitozabalaga@outlook.es",
+            "Ticket de Recarga - EtravelEase",
+            "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
+            "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
+        );*/
+        enviarCorreo(
+            txtEmailDestino.getText(),
+            "Ticket de Recarga - EtravelEase",
+            "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
+            "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
+        );
+
+    }//GEN-LAST:event_btnEnviarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Color color = Color.decode("#5856D6");
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("Temas");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
+        UIManager.put("Button.background", color);
         FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3548,12 +3912,17 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar13;
     public javax.swing.JButton btnEliminarConsumo;
     public javax.swing.JButton btnEliminarRecarga;
+    private javax.swing.JButton btnEnviar;
     public javax.swing.JButton btnModRut;
     public javax.swing.JButton btnModificarConsumo;
     public javax.swing.JButton btnModificarRecarga;
     public javax.swing.JButton btnRegistrarConsumo;
     public javax.swing.JButton btnRegistrarRecarga;
     public javax.swing.JButton btnRegrut;
+    private javax.swing.JButton btnReporte1;
+    private javax.swing.JButton btnReporte2;
+    private javax.swing.JButton btnReporte3;
+    private javax.swing.JButton btnVerTicket;
     private javax.swing.JButton btnactaddemp;
     private javax.swing.JButton btnactaddper;
     private javax.swing.JButton btnactaddunidad;
@@ -3666,11 +4035,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -3682,6 +4055,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private com.toedter.calendar.JDateChooser jdcFinal;
+    private com.toedter.calendar.JDateChooser jdcInicial;
     public javax.swing.JFormattedTextField jdcfechacaducTarjeta;
     public javax.swing.JFormattedTextField jdcfechacreacionTarjeta;
     private Clases.CrazyPanel menuConsumos;
@@ -3733,6 +4108,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTarjeraopc2;
     private javax.swing.JPanel pnlTarjeraopc3;
     private javax.swing.JPanel pnlTarjeraopc4;
+    private javax.swing.JPanel pnlTarjeraopc5;
     private Clases.CrazyPanel pnlTarjetaForm;
     private Clases.CrazyPanel pnlTarjetaForm1;
     private Clases.CrazyPanel pnlTarjetaForm2;
@@ -3743,6 +4119,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel pnlUnidadesForm1;
     private Clases.CrazyPanel pnlUnidadesForm2;
     private javax.swing.JPanel pnlUnidadesForm3;
+    private Clases.CrazyPanel pnlUnidadesForm5;
     private Clases.CrazyPanel pnlUsuarioForm;
     private Clases.CrazyPanel pnlUsuarioForm1;
     private Clases.CrazyPanel pnlUsuarioForm2;
@@ -3783,6 +4160,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JTextField txtContraUser;
     public javax.swing.JTextField txtDniUsers;
     public javax.swing.JTextField txtDniunidad;
+    private javax.swing.JTextField txtEmailDestino;
     public javax.swing.JTextField txtIdRutaUnidad;
     public javax.swing.JTextField txtIdUser;
     public javax.swing.JTextField txtUserUsuario;
