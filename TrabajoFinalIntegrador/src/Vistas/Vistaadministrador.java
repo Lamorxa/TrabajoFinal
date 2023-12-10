@@ -547,6 +547,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnReporte1 = new javax.swing.JButton();
         btnReporte2 = new javax.swing.JButton();
         btnReporte3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("frame"); // NOI18N
@@ -2797,13 +2798,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
         );
 
         tablaUnidades1.add(pnlTarjeraopc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 290, 160));
+
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 180, 30));
+        tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 150, -1, -1));
 
         pnlReportes.add(tablaUnidades1, java.awt.BorderLayout.CENTER);
 
@@ -3988,6 +3985,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbxestadoUser;
     public javax.swing.JComboBox<String> cbxestadopersona;
     public javax.swing.JComboBox<String> cbxtipousupersona;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
