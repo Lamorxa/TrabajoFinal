@@ -16,6 +16,7 @@ import conexion.Conexion;
 import java.sql.Connection;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -66,60 +67,57 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.management.Notification;
+import javax.swing.JFileChooser;
 import raven.toast.Notifications;
 
 public class Vistaadministrador extends javax.swing.JFrame {
-    UsuarioDAO usDao= new UsuarioDAO();
-    Usuarios us=new Usuarios();
-    Rutas rut=new Rutas();
-    RutasDAO rutdao=new RutasDAO();
-    EmpresaTransporte emtrans=new EmpresaTransporte();
-    EmpresaTransporteDAO emtransdao=new EmpresaTransporteDAO();
-    Personas person=new Personas();
-    PersonasDAO persondao=new PersonasDAO();
-    Tarjetas tarj=new Tarjetas();
-    TarjetaDAO tarjdao=new TarjetaDAO();
-    Unidades unidad=new Unidades();
-    UnidadDAO unidadesDAO=new UnidadDAO();
-    RegistroConsumos consu= new RegistroConsumos();
-    RegistroConsumosDAO conconsu= new RegistroConsumosDAO();
-    RegistroRecargas recar=new RegistroRecargas();
+
+    UsuarioDAO usDao = new UsuarioDAO();
+    Usuarios us = new Usuarios();
+    Rutas rut = new Rutas();
+    RutasDAO rutdao = new RutasDAO();
+    EmpresaTransporte emtrans = new EmpresaTransporte();
+    EmpresaTransporteDAO emtransdao = new EmpresaTransporteDAO();
+    Personas person = new Personas();
+    PersonasDAO persondao = new PersonasDAO();
+    Tarjetas tarj = new Tarjetas();
+    TarjetaDAO tarjdao = new TarjetaDAO();
+    Unidades unidad = new Unidades();
+    UnidadDAO unidadesDAO = new UnidadDAO();
+    RegistroConsumos consu = new RegistroConsumos();
+    RegistroConsumosDAO conconsu = new RegistroConsumosDAO();
+    RegistroRecargas recar = new RegistroRecargas();
     RegistroRecargasDAO conrecar = new RegistroRecargasDAO();
-    Rellenarcombo re=new Rellenarcombo();
-    Conexion conec=new Conexion();
-    
+    Rellenarcombo re = new Rellenarcombo();
+    Conexion conec = new Conexion();
+
     public Vistaadministrador() {
-        
+
         //Centrar objetos tabla
-        
-        
         Notifications.getInstance().setJFrame(this);
         GlassPanePopup.install(this);
         ConstructorCajon constructorCajon = new ConstructorCajon(this);
         Drawer.getInstance().setDrawerBuilder(constructorCajon);
         initComponents();
         init();
-        
-       // Controladordebugtarje a=new Controladordebugtarje( this);
 
+        // Controladordebugtarje a=new Controladordebugtarje( this);
         ControladorUsuarios users = new ControladorUsuarios(us, usDao, this);
-        ControladorRutas rutas= new ControladorRutas(rut, rutdao, this);
-        ControladorEmpresaTransporte empresas=new ControladorEmpresaTransporte(emtrans, emtransdao, this);
-        ControladorPersonas personas=new ControladorPersonas(this, person, persondao);
-        ControladorUnidades unidades =new ControladorUnidades(this, unidad, unidadesDAO);
-        ControladorRegistroConsumos consss= new ControladorRegistroConsumos(consu, conconsu, this);
-        ControladorRegistroRecargas con=new ControladorRegistroRecargas(conrecar,recar, this);
+        ControladorRutas rutas = new ControladorRutas(rut, rutdao, this);
+        ControladorEmpresaTransporte empresas = new ControladorEmpresaTransporte(emtrans, emtransdao, this);
+        ControladorPersonas personas = new ControladorPersonas(this, person, persondao);
+        ControladorUnidades unidades = new ControladorUnidades(this, unidad, unidadesDAO);
+        ControladorRegistroConsumos consss = new ControladorRegistroConsumos(consu, conconsu, this);
+        ControladorRegistroRecargas con = new ControladorRegistroRecargas(conrecar, recar, this);
         //re.rellenar("tarjetas", "CodTarjeta",cbntarjetasrecarga,conec);
-         
-      
-        
+
         this.setLocationRelativeTo(null);
         btnRegrut.setVisible(false);
         btncancelper.setVisible(false);
         btndeluni.setVisible(false);
         btnCancelarManRut.setVisible(false);
         btnelirut.setVisible(false);
-        
+
         btnCancelarManRut1.setVisible(false);
         btnModRut.setVisible(false);
         btnCancelarManRut2.setVisible(false);
@@ -150,15 +148,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnactadduser.setVisible(true);
         btnactdeluser.setVisible(false);
         btnactmoduser.setVisible(false);
-        
-        
+
         /*btnaddtar.setVisible(false);
         btnmodtar.setVisible(false);
         btndeltar.setVisible(false);
         btncanTar.setVisible(false);
         btncanTar1.setVisible(false);
         btncanTar2.setVisible(false);
-        */btnaddemp.setVisible(false);
+         */
+        btnaddemp.setVisible(false);
         btndelemp.setVisible(false);
         btnmodemp.setVisible(false);
         btncantrans.setVisible(false);
@@ -166,10 +164,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btncantrans2.setVisible(false);
         btnactmodiunidad.setVisible(false);
         btnactdelunidad.setVisible(false);
-  
 
     }
-       
+
     private void listarTarjetas() {
         try {
             List<Tarjetas> lista = tarjdao.listarTarjetas();
@@ -192,65 +189,63 @@ public class Vistaadministrador extends javax.swing.JFrame {
             // Manejar la excepción, mostrar un mensaje de error, etc.
         }
     }
-    
 
-    private void init(){
-             
+    private void init() {
+
         tablaPersonas.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
-        pnlBotonesBusqueda1.setLayout(new MigLayout("","[200]push[][]","[]push[][]"));
-        pnlPersonaForm.setLayout(new MigLayout("wrap,fill,insets 30 30 30 30","[][][][]","[][][][]"));
+        pnlBotonesBusqueda1.setLayout(new MigLayout("", "[200]push[][]", "[]push[][]"));
+        pnlPersonaForm.setLayout(new MigLayout("wrap,fill,insets 30 30 30 30", "[][][][]", "[][][][]"));
         //pnlPersonaForm1.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         //pnlPersonaForm2.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         //pnlPersonaForm3.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         //pnlPersonaForm4.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
-        pnlBotonesBusqueda2.setLayout(new MigLayout("","[200]push[][]",""));
+        pnlBotonesBusqueda2.setLayout(new MigLayout("", "[200]push[][]", ""));
         tablaUsuarios.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
         //Place holder panel personas
-        txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtnombrepersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre");
-        txtapepatpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Paterno");
-        txtapematpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Apellido Materno");
-        txtdnipersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
-        txtcelusuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Celular");
-        txtemail.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Correo Electrónico");
-        txtruc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"RUC de empresa");
-        
+        txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtnombrepersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre");
+        txtapepatpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Apellido Paterno");
+        txtapematpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Apellido Materno");
+        txtdnipersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
+        txtcelusuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Celular");
+        txtemail.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Correo Electrónico");
+        txtruc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "RUC de empresa");
+
         //Place holder panel usuarios
-        txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtUserUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de Usuario");
-        txtContraUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Contraseña");
-        txtDniUsers.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
-        
+        txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtUserUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre de Usuario");
+        txtContraUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Contraseña");
+        txtDniUsers.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
+
         //Place holder panel Tarjetas
-        txtBuscar3.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtcodtarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Código de tarjeta");
-        txtdnipersonatarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
-        
+        txtBuscar3.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtcodtarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Código de tarjeta");
+        txtdnipersonatarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
+
         //Place holder panel Recargas
-        txtBuscar4.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtCodTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
-        txtmontorecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Monto de recarga");
-        
+        txtBuscar4.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtCodTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Número de Tarjeta");
+        txtmontorecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Monto de recarga");
+
         //Place holder panel Consumos}
-        txtBuscar5.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtCodTarjetaconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Número de Tarjeta");
-        txtCodUnidadconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Unidad");
-        
+        txtBuscar5.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtCodTarjetaconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Número de Tarjeta");
+        txtCodUnidadconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Unidad");
+
         //Place holder panel Rutas
-        txtBuscar6.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtnombreruta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de ruta");
-        
+        txtBuscar6.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtnombreruta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre de ruta");
+
         //Place holder panel Empresas
-        txtBuscar7.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtnombreempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Nombre de la Empresa");
-        txtrucempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Ruc de empresa");
-        txtcolorempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Color");
-        
+        txtBuscar7.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtnombreempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre de la Empresa");
+        txtrucempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Ruc de empresa");
+        txtcolorempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Color");
+
         //Place holder panel Unidades
-        txtBuscar8.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtDniunidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"DNI");
+        txtBuscar8.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtDniunidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -2852,8 +2847,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtemail.setText("");
         txtapematpersona.setText("");
         txtapepatpersona.setText("");
-        
-        
+
+
     }//GEN-LAST:event_btnactaddperActionPerformed
 
     private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
@@ -2874,7 +2869,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtruc.setEnabled(true);
         btndelper.setVisible(true);
         btncancelper2.setVisible(true);
-       
+
     }//GEN-LAST:event_btnactdelperActionPerformed
 
     private void btnmenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu1ActionPerformed
@@ -2882,7 +2877,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnmenu1ActionPerformed
 
     private void btnactaddperMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactaddperMouseClicked
-        
+
     }//GEN-LAST:event_btnactaddperMouseClicked
 
     private void txtapepatpersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtapepatpersonaActionPerformed
@@ -3029,7 +3024,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void btnactmodperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactmodperActionPerformed
         // TODO add your handling code here:
-         txtnombrepersona.setEnabled(true);
+        txtnombrepersona.setEnabled(true);
         txtdnipersona.setEnabled(true);
         txtnombrepersona.setEnabled(true);
         txtcelusuario.setEnabled(true);
@@ -3041,8 +3036,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtruc.setEnabled(true);
         btnmodper.setVisible(true);
         btncancelper1.setVisible(true);
-     
-         
+
+
     }//GEN-LAST:event_btnactmodperActionPerformed
 
     private void txtUserUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserUsuarioActionPerformed
@@ -3091,8 +3086,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtContraUser.setText("");
         txtDniUsers.setText("");
         btnactadduser.setVisible(true);
-    btnactdeluser.setVisible(false);
-    btnactmoduser.setVisible(false);
+        btnactdeluser.setVisible(false);
+        btnactmoduser.setVisible(false);
     }//GEN-LAST:event_btncancelusu1ActionPerformed
 
     private void btnaddtarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddtarMouseClicked
@@ -3163,7 +3158,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnModRut.setVisible(true);
         btnModRut.setEnabled(true);
         btnCancelarManRut1.setVisible(true);
-        
+
     }//GEN-LAST:event_btnmodrutActionPerformed
 
     private void btnModRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModRutActionPerformed
@@ -3217,20 +3212,20 @@ public class Vistaadministrador extends javax.swing.JFrame {
         // Resto del código
         txtnombreempresa.setText("");
         txtrucempresa.setText("");
-        txtcolorempresa.setText("");    
+        txtcolorempresa.setText("");
 
     }//GEN-LAST:event_btncantransActionPerformed
 
     private void btnactmodempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactmodempActionPerformed
         // TODO add your handling code here:
-        
+
         txtnombreempresa.setEnabled(true);
         txtrucempresa.setEnabled(true);
         txtcolorempresa.setEnabled(true);
         cbxEstadoTranporte.setEnabled(true);
         btnmodemp.setVisible(true);
         btncantrans1.setVisible(true);
-        
+
     }//GEN-LAST:event_btnactmodempActionPerformed
 
     private void btnmodempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodempActionPerformed
@@ -3246,7 +3241,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnmodemp.setVisible(false);
         btncantrans1.setVisible(false);
 
-        
         // Resto del código
         txtnombreempresa.setText("");
         txtrucempresa.setText("");
@@ -3265,22 +3259,22 @@ public class Vistaadministrador extends javax.swing.JFrame {
         cbxEstadoTranporte.setEnabled(true);
         btndelemp.setVisible(true);
         btncantrans2.setVisible(true);
-       
+
         btnactdelunidad.setEnabled(false);
     }//GEN-LAST:event_btnactdelempActionPerformed
 
     private void tblEmpresastransMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpresastransMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
-            txtrucempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-            txtnombreempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            txtcolorempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtrucempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtnombreempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtcolorempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
             cbxEstadoTranporte.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
-          
-        btnactdelemp.setVisible(true);
-        btnactmodemp.setVisible(true);
-        btnactaddemp.setVisible(false);
+
+            btnactdelemp.setVisible(true);
+            btnactmodemp.setVisible(true);
+            btnactaddemp.setVisible(false);
         }
     }//GEN-LAST:event_tblEmpresastransMouseClicked
 
@@ -3289,15 +3283,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdRutaUnidadActionPerformed
 
     private void tblrutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblrutasMouseClicked
-        if(evt.getClickCount() == 1) {  
-            JTable receptor = (JTable)evt.getSource();
-           txtidrutman.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
-           txtnombreruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
-           txtmontoruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
-           cbxEstadoRuta.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
-           btnmodrut.setVisible(true);
-           btnelirut.setVisible(true);
-           btnAddRut.setVisible(false);
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtidrutman.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtnombreruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtmontoruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            cbxEstadoRuta.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
+            btnmodrut.setVisible(true);
+            btnelirut.setVisible(true);
+            btnAddRut.setVisible(false);
         }
     }//GEN-LAST:event_tblrutasMouseClicked
 
@@ -3364,8 +3358,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void tblunidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblunidadesMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
             // Asegúrate de tener los nombres de los elementos correctos para la clase Unidad
             txtCodUnidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
             txtDniunidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
@@ -3389,8 +3383,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         cbxEstadoUnidad.setEnabled(true);
         btndeluni.setVisible(true);
         btncanuni2.setVisible(true);
-       
-       
+
+
     }//GEN-LAST:event_btnactdelunidadActionPerformed
 
     private void btncanuni1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncanuni1ActionPerformed
@@ -3406,7 +3400,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtDniunidad.setText("");
         txtIdRutaUnidad.setText("");
         txtCodSoat.setText("");
-        
+
         btnactmodiunidad.setVisible(false);
         btnactdelunidad.setVisible(false);
         btnactaddunidad.setVisible(true);
@@ -3483,7 +3477,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnactmodiunidad.setVisible(false);
         btnactdelunidad.setVisible(false);
         btnactaddunidad.setVisible(true);
-        
+
     }//GEN-LAST:event_btncanuni2ActionPerformed
 
     private void btncancelper1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelper1ActionPerformed
@@ -3534,7 +3528,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtapematpersona.setText("");
         txtapepatpersona.setText("");
         btnactaddper.setEnabled(true);
-        
+
     }//GEN-LAST:event_btncancelperActionPerformed
 
     private void btncancelper2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelper2ActionPerformed
@@ -3566,19 +3560,19 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void tblpersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpersonasMouseClicked
         // TODO add your handling code here:
-        
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
-            txtdnipersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-            txtnombrepersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            txtapepatpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
-            txtapematpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
-            txtcelusuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),4).toString());
-            txtemail.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),5).toString());
+
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtdnipersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtnombrepersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtapepatpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            txtapematpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3).toString());
+            txtcelusuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4).toString());
+            txtemail.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 5).toString());
             btnactaddper.setVisible(false);
             btnactmodper.setVisible(true);
             btnactdelper.setVisible(true);
-          
+
             Object value = receptor.getModel().getValueAt(receptor.getSelectedRow(), 7);
             if (value == null) {
                 txtruc.setText("");
@@ -3586,7 +3580,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtruc.setText(value.toString());
             }
         }
-     
+
     }//GEN-LAST:event_tblpersonasMouseClicked
 
     private void btnactadduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactadduserActionPerformed
@@ -3601,7 +3595,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtContraUser.setText("");
         txtDniUsers.setText("");
         txtIdUser.setText("");
-        
+
     }//GEN-LAST:event_btnactadduserActionPerformed
 
     private void btncancelusu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelusu2ActionPerformed
@@ -3623,12 +3617,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void tblusuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblusuariosMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
-            txtIdUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-            txtDniUsers.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            txtUserUsuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
-            txtContraUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtIdUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtDniUsers.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtUserUsuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            txtContraUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3).toString());
             cbxestadoUser.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4));
             btnactadduser.setVisible(false);
             btnactdeluser.setVisible(true);
@@ -3705,7 +3699,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Transportistas.pdf");
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3730,10 +3724,25 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint);
 
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Pasajeros.pdf");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
+            fileChooser.setSelectedFile(new File("Reporte-Pasajeros.pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+                    System.out.println("Exportación exitosa a PDF");
+                } catch (JRException e) {
+                    e.printStackTrace();
+                    System.err.println("Error al exportar a PDF: " + e.getMessage());
+                }
+            }
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3757,10 +3766,25 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint);
 
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Servicios.pdf");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
+            fileChooser.setSelectedFile(new File("Reporte-Servicios.pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+                    System.out.println("Exportación exitosa a PDF");
+                } catch (JRException e) {
+                    e.printStackTrace();
+                    System.err.println("Error al exportar a PDF: " + e.getMessage());
+                }
+            }
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3784,10 +3808,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint);
 
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "src\\Reportes\\TicketRecarga.pdf");
+            
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3796,13 +3821,13 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerTicketActionPerformed
 
     public static void enviarCorreo(String destinatario, String asunto, String cuerpo, String rutaArchivo) {
-        
+
         // Configuración para el servidor SMTP de Outlook
         String host = "smtp.office365.com";
         String port = "587";
         String username = "luchitozabalaga@outlook.es";
         String password = "Jorgezabalag@90";
-
+        System.out.println(destinatario);
         // Propiedades para la sesión
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -3845,18 +3870,17 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             // Enviar el mensaje
             Transport.send(message);
-            
+
             JOptionPane.showMessageDialog(null, "Email enviado correctamente!!!");
-            
+
             System.out.println("Correo enviado correctamente.");
-            
 
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
 
         /*enviarCorreo(
@@ -3866,10 +3890,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
             "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
         );*/
         enviarCorreo(
-            txtEmailDestino.getText(),
-            "Ticket de Recarga - EtravelEase",
-            "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
-            "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
+                txtEmailDestino.getText(),
+                "Ticket de Recarga - EtravelEase",
+                "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
+                "src\\Reportes\\TicketRecarga.pdf"
         );
 
     }//GEN-LAST:event_btnEnviarActionPerformed
@@ -3878,7 +3902,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnaddpersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddpersoActionPerformed
-        
+
     }//GEN-LAST:event_btnaddpersoActionPerformed
 
     /**
@@ -4194,5 +4218,5 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JTextField txtrucempresa;
     public javax.swing.JTextField txtsaldo;
     // End of variables declaration//GEN-END:variables
-    
+
 }

@@ -48,10 +48,6 @@ INNER JOIN personas p ON p.Dni = t.Dni;]]>
 				</textElement>
 				<text><![CDATA[Reporte de Servicios por Pasajeros]]></text>
 			</staticText>
-			<image>
-				<reportElement x="10" y="10" width="50" height="50" uuid="84c92710-0c82-4180-a7d1-46c6dde77cd8"/>
-				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

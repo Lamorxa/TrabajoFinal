@@ -26,10 +26,6 @@ LIMIT 1;]]>
 	</background>
 	<title>
 		<band height="90" splitType="Stretch">
-			<image>
-				<reportElement x="10" y="13" width="40" height="40" uuid="13a6102a-01b7-4155-bf67-9b7ff439b2dd"/>
-				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="80" y="13" width="104" height="23" forecolor="#000000" uuid="f0acc10f-3154-4e3f-a288-d6d31942c5ed"/>
 				<textElement textAlignment="Center">

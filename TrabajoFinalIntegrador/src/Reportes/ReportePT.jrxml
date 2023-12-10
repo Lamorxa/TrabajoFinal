@@ -43,10 +43,6 @@ INNER JOIN registroconsumos c ON c.CodUnidad = u.CodUnidad;]]>
 				</textElement>
 				<text><![CDATA[Reporte de Pagos a Transportistas por Rutas]]></text>
 			</staticText>
-			<image>
-				<reportElement x="10" y="10" width="50" height="50" uuid="1fc1a963-5775-4b5d-b46e-008603d99710"/>
-				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
