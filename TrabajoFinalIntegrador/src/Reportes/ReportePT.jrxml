@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa03044d-063d-4288-b449-b10e8632bcd9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT e.RucEmpresa, e.NombreEmpresa, e.Color, r.NombreRuta, c.MontoConsumo, c.FechaConsumo FROM empresatransporte e
+INNER JOIN rutas r ON r.RucEmpresa = e.RucEmpresa
+INNER JOIN unidades u ON u.IdRuta = r.IdRuta
+INNER JOIN registroconsumos c ON c.CodUnidad = u.CodUnidad;]]>
+	</queryString>
+	<field name="RucEmpresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreEmpresa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Color" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreRuta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MontoConsumo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FechaConsumo" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="396" y="56" width="138" height="20" uuid="e37e908f-5a5f-40dd-af6a-7c49bb22f652"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="21" width="330" height="26" uuid="d36f613e-0579-436b-a9e8-bda458921d22"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Pagos a Transportistas por Rutas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="10" width="50" height="50" uuid="1fc1a963-5775-4b5d-b46e-008603d99710"/>
+				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="2" width="75" height="20" uuid="05b52b0f-ef52-4fc3-b3df-ec12d2b73c03"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="2" width="164" height="20" uuid="01917422-fdd8-474d-92b1-751646333012"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="2" width="50" height="20" uuid="3d4a69a5-41b8-4205-9388-e7ed06f0d3c2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COLOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="2" width="100" height="20" uuid="651bf998-66ff-46db-91c9-437a5a767fa6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="2" width="50" height="20" uuid="4f941fcb-f70c-4120-b179-ea7d68e91d45"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="2" width="100" height="20" uuid="7b5b56c7-a146-4852-97f3-f544e96d2f54"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="7" y="2" width="75" height="20" uuid="5b60a229-4710-452f-8f4c-98d5afc3fccb"/>
+				<textFieldExpression><![CDATA[$F{RucEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="2" width="164" height="20" uuid="ce2a6099-00ed-4cc4-b38b-bf839ffc6570"/>
+				<textFieldExpression><![CDATA[$F{NombreEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="2" width="50" height="20" uuid="584f01b7-64dd-41b3-8fbc-0f981945faab"/>
+				<textFieldExpression><![CDATA[$F{Color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="2" width="100" height="20" uuid="19c2fae1-e88b-4e9e-a03e-68e55f352537"/>
+				<textFieldExpression><![CDATA[$F{NombreRuta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="2" width="50" height="20" uuid="4ebbaaf6-f3a6-40ec-89d4-c5954582bec0"/>
+				<textFieldExpression><![CDATA[$F{MontoConsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="2" width="100" height="20" uuid="6ac17d8a-d03b-4c9f-89b5-d6347ab14708"/>
+				<textFieldExpression><![CDATA[$F{FechaConsumo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="216" y="11" width="80" height="20" uuid="287a0e93-1cf9-4f7c-88e4-66db209559fc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="296" y="11" width="40" height="20" uuid="a2bec84e-f01b-40e8-ab19-b14c2e034cd2"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
