@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Vistas/Vistaadministrador.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Vistas/VistaUsuario.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Vistas/VistaConductor.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Cajon/ConstructorCajon.java</file>
+            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Controladores/ControladorPersonas.java</file>
+            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Vistas/Frmlogin.java</file>
+            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/VideoPanel/Login.java</file>
+            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Controladores/ControladorLogin.java</file>
+            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/modelos/PersonasDAO.java</file>
         </group>
     </open-files>
 </project-private>

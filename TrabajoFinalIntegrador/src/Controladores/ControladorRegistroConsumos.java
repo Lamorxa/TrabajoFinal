@@ -10,6 +10,7 @@ import Vistas.Vistaadministrador;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import raven.toast.Notifications;
 
 public class ControladorRegistroConsumos implements ActionListener {
     private Vistaadministrador views;
@@ -34,7 +35,7 @@ public class ControladorRegistroConsumos implements ActionListener {
             // Obtener datos de la vista y validar
             if (views.txtCodTarjetaconsu.getText().equals("") ||
             views.txtCodUnidadconsu.getText().equals(""))
-              JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+              Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         else {
                       
             
@@ -52,12 +53,12 @@ public class ControladorRegistroConsumos implements ActionListener {
 
             // Llamar al método de registro en el DAO
             if (registroConsumosDAO.registrarConsumo(nuevoConsumo)) {
-                JOptionPane.showMessageDialog(null, "Consumo Registrado Con Éxito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Registrado correctamente");
                 limpiarTabla();
                 listarConsumos();
                 registroConsumosDAO.actualizarsaldoconsumo(nuevoConsumo);
             } else {
-                JOptionPane.showMessageDialog(null, "Error al registrar Consumo");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al registrar");
             }
         }
         }
@@ -66,7 +67,7 @@ public class ControladorRegistroConsumos implements ActionListener {
             // Obtener datos de la vista y validar
             if (views.txtCodTarjetaconsu.getText().equals("") ||
             views.txtCodUnidadconsu.getText().equals(""))
-              JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+              Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         else{
         
             int codConsumo = Integer.parseInt(views.txtCodConsumo.getText());
@@ -84,11 +85,11 @@ public class ControladorRegistroConsumos implements ActionListener {
 
             // Llamar al método de modificación en el DAO
             if (registroConsumosDAO.modificarConsumos(consumoModificado)) {
-                JOptionPane.showMessageDialog(null, "Consumo Modificado Con Éxito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
                 limpiarTabla();
                 listarConsumos();
             } else {
-                JOptionPane.showMessageDialog(null, "Error al Modificar Consumo");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
             }
         }}
 
@@ -97,7 +98,7 @@ public class ControladorRegistroConsumos implements ActionListener {
             // Obtener datos de la vista y validar
             if (views.txtCodTarjetaconsu.getText().equals("") ||
             views.txtCodUnidadconsu.getText().equals(""))
-              JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+              Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         else{
             int codConsumo = Integer.parseInt(views.txtCodConsumo.getText());
 
@@ -106,12 +107,12 @@ public class ControladorRegistroConsumos implements ActionListener {
 
             // Llamar al método de eliminación en el DAO
             if (registroConsumosDAO.eliminarConsumo(consumoEliminar)) {
-                JOptionPane.showMessageDialog(null, "Consumo Eliminado Con Éxito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
                 limpiarTabla();
                 listarConsumos();
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar Consumo");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
             }
         }
     }}

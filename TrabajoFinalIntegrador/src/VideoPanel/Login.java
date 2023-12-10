@@ -65,6 +65,7 @@ public class Login extends JPanel {
                 // Acciones a realizar cuando se presiona el botón
                 System.out.println("¡Botón presionado en el panel!");
                 
+                
                  Vistaadministrador vistaadmin =new Vistaadministrador();
                vistaadmin.setVisible(true);
 

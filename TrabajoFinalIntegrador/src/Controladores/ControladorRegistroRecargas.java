@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import modelos.RegistroRecargas;
 import modelos.RegistroRecargasDAO;
 import Vistas.Vistaadministrador;
+import raven.toast.Notifications;
 
 public class ControladorRegistroRecargas implements ActionListener {
     private Vistaadministrador views;
@@ -34,7 +35,7 @@ public void actionPerformed(ActionEvent e) {
         if (views.txtCodTarjetaRecarga.getText().equals("") ||
             views.txtmontorecarga.getText().equals("") ||
             views.txtcodrecarga.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         } else {
             registroRecargas.setCodRecarga(Integer.parseInt(views.txtcodrecarga.getText()));
             registroRecargas.setCodTarjeta(views.txtCodTarjetaRecarga.getText());
@@ -42,11 +43,11 @@ public void actionPerformed(ActionEvent e) {
             registroRecargas.setEstado(views.cbxestadoRecarga.getSelectedItem().toString());
 
             if (registroRecargasDAO.registrarRecarga(registroRecargas)) {
-                JOptionPane.showMessageDialog(null, "Recarga registrada con éxito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Registrado corectamente");
                 limpiarTabla();
                 listarRecargas();
             } else {
-                JOptionPane.showMessageDialog(null, "Error al registrar la recarga");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al registrar");
             }
         }
     }
@@ -55,7 +56,7 @@ public void actionPerformed(ActionEvent e) {
         if (views.txtCodTarjetaRecarga.getText().equals("") ||
             views.txtmontorecarga.getText().equals("") ||
             views.txtcodrecarga.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         } else {
             registroRecargas.setCodRecarga(Integer.parseInt(views.txtcodrecarga.getText()));
             registroRecargas.setCodTarjeta(views.txtCodTarjetaRecarga.getText());
@@ -63,11 +64,11 @@ public void actionPerformed(ActionEvent e) {
             registroRecargas.setEstado(views.cbxestadoRecarga.getSelectedItem().toString());
           
             if (registroRecargasDAO.modificarRecargas(registroRecargas)) {
-                JOptionPane.showMessageDialog(null, "Recarga modificada con éxito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
                 limpiarTabla();
                 listarRecargas();
             } else {
-                JOptionPane.showMessageDialog(null, "Error al modificar la recarga");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
             }
         }
     }
@@ -76,7 +77,7 @@ public void actionPerformed(ActionEvent e) {
         if (views.txtCodTarjetaRecarga.getText().equals("") ||
             views.txtmontorecarga.getText().equals("") ||
             views.txtcodrecarga.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         } else {
             registroRecargas.setCodRecarga(Integer.parseInt(views.txtcodrecarga.getText()));
             registroRecargas.setCodTarjeta(views.txtCodTarjetaRecarga.getText());
@@ -84,11 +85,11 @@ public void actionPerformed(ActionEvent e) {
             registroRecargas.setEstado(views.cbxestadoRecarga.getSelectedItem().toString());
           
             if (registroRecargasDAO.eliminarRecarga(registroRecargas)) {
-                JOptionPane.showMessageDialog(null, "Recarga eliminada con éxito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
                 limpiarTabla();
                 listarRecargas();
             } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar la recarga");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
             }
         }
     }

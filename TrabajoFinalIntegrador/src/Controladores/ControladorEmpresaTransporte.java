@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.EmpresaTransporte;
 import modelos.EmpresaTransporteDAO;
+import raven.toast.Notifications;
 
 /**
  *
@@ -41,7 +42,7 @@ public class ControladorEmpresaTransporte implements ActionListener{
     if (views.txtcolorempresa.getText().equals("") ||
             views.txtnombreempresa.getText().equals("") ||
             views.txtrucempresa.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         obj.setColor(views.txtcolorempresa.getText());
         obj.setNombreEmpresa(views.txtnombreempresa.getText());
@@ -49,11 +50,11 @@ public class ControladorEmpresaTransporte implements ActionListener{
         obj.setEstado(views.cbxEstadoTranporte.getSelectedItem().toString());
 
         if (objDAO.registrarEmpresa(obj)) {
-            JOptionPane.showMessageDialog(null, "Empresa modificada con exito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Agregado correctamente");
             limpiarTabla();
             listar();
         } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar la Empresa");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al agregar");
         }
     }}
     
@@ -61,7 +62,7 @@ public class ControladorEmpresaTransporte implements ActionListener{
     if (views.txtcolorempresa.getText().equals("") ||
             views.txtnombreempresa.getText().equals("") ||
             views.txtrucempresa.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         obj.setColor(views.txtcolorempresa.getText());
         obj.setNombreEmpresa(views.txtnombreempresa.getText());
@@ -69,18 +70,18 @@ public class ControladorEmpresaTransporte implements ActionListener{
         obj.setEstado(views.cbxEstadoTranporte.getSelectedItem().toString());
 
         if (objDAO.modificarEmpresa(obj)) {
-            JOptionPane.showMessageDialog(null, "Empresa modificada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
             limpiarTabla();
             listar();
         } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar la Empresa");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
         }
     }}
     if (e.getSource() == views.btndelemp) {
     if (views.txtcolorempresa.getText().equals("") ||
             views.txtnombreempresa.getText().equals("") ||
             views.txtrucempresa.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         obj.setColor(views.txtcolorempresa.getText());
         obj.setNombreEmpresa(views.txtnombreempresa.getText());
@@ -88,11 +89,11 @@ public class ControladorEmpresaTransporte implements ActionListener{
         obj.setEstado(views.cbxEstadoTranporte.getSelectedItem().toString());
 
         if (objDAO.eliminarEmpresa(obj)) {
-            JOptionPane.showMessageDialog(null, "Empresa Eliminada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
             limpiarTabla();
             listar();
         } else {
-            JOptionPane.showMessageDialog(null, "Error al Eliminar la Empresa");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
         }
     }}
     

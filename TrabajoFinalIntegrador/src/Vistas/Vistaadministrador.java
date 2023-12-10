@@ -65,6 +65,8 @@ import javax.mail.internet.*;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.management.Notification;
+import raven.toast.Notifications;
 
 public class Vistaadministrador extends javax.swing.JFrame {
     UsuarioDAO usDao= new UsuarioDAO();
@@ -91,7 +93,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         //Centrar objetos tabla
         
         
-        
+        Notifications.getInstance().setJFrame(this);
         GlassPanePopup.install(this);
         ConstructorCajon constructorCajon = new ConstructorCajon(this);
         Drawer.getInstance().setDrawerBuilder(constructorCajon);
@@ -764,6 +766,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlPersonaForm3.add(cbxtipousupersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 186, -1));
 
         btnaddperso.setText("Añadir");
+        btnaddperso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddpersoActionPerformed(evt);
+            }
+        });
         pnlPersonaForm3.add(btnaddperso, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         btncancelper.setText("Cancelar");
@@ -3869,6 +3876,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnaddpersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddpersoActionPerformed
+        
+    }//GEN-LAST:event_btnaddpersoActionPerformed
 
     /**
      * @param args the command line arguments

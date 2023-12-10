@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelos.Unidades;
 import modelos.UnidadDAO;
+import raven.toast.Notifications;
 
 /**
  *
@@ -68,7 +69,7 @@ public class ControladorUnidades implements ActionListener{
             views.txtIdRutaUnidad.getText().equals("")
             ||views.txtDniunidad.getText().equals("")
             ) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         uni.setCodUnidad(views.txtCodUnidad.getText());
         uni.setDni(views.txtDniunidad.getText());        
@@ -77,11 +78,11 @@ public class ControladorUnidades implements ActionListener{
         uni.setEstado(views.cbxEstadoUnidad.getSelectedItem().toString());
 
         if (unidao.registrarUnidad(uni)) {
-            JOptionPane.showMessageDialog(null, "Unidad Registrada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Registrado correctamente");
             limpiarTabla();
             listar();   
         } else {
-            JOptionPane.showMessageDialog(null, "Error al Registrar la Unidad");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al registrar");
         }
         }
         }
@@ -91,7 +92,7 @@ public class ControladorUnidades implements ActionListener{
             views.txtIdRutaUnidad.getText().equals("")
             ||views.txtDniunidad.getText().equals("")
             ) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         uni.setCodUnidad(views.txtCodUnidad.getText());
         uni.setDni(views.txtDniunidad.getText());        
@@ -100,11 +101,11 @@ public class ControladorUnidades implements ActionListener{
         uni.setEstado(views.cbxEstadoUnidad.getSelectedItem().toString());
 
         if (unidao.modificarUnidad(uni)) {
-            JOptionPane.showMessageDialog(null, "Unidad modificada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
             limpiarTabla();
             listar();   
         } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar la Unidad");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
         }
         }
         }
@@ -114,7 +115,7 @@ public class ControladorUnidades implements ActionListener{
             views.txtIdRutaUnidad.getText().equals("")
             ||views.txtDniunidad.getText().equals("")
             ) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         uni.setCodUnidad(views.txtCodUnidad.getText());
         uni.setDni(views.txtDniunidad.getText());        
@@ -123,11 +124,11 @@ public class ControladorUnidades implements ActionListener{
         uni.setEstado(views.cbxEstadoUnidad.getSelectedItem().toString());
 
         if (unidao.eliminarUnidad(uni)) {
-            JOptionPane.showMessageDialog(null, "Unidad eliminada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
             limpiarTabla();
             listar();   
         } else {
-            JOptionPane.showMessageDialog(null, "Error al eliminada la Unidad");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
         }
         }
         }
