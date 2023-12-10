@@ -81,7 +81,7 @@ public boolean modificar(Rutas ruta) {
 }
 
 public boolean eliminar(Rutas ruta) {
-    String sql = "DELETE FROM rutas WHERE IdRuta = ?";
+    String sql = "UPDATE rutas SET estado = 'inactivo' WHERE IdRuta = ?";
     try {
         Conexion cn = new Conexion();
         Connection con = cn.crearConexion();

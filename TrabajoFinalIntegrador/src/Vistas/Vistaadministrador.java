@@ -703,6 +703,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlPersonaForm1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtnombrepersona.setEnabled(false);
+        txtnombrepersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombrepersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm1.add(txtnombrepersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, -1));
 
         jLabel12.setText("Apellido Materno");
@@ -714,9 +719,19 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtapepatpersonaActionPerformed(evt);
             }
         });
+        txtapepatpersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtapepatpersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm1.add(txtapepatpersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 280, -1));
 
         txtapematpersona.setEnabled(false);
+        txtapematpersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtapematpersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm1.add(txtapematpersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 280, -1));
 
         jLabel46.setText("Apellido Paterno");
@@ -735,10 +750,17 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtdnipersonaActionPerformed(evt);
             }
         });
+        txtdnipersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdnipersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm2.add(txtdnipersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, -1));
 
         jLabel6.setText("Celular");
         pnlPersonaForm2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        txtcelusuario.setEnabled(false);
         pnlPersonaForm2.add(txtcelusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 150, -1));
 
         pnlPersonaForm.add(pnlPersonaForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 220, 160));
@@ -1861,7 +1883,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(918, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuRutasLayout.setVerticalGroup(
             menuRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2047,7 +2069,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda6Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(806, Short.MAX_VALUE))
+                .addContainerGap(788, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda6Layout.setVerticalGroup(
             pnlBotonesBusqueda6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2063,7 +2085,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaRutas.setLayout(tablaRutasLayout);
         tablaRutasLayout.setHorizontalGroup(
             tablaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaRutasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6)
@@ -3025,7 +3047,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private void btnactmodperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactmodperActionPerformed
         // TODO add your handling code here:
         txtnombrepersona.setEnabled(true);
-        txtdnipersona.setEnabled(true);
         txtnombrepersona.setEnabled(true);
         txtcelusuario.setEnabled(true);
         txtemail.setEnabled(true);
@@ -3809,7 +3830,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             // O exportarlo a PDF
             JasperExportManager.exportReportToPdfFile(jasperPrint, "src\\Reportes\\TicketRecarga.pdf");
-            
 
             //return jasperPrint;
         } catch (JRException err) {
@@ -3904,6 +3924,53 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private void btnaddpersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddpersoActionPerformed
 
     }//GEN-LAST:event_btnaddpersoActionPerformed
+
+    private void txtnombrepersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrepersonaKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtnombrepersonaKeyTyped
+
+    private void txtapepatpersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapepatpersonaKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtapepatpersonaKeyTyped
+
+    private void txtapematpersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapematpersonaKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtapematpersonaKeyTyped
+
+    private void txtdnipersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdnipersonaKeyTyped
+        // COD numeros
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtdnipersona.getText().length() >= 8) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtdnipersonaKeyTyped
 
     /**
      * @param args the command line arguments

@@ -132,7 +132,7 @@ public boolean modificarPersona(Personas personas) {
 }
 
 public boolean eliminarPersona(Personas personas) {
-    String sql = "DELETE FROM personas WHERE Dni = ?";
+    String sql = "UPDATE personas SET estado = 'inactivo' WHERE Dni = ?;";
     Conexion cn = new Conexion();
     try {
         Connection con = cn.crearConexion();

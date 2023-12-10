@@ -115,7 +115,7 @@ public boolean modificar(Usuarios user) {
 }
 
 public boolean eliminar(Usuarios user) {
-    String sql = "DELETE FROM usuarios WHERE IdUsuario = ?";
+    String sql = "UPDATE usuarios SET estado = 'inactivo'  WHERE IdUsuario = ?";
     Conexion cn = new Conexion();
 
     try {

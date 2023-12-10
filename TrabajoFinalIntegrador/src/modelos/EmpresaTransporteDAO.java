@@ -89,7 +89,7 @@ public class EmpresaTransporteDAO {
 }
 
 public boolean eliminarEmpresa(EmpresaTransporte empresaTransporte) {
-    String sql = "DELETE FROM empresatransporte WHERE RucEmpresa = ?";
+    String sql = "UPDATE empresatransporte SET estado = 'inactivo' WHERE RucEmpresa = ?";
     Conexion cn = new Conexion();
     try {
         Connection con = cn.crearConexion();
