@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
 public class Conexion {
     public static final String URL = "jdbc:mysql://localhost:3306/etravelease";
     public static final String USERNAME = "root";

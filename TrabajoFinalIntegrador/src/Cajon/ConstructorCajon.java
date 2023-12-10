@@ -84,8 +84,7 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
                          main.pnlRutas.setVisible(false);
                          main.pnlEmpresas.setVisible(false);
                          main.pnlUnidades.setVisible(false);
-                         main.pnlReportes.setVisible(false);
-                         
+                         main.pnlReportes.setVisible(false);                         
                     }
                     if (i == 1 && s == 1) {
                          System.out.println("Menu " + i + " " + s);
@@ -159,7 +158,7 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
                          main.pnlUnidades.setVisible(true);
                          main.pnlReportes.setVisible(false);
                     }
-                    if (i == 4) {
+                    if (i == 4 && s == 0) {
                          System.out.println("Menu " + i + " " + s);
                          main.pnlPersonas.setVisible(false);
                          main.pnlUsuarios.setVisible(false);

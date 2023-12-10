@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="297" pageHeight="390" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4d796581-07f2-42d6-8b3d-21481ee558c4">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT r.CodRecarga, r.MontoRecarga, r.CodTarjeta, r.FechaRecarga FROM registrorecargas r
+INNER JOIN tarjetas t ON t.CodTarjeta = r.CodTarjeta
+ORDER by r.CodRecarga DESC
+LIMIT 1;]]>
+	</queryString>
+	<field name="CodRecarga" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MontoRecarga" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CodTarjeta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FechaRecarga" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="13" width="40" height="40" uuid="13a6102a-01b7-4155-bf67-9b7ff439b2dd"/>
+				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="80" y="13" width="104" height="23" forecolor="#000000" uuid="f0acc10f-3154-4e3f-a288-d6d31942c5ed"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EtravelEase]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-3" y="76" width="62" height="14" forecolor="#000000" uuid="bb189224-e95b-4ebd-908d-0c3af1c8a00e"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro Ticket:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="76" width="20" height="14" forecolor="#000000" uuid="e1ab40ea-0cda-40ab-a920-d163232e2bd8"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="44" width="109" height="26" forecolor="#FF0000" uuid="1256d246-4314-40d2-941a-2e8cbef8a45a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ticket Recarga]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="76" width="100" height="14" uuid="d514465d-b313-4f90-ad5c-d3312efd247e"/>
+				<textFieldExpression><![CDATA[$F{CodRecarga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="9" width="257" height="1" uuid="508c3b32-7113-4c73-9e65-e6b7173de799"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="161" y="0" width="47" height="20" uuid="006c22f1-c227-4bab-aba9-3dbe3527ec59"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="50" height="20" uuid="1dc495c9-9de2-434a-933a-c0441aec0f7c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="2" width="47" height="20" uuid="01b5e62a-9949-417b-a200-124a242f7d60"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="257" height="1" uuid="2b61ddd6-e6f9-45ae-a821-0b5e0d33c6aa"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="61" y="0" width="100" height="20" uuid="4ae625c9-3cd2-42ba-9bb3-e864bc02fa96"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarjeta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="161" y="0" width="47" height="20" uuid="96d8320d-3e02-49de-a697-fb3e1c4be567"/>
+				<textFieldExpression><![CDATA[$F{MontoRecarga}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="20" uuid="8ed20aa9-6d72-413b-9ca5-d933b4fcdd4c"/>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="210" y="0" width="47" height="20" uuid="5b734440-44ec-4093-b809-14120df2eb06"/>
+				<textFieldExpression><![CDATA[$F{MontoRecarga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="0" width="102" height="20" uuid="9b369bd8-ab16-4988-aa45-8d2d948ead4f"/>
+				<textFieldExpression><![CDATA[$F{CodTarjeta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="168" y="2" width="47" height="20" uuid="2a93145b-54e2-4282-9ad2-f0a9fe4e2474"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:   $]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="215" y="2" width="47" height="20" uuid="e63d872d-b77d-4b80-9a87-3ec1aa6396f3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MontoRecarga}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="257" height="1" uuid="5666e395-30b5-43ed-9191-9ed9bfbe5326"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="13" width="36" height="20" uuid="30288dc2-7b46-4826-a330-475c85e3e036"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="13" width="36" height="20" uuid="daa448f2-61de-47d2-92e9-2418bc7ed0d4"/>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="53" width="219" height="31" uuid="ea3e2788-1052-42aa-82f4-2f3efe880f75"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[AGRADECEMOS SU PREFERENCIA VUELVA PRONTO!!!]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="36" y="13" width="100" height="20" uuid="4414c729-71ac-42ea-bc74-7e1c9f8235b3"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="208" y="13" width="49" height="20" uuid="f6c6f750-09d0-4e17-bc18-bc172e7ad5b9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>
