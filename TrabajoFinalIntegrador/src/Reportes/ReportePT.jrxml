@@ -3,11 +3,16 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="f_inicial" class="java.lang.String"/>
+	<parameter name="f_final" class="java.lang.String"/>
+	<parameter name="p_trans" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_rutas" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT e.RucEmpresa, e.NombreEmpresa, e.Color, r.NombreRuta, c.MontoConsumo, c.FechaConsumo FROM empresatransporte e
-INNER JOIN rutas r ON r.RucEmpresa = e.RucEmpresa
-INNER JOIN unidades u ON u.IdRuta = r.IdRuta
-INNER JOIN registroconsumos c ON c.CodUnidad = u.CodUnidad;]]>
+		<![CDATA[CALL reporteTransportistasRutas ($P{f_inicial}, $P{f_final}, $P{p_trans}, $P{p_rutas});]]>
 	</queryString>
 	<field name="RucEmpresa" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

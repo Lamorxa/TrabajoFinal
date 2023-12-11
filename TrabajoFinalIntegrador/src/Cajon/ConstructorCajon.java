@@ -59,9 +59,7 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
             .setIconScale(0.35f)
             .addMenuEvent(new MenuEvent() {
                 @Override
-                public void selected(MenuAction action, int i, int s) {
-                   
-                    
+                public void selected(MenuAction action, int i, int s) {                    
                     if (i == 0 && s == 1) {
                          System.out.println("Menu " + i + " " + s);
                          main.pnlPersonas.setVisible(true);
@@ -85,6 +83,7 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
                          main.pnlEmpresas.setVisible(false);
                          main.pnlUnidades.setVisible(false);
                          main.pnlReportes.setVisible(false);                         
+                         main.pnlReportes.setVisible(false);                      
                     }
                     if (i == 1 && s == 1) {
                          System.out.println("Menu " + i + " " + s);
@@ -168,7 +167,7 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
                          main.pnlRutas.setVisible(false);
                          main.pnlEmpresas.setVisible(false);
                          main.pnlUnidades.setVisible(false);
-                         main.pnlReportes.setVisible(true);
+                         main.pnlReportes.setVisible(true);                    
                     }
                 }
             });

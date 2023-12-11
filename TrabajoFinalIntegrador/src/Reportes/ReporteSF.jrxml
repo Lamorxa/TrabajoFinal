@@ -3,12 +3,14 @@
 	<property name="ireport.zoom" value="1.1"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="f_inicialF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f_finalF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT e.RucEmpresa, e.NombreEmpresa, e.Color, r.NombreRuta, SUM(c.MontoConsumo) AS 'MontoConsumo', c.FechaConsumo FROM empresatransporte e
-INNER JOIN rutas r ON r.RucEmpresa = e.RucEmpresa
-INNER JOIN unidades u ON u.IdRuta = r.IdRuta
-INNER JOIN registroconsumos c ON c.CodUnidad = u.CodUnidad 
-GROUP BY e.RucEmpresa;]]>
+		<![CDATA[CALL reporteServiciosPorFechas($P{f_inicialF}, $P{f_finalF})]]>
 	</queryString>
 	<field name="RucEmpresa" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

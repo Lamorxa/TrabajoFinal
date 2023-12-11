@@ -17,7 +17,10 @@ import java.sql.Connection;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -70,6 +73,9 @@ import javax.management.Notification;
 import javax.swing.JFileChooser;
 import raven.toast.Notifications;
 import raven.toast.ToastClientProperties;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class Vistaadministrador extends javax.swing.JFrame {
 
@@ -526,19 +532,35 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnmenu9 = new javax.swing.JButton();
         jLabel51 = new javax.swing.JLabel();
         tablaUnidades1 = new Clases.CrazyPanel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jLabel60 = new javax.swing.JLabel();
         pnlUnidadesForm5 = new Clases.CrazyPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
         jdcFinal = new com.toedter.calendar.JDateChooser();
         jdcInicial = new com.toedter.calendar.JDateChooser();
-        pnlTarjeraopc5 = new javax.swing.JPanel();
+        txtRutas = new javax.swing.JTextField();
+        txtTransportistas = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
         btnReporte1 = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        pnlUnidadesForm6 = new Clases.CrazyPanel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jdcFinalP = new com.toedter.calendar.JDateChooser();
+        jdcInicialP = new com.toedter.calendar.JDateChooser();
+        txtMontoFinal = new javax.swing.JTextField();
+        txtMontoInicial = new javax.swing.JTextField();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
         btnReporte2 = new javax.swing.JButton();
+        jLabel63 = new javax.swing.JLabel();
+        pnlUnidadesForm7 = new Clases.CrazyPanel();
+        jLabel64 = new javax.swing.JLabel();
+        jdcFinalF = new com.toedter.calendar.JDateChooser();
+        jdcInicialF = new com.toedter.calendar.JDateChooser();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
         btnReporte3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("frame"); // NOI18N
@@ -2706,77 +2728,96 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades1.setPreferredSize(new java.awt.Dimension(1245, 530));
         tablaUnidades1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel25.setText("Fitro de Fechas");
-        tablaUnidades1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 120, 30));
-
-        jLabel59.setText("Fecha Inicial");
-        tablaUnidades1.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 80, -1));
-
-        jLabel60.setText("Fecha Final");
-        tablaUnidades1.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, -1));
-
         pnlUnidadesForm5.setPreferredSize(new java.awt.Dimension(200, 200));
         pnlUnidadesForm5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel52.setText("Fecha Inicial:");
-        pnlUnidadesForm5.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        pnlUnidadesForm5.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
-        jLabel55.setText("Fecha Final");
-        pnlUnidadesForm5.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
-        pnlUnidadesForm5.add(jdcFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 40));
-        pnlUnidadesForm5.add(jdcInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, 40));
+        jLabel55.setText("Rutas");
+        pnlUnidadesForm5.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 110, -1));
+        pnlUnidadesForm5.add(jdcFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 40));
+        pnlUnidadesForm5.add(jdcInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, 40));
+        pnlUnidadesForm5.add(txtRutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 230, 40));
+        pnlUnidadesForm5.add(txtTransportistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 230, 40));
 
-        tablaUnidades1.add(pnlUnidadesForm5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 240, 160));
+        jLabel57.setText("Fecha Final");
+        pnlUnidadesForm5.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, -1));
 
-        btnReporte1.setText("PAGOS TRANSPORTISTAS POR RUTAS");
+        jLabel58.setText("Transportistas");
+        pnlUnidadesForm5.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 110, -1));
+
+        btnReporte1.setText("GENERAR REPORTE");
         btnReporte1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte1ActionPerformed(evt);
             }
         });
+        pnlUnidadesForm5.add(btnReporte1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 230, 40));
 
-        btnReporte2.setText("SERVICIOS POR PASAJEROS");
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setText("Reporte Pagos a Transportistas por Rutas");
+        pnlUnidadesForm5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 280, 40));
+
+        tablaUnidades1.add(pnlUnidadesForm5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 310, 410));
+
+        pnlUnidadesForm6.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlUnidadesForm6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel59.setText("Fecha Inicial:");
+        pnlUnidadesForm6.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        jLabel60.setText("Monto Final");
+        pnlUnidadesForm6.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 110, -1));
+        pnlUnidadesForm6.add(jdcFinalP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 40));
+        pnlUnidadesForm6.add(jdcInicialP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, 40));
+        pnlUnidadesForm6.add(txtMontoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 230, 40));
+        pnlUnidadesForm6.add(txtMontoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 230, 40));
+
+        jLabel61.setText("Fecha Final");
+        pnlUnidadesForm6.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, -1));
+
+        jLabel62.setText("Monto Inicial");
+        pnlUnidadesForm6.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 110, -1));
+
+        btnReporte2.setText("GENERAR REPORTE");
         btnReporte2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte2ActionPerformed(evt);
             }
         });
+        pnlUnidadesForm6.add(btnReporte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 230, 40));
 
-        btnReporte3.setText("SERVICIOS POR FECHAS");
+        jLabel63.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel63.setText("Reporte Servicios por Pasajeros");
+        pnlUnidadesForm6.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 220, 40));
+
+        tablaUnidades1.add(pnlUnidadesForm6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 300, 410));
+
+        pnlUnidadesForm7.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlUnidadesForm7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel64.setText("Fecha Inicial:");
+        pnlUnidadesForm7.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        pnlUnidadesForm7.add(jdcFinalF, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 40));
+        pnlUnidadesForm7.add(jdcInicialF, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, 40));
+
+        jLabel67.setText("Fecha Final");
+        pnlUnidadesForm7.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, -1));
+
+        jLabel69.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel69.setText("Reporte Resumen Servicios por Fechas");
+        pnlUnidadesForm7.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 260, 40));
+
+        btnReporte3.setText("GENERAR REPORTE");
         btnReporte3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte3ActionPerformed(evt);
             }
         });
+        pnlUnidadesForm7.add(btnReporte3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 230, 40));
 
-        javax.swing.GroupLayout pnlTarjeraopc5Layout = new javax.swing.GroupLayout(pnlTarjeraopc5);
-        pnlTarjeraopc5.setLayout(pnlTarjeraopc5Layout);
-        pnlTarjeraopc5Layout.setHorizontalGroup(
-            pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTarjeraopc5Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnReporte1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                    .addComponent(btnReporte2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
-        );
-        pnlTarjeraopc5Layout.setVerticalGroup(
-            pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTarjeraopc5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(btnReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReporte2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReporte3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        tablaUnidades1.add(pnlTarjeraopc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 290, 160));
-
-        jButton1.setText("jButton1");
-        tablaUnidades1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 150, -1, -1));
+        tablaUnidades1.add(pnlUnidadesForm7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 300, 270));
 
         pnlReportes.add(tablaUnidades1, java.awt.BorderLayout.CENTER);
 
@@ -3642,8 +3683,28 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReportePT.jrxml");
 
             System.out.println("PASO LA COMPILACION");
+            
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date inicial = jdcInicial.getDate();
+            Date finall = jdcFinal.getDate();
+            LocalDate timedate1 = LocalDate.ofInstant(inicial.toInstant(), ZoneId.systemDefault());
+            LocalDate timedate2 = LocalDate.ofInstant(finall.toInstant(), ZoneId.systemDefault());
+            String f_inicialFormato = timedate1.format(formatter);
+            String f_finalFormato = timedate2.format(formatter);
+            System.out.println(f_inicialFormato);
+            System.out.println(f_finalFormato);
+            
+            Map parametros = new HashMap();
+            parametros.put("f_inicial", f_inicialFormato);
+            parametros.put("f_final", f_finalFormato);
+            parametros.put("p_trans", txtTransportistas.getText());
+            parametros.put("p_rutas", txtRutas.getText());
+            
+            //System.out.println(jdcInicial.getDate());
+            //System.out.println(jdcFinal.getDate());
+            
             // Paso 3: Llenar el informe con datos desde la base de datos.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn);
             System.out.println("PASO LA LECTURA");
             // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
             JasperViewer.viewReport(jasperPrint);
@@ -3684,12 +3745,28 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReporteSP.jrxml");
             //JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\LuisDev\\Downloads\\FinalIntegrador\\FinalIntegrador\\Formatos\\src\\Reportes\\ReporteSP.jrxml");
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date inicial = jdcInicialP.getDate();
+            Date finall = jdcFinalP.getDate();
+            LocalDate timedate1 = LocalDate.ofInstant(inicial.toInstant(), ZoneId.systemDefault());
+            LocalDate timedate2 = LocalDate.ofInstant(finall.toInstant(), ZoneId.systemDefault());
+            String f_inicialFormato = timedate1.format(formatter);
+            String f_finalFormato = timedate2.format(formatter);
+            System.out.println(f_inicialFormato);
+            System.out.println(f_finalFormato);
+            
+            Map parametros = new HashMap();
+            parametros.put("f_inicialS", f_inicialFormato);
+            parametros.put("f_finalS", f_finalFormato);
+            parametros.put("m_inicial", txtMontoInicial.getText());
+            parametros.put("m_final", txtMontoFinal.getText());            
+
             // Paso 3: Llenar el informe con datos desde la base de datos.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn);
 
             // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
             JasperViewer.viewReport(jasperPrint);
-
+        
             // O exportarlo a PDF
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Guardar Reporte PDF");
@@ -3726,8 +3803,22 @@ public class Vistaadministrador extends javax.swing.JFrame {
             // Compilar el archivo .jasper
             JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReporteSF.jrxml");
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date inicial = jdcInicialF.getDate();
+            Date finall = jdcFinalF.getDate();
+            LocalDate timedate1 = LocalDate.ofInstant(inicial.toInstant(), ZoneId.systemDefault());
+            LocalDate timedate2 = LocalDate.ofInstant(finall.toInstant(), ZoneId.systemDefault());
+            String f_inicialFormato = timedate1.format(formatter);
+            String f_finalFormato = timedate2.format(formatter);
+            System.out.println(f_inicialFormato);
+            System.out.println(f_finalFormato);
+            
+            Map parametros = new HashMap();
+            parametros.put("f_inicialF", f_inicialFormato);
+            parametros.put("f_finalF", f_finalFormato);
+            
             // Paso 3: Llenar el informe con datos desde la base de datos.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn);
 
             // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
             JasperViewer.viewReport(jasperPrint);
@@ -4031,6 +4122,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbxtarjetasrecarga;
     public javax.swing.JComboBox<String> cbxtipousupersona;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -4083,10 +4176,18 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -4099,7 +4200,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private com.toedter.calendar.JDateChooser jdcFinal;
+    private com.toedter.calendar.JDateChooser jdcFinalF;
+    private com.toedter.calendar.JDateChooser jdcFinalP;
     private com.toedter.calendar.JDateChooser jdcInicial;
+    private com.toedter.calendar.JDateChooser jdcInicialF;
+    private com.toedter.calendar.JDateChooser jdcInicialP;
     public javax.swing.JFormattedTextField jdcfechacaducTarjeta;
     public javax.swing.JFormattedTextField jdcfechacreacionTarjeta;
     private Clases.CrazyPanel menuConsumos;
@@ -4151,7 +4256,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTarjeraopc2;
     private javax.swing.JPanel pnlTarjeraopc3;
     private javax.swing.JPanel pnlTarjeraopc4;
-    private javax.swing.JPanel pnlTarjeraopc5;
     private Clases.CrazyPanel pnlTarjetaForm;
     private Clases.CrazyPanel pnlTarjetaForm1;
     private Clases.CrazyPanel pnlTarjetaForm2;
@@ -4163,6 +4267,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel pnlUnidadesForm2;
     private javax.swing.JPanel pnlUnidadesForm3;
     private Clases.CrazyPanel pnlUnidadesForm5;
+    private Clases.CrazyPanel pnlUnidadesForm6;
+    private Clases.CrazyPanel pnlUnidadesForm7;
     private Clases.CrazyPanel pnlUsuarioForm;
     private Clases.CrazyPanel pnlUsuarioForm1;
     private Clases.CrazyPanel pnlUsuarioForm2;
@@ -4205,6 +4311,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmailDestino;
     public javax.swing.JTextField txtIdRutaUnidad;
     public javax.swing.JTextField txtIdUser;
+    private javax.swing.JTextField txtMontoFinal;
+    private javax.swing.JTextField txtMontoInicial;
+    private javax.swing.JTextField txtRutas;
+    private javax.swing.JTextField txtTransportistas;
     public javax.swing.JTextField txtUserUsuario;
     public javax.swing.JTextField txtapematpersona;
     public javax.swing.JTextField txtapepatpersona;
