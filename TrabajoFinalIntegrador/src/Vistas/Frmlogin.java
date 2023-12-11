@@ -33,7 +33,7 @@ public class Frmlogin extends JFrame {
                 
 
         init();
-        
+       
         //ControladorLogin control =new ControladorLogin(us, usDao, this); 
         
     }
@@ -98,5 +98,5 @@ private void verificarAtributo() {
     public void setAtributo(boolean atributo) {
         this.atributo = atributo;
     }
-
+    
 }

@@ -12,8 +12,11 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
+import modelos.Personas;
+import modelos.PersonasDAO;
 import raven.drawer.Drawer;
 import raven.popup.GlassPanePopup;
+import uk.co.caprica.vlcj.factory.discovery.provider.DiscoveryProviderPriority;
 
 /**
  *
@@ -21,9 +24,9 @@ import raven.popup.GlassPanePopup;
  */
 public class VistaConductor extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaConductor
-     */
+    Personas per = new Personas();
+    PersonasDAO perdao = new PersonasDAO();
+
     public VistaConductor() {
         GlassPanePopup.install(this);
         ConstructorCajonConductor constructorCajonConductor = new ConstructorCajonConductor(this);
@@ -31,9 +34,24 @@ public class VistaConductor extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
-    public void init(){
-        
+
+    public VistaConductor(String dni) {
+
+        GlassPanePopup.install(this);
+        ConstructorCajonConductor constructorCajonConductor = new ConstructorCajonConductor(this);
+        Drawer.getInstance().setDrawerBuilder(constructorCajonConductor);
+        Personas user = perdao.persona(dni);
+        initComponents();
+        System.out.println("hoa" + user.getNombres());
+
+        jlblnombreusuario.setText(user.getNombres());
+
+        init();
+
+    }
+
+    public void init() {
+
     }
 
     /**
@@ -50,6 +68,7 @@ public class VistaConductor extends javax.swing.JFrame {
         menuConsumos = new Clases.CrazyPanel();
         btnmenu5 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
+        jlblnombreusuario = new javax.swing.JLabel();
         tablaConsumos = new Clases.CrazyPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -124,18 +143,22 @@ public class VistaConductor extends javax.swing.JFrame {
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(892, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 790, Short.MAX_VALUE)
+                .addComponent(jlblnombreusuario)
+                .addGap(102, 102, 102))
         );
         menuConsumosLayout.setVerticalGroup(
             menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuConsumosLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(menuConsumosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuConsumosLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblnombreusuario)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pnlConsumos.add(menuConsumos, java.awt.BorderLayout.PAGE_START);
@@ -734,6 +757,7 @@ public class VistaConductor extends javax.swing.JFrame {
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
+    private javax.swing.JLabel jlblnombreusuario;
     private Clases.CrazyPanel menuConsumos;
     private Clases.CrazyPanel menuEmpresas;
     private Clases.CrazyPanel menuRutas;

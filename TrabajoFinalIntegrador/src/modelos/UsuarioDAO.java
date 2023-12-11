@@ -130,7 +130,7 @@ public boolean eliminar(Usuarios user) {
         return false;
     }
 }
-public int obtenerTipoUsuario(Usuarios user) {
+    public int obtenerTipoUsuario(Usuarios user) {
     int tipoUsuario = 0;
     String sql = "SELECT personas.IdTipoPersona FROM personas INNER JOIN usuarios ON usuarios.Dni = personas.Dni WHERE usuarios.Dni=?";
     Conexion cn = new Conexion();

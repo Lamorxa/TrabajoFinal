@@ -27,15 +27,14 @@ public class Login extends JPanel {
     private Usuarios us;
     private UsuarioDAO UsDao;
 
-
     public Login() {
         init();
-        
+
     }
 
     public void init() {
-        us=new Usuarios();
-        UsDao=new UsuarioDAO();
+        us = new Usuarios();
+        UsDao = new UsuarioDAO();
         setOpaque(false);
         setLayout(new MigLayout("wrap,fillx,insets 60 60 40 60", "[fill]"));
         JLabel title = new JLabel("              Inicia Sesion            ", SwingConstants.CENTER);
@@ -85,18 +84,16 @@ public class Login extends JPanel {
                             case 1:
                                 Vistaadministrador vistaadmin = new Vistaadministrador();
                                 vistaadmin.setVisible(true);
-                                
+
                                 break;
                             case 2:
-                                VistaConductor vistaconduc = new VistaConductor();
+                                VistaConductor vistaconduc = new VistaConductor(us.getDni());
                                 vistaconduc.setVisible(true);
-                                
 
                                 break;
                             case 3:
                                 VistaUsuario vistusu = new VistaUsuario();
                                 vistusu.setVisible(true);
-                                
 
                                 break;
                             default:
@@ -105,14 +102,20 @@ public class Login extends JPanel {
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos");
-                        cerrarVentana();
+
                     }
                 }
 
             }
         });
-        
-    //fin init
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        //fin init
     }
 
     private Component createSignupLabel() {
@@ -146,13 +149,16 @@ public class Login extends JPanel {
         g2.dispose();
         super.paintComponent(g);
     }
-     private void cerrarVentana() {
-        // Obtener la ventana principal (JFrame)
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
-        // Cerrar la ventana
-        frame.dispose();
+    public void agregarListenerBotonCerrar(ActionListener listener) {
+        // Agrega el ActionListener al botón de cerrar
+        // Este método podría ser llamado desde el Frmlogin
+        // para establecer el ActionListener necesario.
+        // Puedes usar getBtnCancelar() o cualquier otro botón
+        // que quieras que realice la acción de cerrar.
+        getBtnCancelar().addActionListener(listener);
     }
+
     public JTextField getTxtUsuario() {
         return txtUsuario;
     }
