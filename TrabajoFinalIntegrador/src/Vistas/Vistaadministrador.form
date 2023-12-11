@@ -785,7 +785,7 @@
                           <Component id="btnmenu2" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="893" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -856,7 +856,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="UsuarioBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="UsuarioBotones" alignment="1" pref="1238" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="1191" max="-2" attributes="0"/>
@@ -1958,7 +1958,7 @@
                           <Component id="btnmenu4" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel18" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="893" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2522,7 +2522,7 @@
                           <Component id="btnmenu5" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel26" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="893" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2593,7 +2593,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="ConsumoBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="ConsumoBotones" alignment="1" pref="1238" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane5" max="32767" attributes="0"/>
@@ -2995,7 +2995,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="788" max="32767" attributes="0"/>
+                                  <EmptySpace pref="781" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3064,7 +3064,7 @@
                           <Component id="btnmenu6" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel29" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="893" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3135,7 +3135,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="RutasBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="RutasBotones" alignment="1" pref="1238" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane6" max="32767" attributes="0"/>
@@ -3529,7 +3529,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="788" max="32767" attributes="0"/>
+                                  <EmptySpace pref="781" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4221,7 +4221,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="UnidadesBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="UnidadesBotones" alignment="1" pref="1238" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane8" max="32767" attributes="0"/>
@@ -4253,9 +4253,9 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="0">
                             <Column editable="true" title="C&#xf3;digo de Unidad" type="java.lang.Integer"/>
-                            <Column editable="true" title="C&#xf3;digo de SOAT" type="java.lang.Integer"/>
-                            <Column editable="true" title="ID de Ruta" type="java.lang.Integer"/>
                             <Column editable="true" title="DNI" type="java.lang.Integer"/>
+                            <Column editable="true" title="ID de Ruta" type="java.lang.Integer"/>
+                            <Column editable="true" title="C&#xf3;digo de SOAT" type="java.lang.Integer"/>
                             <Column editable="true" title="Estado" type="java.lang.String"/>
                           </Table>
                         </Property>
@@ -4683,7 +4683,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="788" max="32767" attributes="0"/>
+                                  <EmptySpace pref="781" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

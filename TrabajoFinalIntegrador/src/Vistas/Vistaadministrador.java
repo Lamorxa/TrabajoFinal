@@ -894,7 +894,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         menuUsuariosLayout.setVerticalGroup(
             menuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1148,7 +1148,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUsuarios.setLayout(tablaUsuariosLayout);
         tablaUsuariosLayout.setHorizontalGroup(
             tablaUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UsuarioBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(UsuarioBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(tablaUsuariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1436,7 +1436,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         menuRecargasLayout.setVerticalGroup(
             menuRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1667,7 +1667,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         menuConsumosLayout.setVerticalGroup(
             menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1819,7 +1819,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda5Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda5Layout.setVerticalGroup(
             pnlBotonesBusqueda5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1835,7 +1835,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaConsumos.setLayout(tablaConsumosLayout);
         tablaConsumosLayout.setHorizontalGroup(
             tablaConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaConsumosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5)
@@ -1883,7 +1883,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         menuRutasLayout.setVerticalGroup(
             menuRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2069,7 +2069,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda6Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda6Layout.setVerticalGroup(
             pnlBotonesBusqueda6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2085,7 +2085,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaRutas.setLayout(tablaRutasLayout);
         tablaRutasLayout.setHorizontalGroup(
             tablaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaRutasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6)
@@ -2448,7 +2448,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Unidad", "Código de SOAT", "ID de Ruta", "DNI", "Estado"
+                "Código de Unidad", "DNI", "ID de Ruta", "Código de SOAT", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -2671,7 +2671,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda8Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda8Layout.setVerticalGroup(
             pnlBotonesBusqueda8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2687,7 +2687,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades.setLayout(tablaUnidadesLayout);
         tablaUnidadesLayout.setHorizontalGroup(
             tablaUnidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaUnidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8)
