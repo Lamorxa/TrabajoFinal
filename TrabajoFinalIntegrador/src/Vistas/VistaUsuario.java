@@ -244,6 +244,11 @@ public class VistaUsuario extends javax.swing.JFrame {
                 txtmontorecargaActionPerformed(evt);
             }
         });
+        txtmontorecarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmontorecargaKeyTyped(evt);
+            }
+        });
         pnlRecargasForm4.add(txtmontorecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
 
         pnlRecargasForm4.add(cbxCodTarjetaRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
@@ -376,6 +381,19 @@ public class VistaUsuario extends javax.swing.JFrame {
     private void btnRegistrarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarRecargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarRecargaActionPerformed
+
+    private void txtmontorecargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmontorecargaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtmontorecarga.getText().length() >= 3) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtmontorecargaKeyTyped
 
     /**
      * @param args the command line arguments
