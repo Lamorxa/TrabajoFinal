@@ -30,7 +30,7 @@ public class ConstructorCajonUsuario extends SimpleDrawerBuilder{
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
             {"~Administración~"},
-            {"Movimientos", "Tarjetas", "Recargas", "Consumos"},
+            {"Movimientos", "Recargas"},
             {"~Configuración~"},
             {"Proximamente"}
                 
@@ -50,25 +50,8 @@ public class ConstructorCajonUsuario extends SimpleDrawerBuilder{
                    
                     
                     if (i == 0 && s == 1) {
-                         System.out.println("Menu " + i + " " + s);
-                         main2.pnlTarjetas.setVisible(true);
                          main2.pnlRecargas.setVisible(false);
-                         main2.pnlConsumos.setVisible(false);
                     }
-                    if (i == 0 && s == 2) {
-                         System.out.println("Menu " + i + " " + s);
-                         main2.pnlTarjetas.setVisible(false);
-                         main2.pnlRecargas.setVisible(true);
-                         main2.pnlConsumos.setVisible(false);
-                         
-                    }
-                    if (i == 0 && s == 3) {
-                         System.out.println("Menu " + i + " " + s);
-                         main2.pnlTarjetas.setVisible(false);
-                         main2.pnlRecargas.setVisible(false);
-                         main2.pnlConsumos.setVisible(true);
-                    }
-                    
                 }
             });
     }

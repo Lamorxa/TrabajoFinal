@@ -119,17 +119,6 @@ public class VistaUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         paneles = new raven.crazypanel.CrazyPanel();
-        pnlTarjetas = new raven.crazypanel.CrazyPanel();
-        menuTarjetas = new Clases.CrazyPanel();
-        btnmenu3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        tablaTarjetas = new Clases.CrazyPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        TarjetaBotones = new Clases.CrazyPanel();
-        pnlBotonesBusqueda3 = new Clases.CrazyPanel();
-        txtBuscar3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         pnlRecargas = new raven.crazypanel.CrazyPanel();
         menuRecargas1 = new Clases.CrazyPanel();
         btnmenu6 = new javax.swing.JButton();
@@ -151,154 +140,10 @@ public class VistaUsuario extends javax.swing.JFrame {
         btnRegistrarRecarga = new javax.swing.JButton();
         pnlBotonesBusqueda6 = new Clases.CrazyPanel();
         txtBuscar6 = new javax.swing.JTextField();
-        pnlConsumos = new raven.crazypanel.CrazyPanel();
-        menuConsumos = new Clases.CrazyPanel();
-        btnmenu5 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
-        tablaConsumos = new Clases.CrazyPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        ConsumoBotones = new Clases.CrazyPanel();
-        pnlBotonesBusqueda5 = new Clases.CrazyPanel();
-        txtBuscar5 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         paneles.setLayout(new java.awt.CardLayout(30, 20));
-
-        pnlTarjetas.setLayout(new java.awt.BorderLayout());
-
-        menuTarjetas.setAlignmentX(1.0F);
-        menuTarjetas.setPreferredSize(new java.awt.Dimension(100, 80));
-
-        btnmenu3.setBackground(new java.awt.Color(30, 30, 30));
-        btnmenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icono/menu.png"))); // NOI18N
-        btnmenu3.setPreferredSize(new java.awt.Dimension(120, 123));
-        btnmenu3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenu3ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Tarjetas");
-        jLabel2.setAlignmentX(1.0F);
-        jLabel2.setPreferredSize(new java.awt.Dimension(262, 40));
-
-        javax.swing.GroupLayout menuTarjetasLayout = new javax.swing.GroupLayout(menuTarjetas);
-        menuTarjetas.setLayout(menuTarjetasLayout);
-        menuTarjetasLayout.setHorizontalGroup(
-            menuTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuTarjetasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnmenu3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
-        );
-        menuTarjetasLayout.setVerticalGroup(
-            menuTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuTarjetasLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(menuTarjetasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnmenu3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlTarjetas.add(menuTarjetas, java.awt.BorderLayout.PAGE_START);
-
-        tablaTarjetas.setPreferredSize(new java.awt.Dimension(1245, 530));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Cod Tarjeta", "Emisión", "Caducidad", "DNI", "Saldo", "Estado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Float.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-
-        TarjetaBotones.setEnabled(false);
-        TarjetaBotones.setPreferredSize(new java.awt.Dimension(900, 216));
-        TarjetaBotones.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                TarjetaBotonesComponentAdded(evt);
-            }
-        });
-        TarjetaBotones.setLayout(new java.awt.BorderLayout());
-
-        txtBuscar3.setMinimumSize(new java.awt.Dimension(650, 30));
-        txtBuscar3.setPreferredSize(new java.awt.Dimension(450, 30));
-        txtBuscar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscar3ActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout pnlBotonesBusqueda3Layout = new javax.swing.GroupLayout(pnlBotonesBusqueda3);
-        pnlBotonesBusqueda3.setLayout(pnlBotonesBusqueda3Layout);
-        pnlBotonesBusqueda3Layout.setHorizontalGroup(
-            pnlBotonesBusqueda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBotonesBusqueda3Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlBotonesBusqueda3Layout.setVerticalGroup(
-            pnlBotonesBusqueda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBotonesBusqueda3Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(pnlBotonesBusqueda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBuscar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        TarjetaBotones.add(pnlBotonesBusqueda3, java.awt.BorderLayout.PAGE_START);
-
-        javax.swing.GroupLayout tablaTarjetasLayout = new javax.swing.GroupLayout(tablaTarjetas);
-        tablaTarjetas.setLayout(tablaTarjetasLayout);
-        tablaTarjetasLayout.setHorizontalGroup(
-            tablaTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TarjetaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaTarjetasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-        );
-        tablaTarjetasLayout.setVerticalGroup(
-            tablaTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablaTarjetasLayout.createSequentialGroup()
-                .addComponent(TarjetaBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
-        );
-
-        pnlTarjetas.add(tablaTarjetas, java.awt.BorderLayout.CENTER);
-
-        paneles.add(pnlTarjetas, "card2");
 
         pnlRecargas.setLayout(new java.awt.BorderLayout());
 
@@ -454,139 +299,6 @@ public class VistaUsuario extends javax.swing.JFrame {
 
         paneles.add(pnlRecargas, "card2");
 
-        pnlConsumos.setLayout(new java.awt.BorderLayout());
-
-        menuConsumos.setAlignmentX(1.0F);
-        menuConsumos.setPreferredSize(new java.awt.Dimension(100, 80));
-
-        btnmenu5.setBackground(new java.awt.Color(30, 30, 30));
-        btnmenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icono/menu.png"))); // NOI18N
-        btnmenu5.setPreferredSize(new java.awt.Dimension(120, 123));
-        btnmenu5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenu5ActionPerformed(evt);
-            }
-        });
-
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Consumos");
-        jLabel26.setAlignmentX(1.0F);
-        jLabel26.setPreferredSize(new java.awt.Dimension(262, 40));
-
-        javax.swing.GroupLayout menuConsumosLayout = new javax.swing.GroupLayout(menuConsumos);
-        menuConsumos.setLayout(menuConsumosLayout);
-        menuConsumosLayout.setHorizontalGroup(
-            menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuConsumosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(900, Short.MAX_VALUE))
-        );
-        menuConsumosLayout.setVerticalGroup(
-            menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuConsumosLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(menuConsumosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlConsumos.add(menuConsumos, java.awt.BorderLayout.PAGE_START);
-
-        tablaConsumos.setPreferredSize(new java.awt.Dimension(1245, 530));
-
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Código de Consumo", "Tarjeta", "Monto de Consumo", "Fecha de Consumo", "Unidad", "Estado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane5.setViewportView(jTable5);
-
-        ConsumoBotones.setEnabled(false);
-        ConsumoBotones.setPreferredSize(new java.awt.Dimension(900, 216));
-        ConsumoBotones.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                ConsumoBotonesComponentAdded(evt);
-            }
-        });
-        ConsumoBotones.setLayout(new java.awt.BorderLayout());
-
-        txtBuscar5.setMinimumSize(new java.awt.Dimension(650, 30));
-        txtBuscar5.setPreferredSize(new java.awt.Dimension(450, 30));
-        txtBuscar5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscar5ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout pnlBotonesBusqueda5Layout = new javax.swing.GroupLayout(pnlBotonesBusqueda5);
-        pnlBotonesBusqueda5.setLayout(pnlBotonesBusqueda5Layout);
-        pnlBotonesBusqueda5Layout.setHorizontalGroup(
-            pnlBotonesBusqueda5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBotonesBusqueda5Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(txtBuscar5, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(312, Short.MAX_VALUE))
-        );
-        pnlBotonesBusqueda5Layout.setVerticalGroup(
-            pnlBotonesBusqueda5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBotonesBusqueda5Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(pnlBotonesBusqueda5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtBuscar5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        ConsumoBotones.add(pnlBotonesBusqueda5, java.awt.BorderLayout.PAGE_START);
-
-        javax.swing.GroupLayout tablaConsumosLayout = new javax.swing.GroupLayout(tablaConsumos);
-        tablaConsumos.setLayout(tablaConsumosLayout);
-        tablaConsumosLayout.setHorizontalGroup(
-            tablaConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConsumoBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaConsumosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5)
-                .addContainerGap())
-        );
-        tablaConsumosLayout.setVerticalGroup(
-            tablaConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablaConsumosLayout.createSequentialGroup()
-                .addComponent(ConsumoBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        pnlConsumos.add(tablaConsumos, java.awt.BorderLayout.CENTER);
-
-        paneles.add(pnlConsumos, "card2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -601,30 +313,6 @@ public class VistaUsuario extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnmenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu3ActionPerformed
-        Drawer.getInstance().showDrawer();
-    }//GEN-LAST:event_btnmenu3ActionPerformed
-
-    private void txtBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscar3ActionPerformed
-
-    private void TarjetaBotonesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_TarjetaBotonesComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TarjetaBotonesComponentAdded
-
-    private void btnmenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu5ActionPerformed
-        Drawer.getInstance().showDrawer();
-    }//GEN-LAST:event_btnmenu5ActionPerformed
-
-    private void txtBuscar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscar5ActionPerformed
-
-    private void ConsumoBotonesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_ConsumoBotonesComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConsumoBotonesComponentAdded
 
     private void btnmenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu6ActionPerformed
         Drawer.getInstance().showDrawer();
@@ -769,48 +457,26 @@ public class VistaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public Clases.CrazyPanel ConsumoBotones;
     public Clases.CrazyPanel RecargaBotones1;
-    public Clases.CrazyPanel TarjetaBotones;
     private javax.swing.JButton btnEnviar;
     public javax.swing.JButton btnRegistrarRecarga;
     private javax.swing.JButton btnVerTicket;
-    private javax.swing.JButton btnmenu3;
-    private javax.swing.JButton btnmenu5;
     private javax.swing.JButton btnmenu6;
     public javax.swing.JComboBox<String> cbxCodTarjetaRecarga;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel66;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable5;
-    private Clases.CrazyPanel menuConsumos;
     private Clases.CrazyPanel menuRecargas1;
-    private Clases.CrazyPanel menuTarjetas;
     public raven.crazypanel.CrazyPanel paneles;
-    private Clases.CrazyPanel pnlBotonesBusqueda3;
-    private Clases.CrazyPanel pnlBotonesBusqueda5;
     private Clases.CrazyPanel pnlBotonesBusqueda6;
-    public raven.crazypanel.CrazyPanel pnlConsumos;
     public raven.crazypanel.CrazyPanel pnlRecargas;
     private Clases.CrazyPanel pnlRecargasForm2;
     private Clases.CrazyPanel pnlRecargasForm3;
     private Clases.CrazyPanel pnlRecargasForm4;
-    public raven.crazypanel.CrazyPanel pnlTarjetas;
-    public Clases.CrazyPanel tablaConsumos;
     public Clases.CrazyPanel tablaRecargas1;
-    public Clases.CrazyPanel tablaTarjetas;
     public javax.swing.JTable tblRecargas;
-    private javax.swing.JTextField txtBuscar3;
-    private javax.swing.JTextField txtBuscar5;
     private javax.swing.JTextField txtBuscar6;
     public javax.swing.JTextField txtmontorecarga;
     // End of variables declaration//GEN-END:variables
