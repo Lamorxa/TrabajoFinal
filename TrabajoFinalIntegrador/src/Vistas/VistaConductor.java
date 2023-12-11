@@ -5,14 +5,28 @@
 package Vistas;
 
 import Cajon.ConstructorCajonConductor;
+import Controladores.ControladorvistaConductor;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
+import modelos.EmpresaTransporte;
+import modelos.EmpresaTransporteDAO;
+import modelos.Personas;
+import modelos.PersonasDAO;
+import modelos.RegistroConsumos;
+import modelos.RegistroConsumosDAO;
+import modelos.Rutas;
+import modelos.RutasDAO;
+import modelos.UnidadDAO;
+import modelos.Unidades;
+import modelos.Usuarios;
 import raven.drawer.Drawer;
 import raven.popup.GlassPanePopup;
+import uk.co.caprica.vlcj.factory.discovery.provider.DiscoveryProviderPriority;
 
 /**
  *
@@ -20,9 +34,18 @@ import raven.popup.GlassPanePopup;
  */
 public class VistaConductor extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaConductor
-     */
+    Personas per = new Personas();
+    PersonasDAO perdao = new PersonasDAO();
+    private RegistroConsumos registroConsumos;
+    private RegistroConsumosDAO registroConsumosDAO;
+    private Rutas rutas;
+    private RutasDAO rutasDAO;
+    private EmpresaTransporte empre;
+    private EmpresaTransporteDAO empreDAO;
+    private Unidades uni;
+    private UnidadDAO unidao;
+    private Personas user;
+
     public VistaConductor() {
         GlassPanePopup.install(this);
         ConstructorCajonConductor constructorCajonConductor = new ConstructorCajonConductor(this);
@@ -30,9 +53,28 @@ public class VistaConductor extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
-    public void init(){
-        
+
+    public VistaConductor(String dni) {
+
+        GlassPanePopup.install(this);
+        ConstructorCajonConductor constructorCajonConductor = new ConstructorCajonConductor(this);
+        Drawer.getInstance().setDrawerBuilder(constructorCajonConductor);
+        Personas user = perdao.persona(dni);
+        registroConsumosDAO = new RegistroConsumosDAO();
+        rutasDAO=new RutasDAO(); 
+        initComponents();
+        ControladorvistaConductor contro = new ControladorvistaConductor(this, registroConsumos, registroConsumosDAO, rutas, rutasDAO, empre, empreDAO, uni, unidao, user);
+
+        System.out.println("hoa" + user.getNombres());
+
+        jlblnombreusuario.setText(user.getNombres());
+
+        init();
+
+    }
+
+    public void init() {
+
     }
 
     /**
@@ -49,9 +91,10 @@ public class VistaConductor extends javax.swing.JFrame {
         menuConsumos = new Clases.CrazyPanel();
         btnmenu5 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
+        jlblnombreusuario = new javax.swing.JLabel();
         tablaConsumos = new Clases.CrazyPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblconsumosuser = new javax.swing.JTable();
         ConsumoBotones = new Clases.CrazyPanel();
         pnlBotonesBusqueda5 = new Clases.CrazyPanel();
         txtBuscar5 = new javax.swing.JTextField();
@@ -62,7 +105,7 @@ public class VistaConductor extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         tablaRutas = new Clases.CrazyPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tblrutas = new javax.swing.JTable();
         RutasBotones = new Clases.CrazyPanel();
         pnlBotonesBusqueda6 = new Clases.CrazyPanel();
         txtBuscar6 = new javax.swing.JTextField();
@@ -123,44 +166,45 @@ public class VistaConductor extends javax.swing.JFrame {
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(892, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 790, Short.MAX_VALUE)
+                .addComponent(jlblnombreusuario)
+                .addGap(102, 102, 102))
         );
         menuConsumosLayout.setVerticalGroup(
             menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuConsumosLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(menuConsumosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnmenu5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuConsumosLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(menuConsumosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblnombreusuario)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pnlConsumos.add(menuConsumos, java.awt.BorderLayout.PAGE_START);
 
         tablaConsumos.setPreferredSize(new java.awt.Dimension(1245, 530));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblconsumosuser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Código de Consumo", "Tarjeta", "Monto de Consumo", "Fecha de Consumo", "Unidad", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tblconsumosuser);
 
         ConsumoBotones.setEnabled(false);
         ConsumoBotones.setPreferredSize(new java.awt.Dimension(900, 216));
@@ -274,12 +318,9 @@ public class VistaConductor extends javax.swing.JFrame {
 
         tablaRutas.setPreferredSize(new java.awt.Dimension(1245, 530));
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        tblrutas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID de Ruta", "Nombre de Ruta", "Monto de Ruta", "Estado"
@@ -293,7 +334,7 @@ public class VistaConductor extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(jTable6);
+        jScrollPane6.setViewportView(tblrutas);
 
         RutasBotones.setEnabled(false);
         RutasBotones.setPreferredSize(new java.awt.Dimension(900, 216));
@@ -695,9 +736,11 @@ public class VistaConductor extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Color color = Color.decode("#5856D6");
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("Temas");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
+        UIManager.put("Button.background", color);
         FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -727,10 +770,9 @@ public class VistaConductor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
+    private javax.swing.JLabel jlblnombreusuario;
     private Clases.CrazyPanel menuConsumos;
     private Clases.CrazyPanel menuEmpresas;
     private Clases.CrazyPanel menuRutas;
@@ -748,6 +790,8 @@ public class VistaConductor extends javax.swing.JFrame {
     public Clases.CrazyPanel tablaEmpresas;
     public Clases.CrazyPanel tablaRutas;
     public Clases.CrazyPanel tablaUnidades;
+    public javax.swing.JTable tblconsumosuser;
+    public javax.swing.JTable tblrutas;
     private javax.swing.JTextField txtBuscar5;
     private javax.swing.JTextField txtBuscar6;
     private javax.swing.JTextField txtBuscar7;

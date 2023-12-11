@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelos.Rutas;
 import modelos.RutasDAO;
+import raven.toast.Notifications;
 
 /**
  *
@@ -39,7 +40,7 @@ public class ControladorRutas implements ActionListener{
     if (views.txtidrutman.getText().equals("") ||
             views.txtmontoruta.getText().equals("") ||
             views.txtnombreruta.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         obj.setNombreRuta(views.txtnombreruta.getText());
         obj.setIdRuta(Integer.parseInt(views.txtidrutman.getText()));
@@ -47,11 +48,11 @@ public class ControladorRutas implements ActionListener{
         obj.setEstado(views.cbxEstadoRuta.getSelectedItem().toString());
 
         if (objDAO.modificar(obj)) {
-            JOptionPane.showMessageDialog(null, "Ruta modificada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
             limpiarTabla();
             listarRutas();
         } else {
-            JOptionPane.showMessageDialog(null, "Error al modificar la ruta");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
         }
     }
         }
@@ -61,7 +62,7 @@ public class ControladorRutas implements ActionListener{
             views.txtmontoruta.getText().equals("")||
             views.txtnombreruta.getText().equals(""))
             {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
             }else   {
             obj.setNombreRuta(views.txtnombreruta.getText());
             obj.setIdRuta(Integer.parseInt(views.txtidrutman.getText()));
@@ -71,9 +72,9 @@ public class ControladorRutas implements ActionListener{
             {
                 limpiarTabla();
                 listarRutas();
-                JOptionPane.showMessageDialog(null, "Ruta Registrado Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Registrado correctamente");
             }else {
-                 JOptionPane.showMessageDialog(null, "Error a resgistrar Usuario");
+                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al registrar");
                    }
             }   
         }
@@ -81,16 +82,16 @@ if (e.getSource() == views.btndeluni) {
     if (views.txtidrutman.getText().equals("") ||
             views.txtmontoruta.getText().equals("") ||
             views.txtnombreruta.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+        Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
     } else {
         obj.setIdRuta(Integer.parseInt(views.txtidrutman.getText()));
 
         if (objDAO.eliminar(obj)) {
-            JOptionPane.showMessageDialog(null, "Ruta eliminada con éxito");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
             limpiarTabla();
             listarRutas();
         } else {
-            JOptionPane.showMessageDialog(null, "Error al eliminar la ruta");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
         }
     }
 }

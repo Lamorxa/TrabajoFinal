@@ -83,7 +83,7 @@ public boolean modificarUnidad(Unidades unidades) {
 }
 
 public boolean eliminarUnidad(Unidades unidades) {
-    String sql = "DELETE FROM unidades WHERE CodUnidad = ?";
+    String sql = "UPDATE unidades SET estado = 'inactivo'  WHERE CodUnidad = ?";
     try {
         Connection con = new Conexion().crearConexion();
         PreparedStatement ps = con.prepareStatement(sql);

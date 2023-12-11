@@ -23,6 +23,38 @@ public class PersonasDAO {
     PreparedStatement ps;
     ResultSet rs;
     
+    public Personas persona(String dni){
+        String sql = "SELECT * FROM personas WHERE Dni = ?";
+        Conexion cn = new Conexion();
+        Personas persona = null;
+
+        try {
+            Connection con = cn.crearConexion();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, dni);  // Establece el valor del parámetro DNI
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                persona = new Personas();
+                persona.setDni(rs.getString("Dni"));
+                persona.setNombres(rs.getString("Nombres"));
+                persona.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+                persona.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+                persona.setTelefono(rs.getString("Telefono"));
+                persona.setCorreoElectronico(rs.getString("CorreoElectronico"));
+                persona.setIdTipoPersona(rs.getInt("IdTipoPersona"));
+                persona.setRucEmpresa(rs.getString("RucEmpresa"));
+                persona.setEstado(rs.getString("Estado"));
+            }
+
+            cn.cierraConsultas();
+        } catch (SQLException e) {
+            System.out.println("Error al obtener la persona por DNI: " + e.toString());
+        }
+
+        return persona;
+    }
+    
     public boolean registrarPersona(Personas personas){
     String sql = "INSERT INTO personas (Dni, Nombres, ApellidoPaterno, ApellidoMaterno, Telefono, CorreoElectronico, IdTipoPersona, RucEmpresa, Estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     Conexion cn = new Conexion();
@@ -100,7 +132,7 @@ public boolean modificarPersona(Personas personas) {
 }
 
 public boolean eliminarPersona(Personas personas) {
-    String sql = "DELETE FROM personas WHERE Dni = ?";
+    String sql = "UPDATE personas SET estado = 'inactivo' WHERE Dni = ?;";
     Conexion cn = new Conexion();
     try {
         Connection con = cn.crearConexion();

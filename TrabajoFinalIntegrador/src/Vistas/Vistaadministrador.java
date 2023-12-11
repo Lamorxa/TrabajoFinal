@@ -14,8 +14,13 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import conexion.Conexion;
 import java.sql.Connection;
+import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -64,59 +69,61 @@ import javax.mail.internet.*;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.management.Notification;
+import javax.swing.JFileChooser;
+import raven.toast.Notifications;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class Vistaadministrador extends javax.swing.JFrame {
-    UsuarioDAO usDao= new UsuarioDAO();
-    Usuarios us=new Usuarios();
-    Rutas rut=new Rutas();
-    RutasDAO rutdao=new RutasDAO();
-    EmpresaTransporte emtrans=new EmpresaTransporte();
-    EmpresaTransporteDAO emtransdao=new EmpresaTransporteDAO();
-    Personas person=new Personas();
-    PersonasDAO persondao=new PersonasDAO();
-    Tarjetas tarj=new Tarjetas();
-    TarjetaDAO tarjdao=new TarjetaDAO();
-    Unidades unidad=new Unidades();
-    UnidadDAO unidadesDAO=new UnidadDAO();
-    RegistroConsumos consu= new RegistroConsumos();
-    RegistroConsumosDAO conconsu= new RegistroConsumosDAO();
-    RegistroRecargas recar=new RegistroRecargas();
+
+    UsuarioDAO usDao = new UsuarioDAO();
+    Usuarios us = new Usuarios();
+    Rutas rut = new Rutas();
+    RutasDAO rutdao = new RutasDAO();
+    EmpresaTransporte emtrans = new EmpresaTransporte();
+    EmpresaTransporteDAO emtransdao = new EmpresaTransporteDAO();
+    Personas person = new Personas();
+    PersonasDAO persondao = new PersonasDAO();
+    Tarjetas tarj = new Tarjetas();
+    TarjetaDAO tarjdao = new TarjetaDAO();
+    Unidades unidad = new Unidades();
+    UnidadDAO unidadesDAO = new UnidadDAO();
+    RegistroConsumos consu = new RegistroConsumos();
+    RegistroConsumosDAO conconsu = new RegistroConsumosDAO();
+    RegistroRecargas recar = new RegistroRecargas();
     RegistroRecargasDAO conrecar = new RegistroRecargasDAO();
-    Rellenarcombo re=new Rellenarcombo();
-    Conexion conec=new Conexion();
-    
+    Rellenarcombo re = new Rellenarcombo();
+    Conexion conec = new Conexion();
+
     public Vistaadministrador() {
-        
+
         //Centrar objetos tabla
-        
-        
-        
+        Notifications.getInstance().setJFrame(this);
         GlassPanePopup.install(this);
         ConstructorCajon constructorCajon = new ConstructorCajon(this);
         Drawer.getInstance().setDrawerBuilder(constructorCajon);
         initComponents();
         init();
-        
-       // Controladordebugtarje a=new Controladordebugtarje( this);
 
+        // Controladordebugtarje a=new Controladordebugtarje( this);
         ControladorUsuarios users = new ControladorUsuarios(us, usDao, this);
-        ControladorRutas rutas= new ControladorRutas(rut, rutdao, this);
-        ControladorEmpresaTransporte empresas=new ControladorEmpresaTransporte(emtrans, emtransdao, this);
-        ControladorPersonas personas=new ControladorPersonas(this, person, persondao);
-        ControladorUnidades unidades =new ControladorUnidades(this, unidad, unidadesDAO);
-        ControladorRegistroConsumos consss= new ControladorRegistroConsumos(consu, conconsu, this);
-        ControladorRegistroRecargas con=new ControladorRegistroRecargas(conrecar,recar, this);
+        ControladorRutas rutas = new ControladorRutas(rut, rutdao, this);
+        ControladorEmpresaTransporte empresas = new ControladorEmpresaTransporte(emtrans, emtransdao, this);
+        ControladorPersonas personas = new ControladorPersonas(this, person, persondao);
+        ControladorUnidades unidades = new ControladorUnidades(this, unidad, unidadesDAO);
+        ControladorRegistroConsumos consss = new ControladorRegistroConsumos(consu, conconsu, this);
+        ControladorRegistroRecargas con = new ControladorRegistroRecargas(conrecar, recar, this);
         //re.rellenar("tarjetas", "CodTarjeta",cbntarjetasrecarga,conec);
-         
-      
-        
+
         this.setLocationRelativeTo(null);
         btnRegrut.setVisible(false);
         btncancelper.setVisible(false);
         btndeluni.setVisible(false);
         btnCancelarManRut.setVisible(false);
         btnelirut.setVisible(false);
-        
+
         btnCancelarManRut1.setVisible(false);
         btnModRut.setVisible(false);
         btnCancelarManRut2.setVisible(false);
@@ -147,15 +154,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnactadduser.setVisible(true);
         btnactdeluser.setVisible(false);
         btnactmoduser.setVisible(false);
-        
-        
+
         /*btnaddtar.setVisible(false);
         btnmodtar.setVisible(false);
         btndeltar.setVisible(false);
         btncanTar.setVisible(false);
         btncanTar1.setVisible(false);
         btncanTar2.setVisible(false);
-        */btnaddemp.setVisible(false);
+         */
+        btnaddemp.setVisible(false);
         btndelemp.setVisible(false);
         btnmodemp.setVisible(false);
         btncantrans.setVisible(false);
@@ -163,10 +170,9 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btncantrans2.setVisible(false);
         btnactmodiunidad.setVisible(false);
         btnactdelunidad.setVisible(false);
-  
 
     }
-       
+
     private void listarTarjetas() {
         try {
             List<Tarjetas> lista = tarjdao.listarTarjetas();
@@ -189,24 +195,63 @@ public class Vistaadministrador extends javax.swing.JFrame {
             // Manejar la excepción, mostrar un mensaje de error, etc.
         }
     }
-    
 
-    private void init(){
-             
+    private void init() {
+
         tablaPersonas.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
-        pnlBotonesBusqueda1.setLayout(new MigLayout("","[200]push[][]","[]push[][]"));
-        pnlPersonaForm.setLayout(new MigLayout("wrap,fill,insets 30 30 30 30","[][][][]","[][][][]"));
+        pnlBotonesBusqueda1.setLayout(new MigLayout("", "[200]push[][]", "[]push[][]"));
+        pnlPersonaForm.setLayout(new MigLayout("wrap,fill,insets 30 30 30 30", "[][][][]", "[][][][]"));
         //pnlPersonaForm1.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         //pnlPersonaForm2.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         //pnlPersonaForm3.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
         //pnlPersonaForm4.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]"));
-        pnlBotonesBusqueda2.setLayout(new MigLayout("","[200]push[][]",""));
+        pnlBotonesBusqueda2.setLayout(new MigLayout("", "[200]push[][]", ""));
         tablaUsuarios.setLayout(new MigLayout("wrap,fill,insets 15", "[fill]", "[grow 0][fill]"));
-        txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
-        txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT,"Buscar");
+        //Place holder panel personas
+        txtBuscar1.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtnombrepersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre");
+        txtapepatpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Apellido Paterno");
+        txtapematpersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Apellido Materno");
+        txtdnipersona.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
+        txtcelusuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Celular");
+        txtemail.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Correo Electrónico");
+        txtruc.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "RUC de empresa");
 
+        //Place holder panel usuarios
+        txtBuscar2.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtUserUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre de Usuario");
+        txtContraUser.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Contraseña");
+        txtDniUsers.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
+
+        //Place holder panel Tarjetas
+        txtBuscar3.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtcodtarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Código de tarjeta");
+        txtdnipersonatarjeta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
+
+        //Place holder panel Recargas
+        txtBuscar4.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtCodTarjetaRecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Número de Tarjeta");
+        txtmontorecarga.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Monto de recarga");
+
+        //Place holder panel Consumos}
+        txtBuscar5.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtCodTarjetaconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Número de Tarjeta");
+        txtCodUnidadconsu.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Unidad");
+
+        //Place holder panel Rutas
+        txtBuscar6.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtnombreruta.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre de ruta");
+
+        //Place holder panel Empresas
+        txtBuscar7.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtnombreempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Nombre de la Empresa");
+        txtrucempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Ruc de empresa");
+        txtcolorempresa.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Color");
+
+        //Place holder panel Unidades
+        txtBuscar8.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Buscar");
+        txtDniunidad.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "DNI");
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -493,17 +538,34 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnmenu9 = new javax.swing.JButton();
         jLabel51 = new javax.swing.JLabel();
         tablaUnidades1 = new Clases.CrazyPanel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jLabel60 = new javax.swing.JLabel();
         pnlUnidadesForm5 = new Clases.CrazyPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
         jdcFinal = new com.toedter.calendar.JDateChooser();
         jdcInicial = new com.toedter.calendar.JDateChooser();
-        pnlTarjeraopc5 = new javax.swing.JPanel();
+        txtRutas = new javax.swing.JTextField();
+        txtTransportistas = new javax.swing.JTextField();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
         btnReporte1 = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        pnlUnidadesForm6 = new Clases.CrazyPanel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jdcFinalP = new com.toedter.calendar.JDateChooser();
+        jdcInicialP = new com.toedter.calendar.JDateChooser();
+        txtMontoFinal = new javax.swing.JTextField();
+        txtMontoInicial = new javax.swing.JTextField();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
         btnReporte2 = new javax.swing.JButton();
+        jLabel63 = new javax.swing.JLabel();
+        pnlUnidadesForm7 = new Clases.CrazyPanel();
+        jLabel64 = new javax.swing.JLabel();
+        jdcFinalF = new com.toedter.calendar.JDateChooser();
+        jdcInicialF = new com.toedter.calendar.JDateChooser();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
         btnReporte3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -663,6 +725,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlPersonaForm1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtnombrepersona.setEnabled(false);
+        txtnombrepersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombrepersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm1.add(txtnombrepersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, -1));
 
         jLabel12.setText("Apellido Materno");
@@ -674,9 +741,19 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtapepatpersonaActionPerformed(evt);
             }
         });
+        txtapepatpersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtapepatpersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm1.add(txtapepatpersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 280, -1));
 
         txtapematpersona.setEnabled(false);
+        txtapematpersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtapematpersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm1.add(txtapematpersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 280, -1));
 
         jLabel46.setText("Apellido Paterno");
@@ -695,10 +772,17 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtdnipersonaActionPerformed(evt);
             }
         });
+        txtdnipersona.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdnipersonaKeyTyped(evt);
+            }
+        });
         pnlPersonaForm2.add(txtdnipersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, -1));
 
         jLabel6.setText("Celular");
         pnlPersonaForm2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        txtcelusuario.setEnabled(false);
         pnlPersonaForm2.add(txtcelusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 150, -1));
 
         pnlPersonaForm.add(pnlPersonaForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 220, 160));
@@ -721,6 +805,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlPersonaForm3.add(cbxtipousupersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 186, -1));
 
         btnaddperso.setText("Añadir");
+        btnaddperso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddpersoActionPerformed(evt);
+            }
+        });
         pnlPersonaForm3.add(btnaddperso, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         btncancelper.setText("Cancelar");
@@ -850,11 +939,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Usuario", "Usuario", "Contraseña", "DNI", "Estado"
+                "Id Usuario", "DNI", "Usuario", "Contraseña", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1623,7 +1712,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Consumo", "Tarjeta", "Monto de Consumo", "Fecha de Consumo", "Unidad", "Estado"
+                "Código de Consumo", "Monto de Consumo", "Tarjeta", "Unidad", "Fecha de Consumo", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -1816,7 +1905,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(918, Short.MAX_VALUE))
+                .addContainerGap(893, Short.MAX_VALUE))
         );
         menuRutasLayout.setVerticalGroup(
             menuRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2002,7 +2091,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda6Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(806, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda6Layout.setVerticalGroup(
             pnlBotonesBusqueda6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2018,7 +2107,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaRutas.setLayout(tablaRutasLayout);
         tablaRutasLayout.setHorizontalGroup(
             tablaRutasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addComponent(RutasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaRutasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6)
@@ -2381,7 +2470,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código de Unidad", "Código de SOAT", "ID de Ruta", "DNI", "Estado"
+                "Código de Unidad", "DNI", "ID de Ruta", "Código de SOAT", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -2604,7 +2693,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda8Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda8Layout.setVerticalGroup(
             pnlBotonesBusqueda8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2620,7 +2709,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades.setLayout(tablaUnidadesLayout);
         tablaUnidadesLayout.setHorizontalGroup(
             tablaUnidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+            .addComponent(UnidadesBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaUnidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8)
@@ -2687,74 +2776,96 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaUnidades1.setPreferredSize(new java.awt.Dimension(1245, 530));
         tablaUnidades1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel25.setText("Fitro de Fechas");
-        tablaUnidades1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 120, 30));
-
-        jLabel59.setText("Fecha Inicial");
-        tablaUnidades1.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 80, -1));
-
-        jLabel60.setText("Fecha Final");
-        tablaUnidades1.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 120, -1));
-
         pnlUnidadesForm5.setPreferredSize(new java.awt.Dimension(200, 200));
         pnlUnidadesForm5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel52.setText("Fecha Inicial:");
-        pnlUnidadesForm5.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        pnlUnidadesForm5.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
-        jLabel55.setText("Fecha Final");
-        pnlUnidadesForm5.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
-        pnlUnidadesForm5.add(jdcFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 40));
-        pnlUnidadesForm5.add(jdcInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 190, 40));
+        jLabel55.setText("Rutas");
+        pnlUnidadesForm5.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 110, -1));
+        pnlUnidadesForm5.add(jdcFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 40));
+        pnlUnidadesForm5.add(jdcInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, 40));
+        pnlUnidadesForm5.add(txtRutas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 230, 40));
+        pnlUnidadesForm5.add(txtTransportistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 230, 40));
 
-        tablaUnidades1.add(pnlUnidadesForm5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 240, 160));
+        jLabel57.setText("Fecha Final");
+        pnlUnidadesForm5.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, -1));
 
-        btnReporte1.setText("PAGOS TRANSPORTISTAS POR RUTAS");
+        jLabel58.setText("Transportistas");
+        pnlUnidadesForm5.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 110, -1));
+
+        btnReporte1.setText("GENERAR REPORTE");
         btnReporte1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte1ActionPerformed(evt);
             }
         });
+        pnlUnidadesForm5.add(btnReporte1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 230, 40));
 
-        btnReporte2.setText("SERVICIOS POR PASAJEROS");
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setText("Reporte Pagos a Transportistas por Rutas");
+        pnlUnidadesForm5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 280, 40));
+
+        tablaUnidades1.add(pnlUnidadesForm5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 310, 410));
+
+        pnlUnidadesForm6.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlUnidadesForm6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel59.setText("Fecha Inicial:");
+        pnlUnidadesForm6.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        jLabel60.setText("Monto Final");
+        pnlUnidadesForm6.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 110, -1));
+        pnlUnidadesForm6.add(jdcFinalP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 40));
+        pnlUnidadesForm6.add(jdcInicialP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, 40));
+        pnlUnidadesForm6.add(txtMontoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 230, 40));
+        pnlUnidadesForm6.add(txtMontoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 230, 40));
+
+        jLabel61.setText("Fecha Final");
+        pnlUnidadesForm6.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, -1));
+
+        jLabel62.setText("Monto Inicial");
+        pnlUnidadesForm6.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 110, -1));
+
+        btnReporte2.setText("GENERAR REPORTE");
         btnReporte2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte2ActionPerformed(evt);
             }
         });
+        pnlUnidadesForm6.add(btnReporte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 230, 40));
 
-        btnReporte3.setText("SERVICIOS POR FECHAS");
+        jLabel63.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel63.setText("Reporte Servicios por Pasajeros");
+        pnlUnidadesForm6.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 220, 40));
+
+        tablaUnidades1.add(pnlUnidadesForm6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 300, 410));
+
+        pnlUnidadesForm7.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlUnidadesForm7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel64.setText("Fecha Inicial:");
+        pnlUnidadesForm7.add(jLabel64, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        pnlUnidadesForm7.add(jdcFinalF, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 230, 40));
+        pnlUnidadesForm7.add(jdcInicialF, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 230, 40));
+
+        jLabel67.setText("Fecha Final");
+        pnlUnidadesForm7.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 110, -1));
+
+        jLabel69.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel69.setText("Reporte Resumen Servicios por Fechas");
+        pnlUnidadesForm7.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 260, 40));
+
+        btnReporte3.setText("GENERAR REPORTE");
         btnReporte3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReporte3ActionPerformed(evt);
             }
         });
+        pnlUnidadesForm7.add(btnReporte3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 230, 40));
 
-        javax.swing.GroupLayout pnlTarjeraopc5Layout = new javax.swing.GroupLayout(pnlTarjeraopc5);
-        pnlTarjeraopc5.setLayout(pnlTarjeraopc5Layout);
-        pnlTarjeraopc5Layout.setHorizontalGroup(
-            pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTarjeraopc5Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnReporte1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                    .addComponent(btnReporte2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
-        );
-        pnlTarjeraopc5Layout.setVerticalGroup(
-            pnlTarjeraopc5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTarjeraopc5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(btnReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReporte2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReporte3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        tablaUnidades1.add(pnlTarjeraopc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 290, 160));
+        tablaUnidades1.add(pnlUnidadesForm7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 300, 270));
 
         pnlReportes.add(tablaUnidades1, java.awt.BorderLayout.CENTER);
 
@@ -2799,8 +2910,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtemail.setText("");
         txtapematpersona.setText("");
         txtapepatpersona.setText("");
-        
-        
+
+
     }//GEN-LAST:event_btnactaddperActionPerformed
 
     private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
@@ -2821,7 +2932,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtruc.setEnabled(true);
         btndelper.setVisible(true);
         btncancelper2.setVisible(true);
-       
+
     }//GEN-LAST:event_btnactdelperActionPerformed
 
     private void btnmenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu1ActionPerformed
@@ -2829,7 +2940,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnmenu1ActionPerformed
 
     private void btnactaddperMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactaddperMouseClicked
-        
+
     }//GEN-LAST:event_btnactaddperMouseClicked
 
     private void txtapepatpersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtapepatpersonaActionPerformed
@@ -2976,8 +3087,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void btnactmodperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactmodperActionPerformed
         // TODO add your handling code here:
-         txtnombrepersona.setEnabled(true);
-        txtdnipersona.setEnabled(true);
+        txtnombrepersona.setEnabled(true);
         txtnombrepersona.setEnabled(true);
         txtcelusuario.setEnabled(true);
         txtemail.setEnabled(true);
@@ -2988,8 +3098,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtruc.setEnabled(true);
         btnmodper.setVisible(true);
         btncancelper1.setVisible(true);
-     
-         
+
+
     }//GEN-LAST:event_btnactmodperActionPerformed
 
     private void txtUserUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserUsuarioActionPerformed
@@ -3038,8 +3148,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtContraUser.setText("");
         txtDniUsers.setText("");
         btnactadduser.setVisible(true);
-    btnactdeluser.setVisible(false);
-    btnactmoduser.setVisible(false);
+        btnactdeluser.setVisible(false);
+        btnactmoduser.setVisible(false);
     }//GEN-LAST:event_btncancelusu1ActionPerformed
 
     private void btnaddtarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddtarMouseClicked
@@ -3110,7 +3220,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnModRut.setVisible(true);
         btnModRut.setEnabled(true);
         btnCancelarManRut1.setVisible(true);
-        
+
     }//GEN-LAST:event_btnmodrutActionPerformed
 
     private void btnModRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModRutActionPerformed
@@ -3164,20 +3274,20 @@ public class Vistaadministrador extends javax.swing.JFrame {
         // Resto del código
         txtnombreempresa.setText("");
         txtrucempresa.setText("");
-        txtcolorempresa.setText("");    
+        txtcolorempresa.setText("");
 
     }//GEN-LAST:event_btncantransActionPerformed
 
     private void btnactmodempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactmodempActionPerformed
         // TODO add your handling code here:
-        
+
         txtnombreempresa.setEnabled(true);
         txtrucempresa.setEnabled(true);
         txtcolorempresa.setEnabled(true);
         cbxEstadoTranporte.setEnabled(true);
         btnmodemp.setVisible(true);
         btncantrans1.setVisible(true);
-        
+
     }//GEN-LAST:event_btnactmodempActionPerformed
 
     private void btnmodempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodempActionPerformed
@@ -3193,7 +3303,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnmodemp.setVisible(false);
         btncantrans1.setVisible(false);
 
-        
         // Resto del código
         txtnombreempresa.setText("");
         txtrucempresa.setText("");
@@ -3212,22 +3321,22 @@ public class Vistaadministrador extends javax.swing.JFrame {
         cbxEstadoTranporte.setEnabled(true);
         btndelemp.setVisible(true);
         btncantrans2.setVisible(true);
-       
+
         btnactdelunidad.setEnabled(false);
     }//GEN-LAST:event_btnactdelempActionPerformed
 
     private void tblEmpresastransMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpresastransMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
-            txtrucempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-            txtnombreempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            txtcolorempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtrucempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtnombreempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtcolorempresa.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
             cbxEstadoTranporte.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
-          
-        btnactdelemp.setVisible(true);
-        btnactmodemp.setVisible(true);
-        btnactaddemp.setVisible(false);
+
+            btnactdelemp.setVisible(true);
+            btnactmodemp.setVisible(true);
+            btnactaddemp.setVisible(false);
         }
     }//GEN-LAST:event_tblEmpresastransMouseClicked
 
@@ -3236,15 +3345,15 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdRutaUnidadActionPerformed
 
     private void tblrutasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblrutasMouseClicked
-        if(evt.getClickCount() == 1) {  
-            JTable receptor = (JTable)evt.getSource();
-           txtidrutman.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
-           txtnombreruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
-           txtmontoruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
-           cbxEstadoRuta.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
-           btnmodrut.setVisible(true);
-           btnelirut.setVisible(true);
-           btnAddRut.setVisible(false);
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtidrutman.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtnombreruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtmontoruta.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            cbxEstadoRuta.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3));
+            btnmodrut.setVisible(true);
+            btnelirut.setVisible(true);
+            btnAddRut.setVisible(false);
         }
     }//GEN-LAST:event_tblrutasMouseClicked
 
@@ -3311,8 +3420,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void tblunidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblunidadesMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
             // Asegúrate de tener los nombres de los elementos correctos para la clase Unidad
             txtCodUnidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
             txtDniunidad.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
@@ -3336,8 +3445,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
         cbxEstadoUnidad.setEnabled(true);
         btndeluni.setVisible(true);
         btncanuni2.setVisible(true);
-       
-       
+
+
     }//GEN-LAST:event_btnactdelunidadActionPerformed
 
     private void btncanuni1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncanuni1ActionPerformed
@@ -3353,7 +3462,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtDniunidad.setText("");
         txtIdRutaUnidad.setText("");
         txtCodSoat.setText("");
-        
+
         btnactmodiunidad.setVisible(false);
         btnactdelunidad.setVisible(false);
         btnactaddunidad.setVisible(true);
@@ -3430,7 +3539,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         btnactmodiunidad.setVisible(false);
         btnactdelunidad.setVisible(false);
         btnactaddunidad.setVisible(true);
-        
+
     }//GEN-LAST:event_btncanuni2ActionPerformed
 
     private void btncancelper1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelper1ActionPerformed
@@ -3481,7 +3590,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtapematpersona.setText("");
         txtapepatpersona.setText("");
         btnactaddper.setEnabled(true);
-        
+
     }//GEN-LAST:event_btncancelperActionPerformed
 
     private void btncancelper2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelper2ActionPerformed
@@ -3513,19 +3622,19 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void tblpersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblpersonasMouseClicked
         // TODO add your handling code here:
-        
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
-            txtdnipersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-            txtnombrepersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            txtapepatpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
-            txtapematpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
-            txtcelusuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),4).toString());
-            txtemail.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),5).toString());
+
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtdnipersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtnombrepersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtapepatpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            txtapematpersona.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3).toString());
+            txtcelusuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4).toString());
+            txtemail.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 5).toString());
             btnactaddper.setVisible(false);
             btnactmodper.setVisible(true);
             btnactdelper.setVisible(true);
-          
+
             Object value = receptor.getModel().getValueAt(receptor.getSelectedRow(), 7);
             if (value == null) {
                 txtruc.setText("");
@@ -3533,7 +3642,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtruc.setText(value.toString());
             }
         }
-     
+
     }//GEN-LAST:event_tblpersonasMouseClicked
 
     private void btnactadduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactadduserActionPerformed
@@ -3548,7 +3657,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtContraUser.setText("");
         txtDniUsers.setText("");
         txtIdUser.setText("");
-        
+
     }//GEN-LAST:event_btnactadduserActionPerformed
 
     private void btncancelusu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelusu2ActionPerformed
@@ -3570,12 +3679,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
     private void tblusuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblusuariosMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 1) {
-            JTable receptor = (JTable)evt.getSource();
-            txtIdUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
-            txtDniUsers.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            txtUserUsuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),2).toString());
-            txtContraUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),3).toString());
+        if (evt.getClickCount() == 1) {
+            JTable receptor = (JTable) evt.getSource();
+            txtIdUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 0).toString());
+            txtDniUsers.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 1).toString());
+            txtUserUsuario.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 2).toString());
+            txtContraUser.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(), 3).toString());
             cbxestadoUser.setSelectedItem(receptor.getModel().getValueAt(receptor.getSelectedRow(), 4));
             btnactadduser.setVisible(false);
             btnactdeluser.setVisible(true);
@@ -3642,17 +3751,51 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReportePT.jrxml");
 
             System.out.println("PASO LA COMPILACION");
+            
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date inicial = jdcInicial.getDate();
+            Date finall = jdcFinal.getDate();
+            LocalDate timedate1 = LocalDate.ofInstant(inicial.toInstant(), ZoneId.systemDefault());
+            LocalDate timedate2 = LocalDate.ofInstant(finall.toInstant(), ZoneId.systemDefault());
+            String f_inicialFormato = timedate1.format(formatter);
+            String f_finalFormato = timedate2.format(formatter);
+            System.out.println(f_inicialFormato);
+            System.out.println(f_finalFormato);
+            
+            Map parametros = new HashMap();
+            parametros.put("f_inicial", f_inicialFormato);
+            parametros.put("f_final", f_finalFormato);
+            parametros.put("p_trans", txtTransportistas.getText());
+            parametros.put("p_rutas", txtRutas.getText());
+            
+            //System.out.println(jdcInicial.getDate());
+            //System.out.println(jdcFinal.getDate());
+            
             // Paso 3: Llenar el informe con datos desde la base de datos.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn);
             System.out.println("PASO LA LECTURA");
             // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
             JasperViewer.viewReport(jasperPrint);
             System.out.println("PASO LA PARTE DE VIEW");
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Transportistas.pdf");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
+            fileChooser.setSelectedFile(new File("Reporte-Transportistas.pdf"));
 
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+                    System.out.println("Exportación exitosa a PDF");
+                } catch (JRException e) {
+                    e.printStackTrace();
+                    System.err.println("Error al exportar a PDF: " + e.getMessage());
+                }
+            }
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3670,17 +3813,48 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReporteSP.jrxml");
             //JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\LuisDev\\Downloads\\FinalIntegrador\\FinalIntegrador\\Formatos\\src\\Reportes\\ReporteSP.jrxml");
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date inicial = jdcInicialP.getDate();
+            Date finall = jdcFinalP.getDate();
+            LocalDate timedate1 = LocalDate.ofInstant(inicial.toInstant(), ZoneId.systemDefault());
+            LocalDate timedate2 = LocalDate.ofInstant(finall.toInstant(), ZoneId.systemDefault());
+            String f_inicialFormato = timedate1.format(formatter);
+            String f_finalFormato = timedate2.format(formatter);
+            System.out.println(f_inicialFormato);
+            System.out.println(f_finalFormato);
+            
+            Map parametros = new HashMap();
+            parametros.put("f_inicialS", f_inicialFormato);
+            parametros.put("f_finalS", f_finalFormato);
+            parametros.put("m_inicial", txtMontoInicial.getText());
+            parametros.put("m_final", txtMontoFinal.getText());            
+
             // Paso 3: Llenar el informe con datos desde la base de datos.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn);
 
             // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
             JasperViewer.viewReport(jasperPrint);
-
+        
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Pasajeros.pdf");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
+            fileChooser.setSelectedFile(new File("Reporte-Pasajeros.pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+                    System.out.println("Exportación exitosa a PDF");
+                } catch (JRException e) {
+                    e.printStackTrace();
+                    System.err.println("Error al exportar a PDF: " + e.getMessage());
+                }
+            }
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3697,17 +3871,46 @@ public class Vistaadministrador extends javax.swing.JFrame {
             // Compilar el archivo .jasper
             JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\ReporteSF.jrxml");
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date inicial = jdcInicialF.getDate();
+            Date finall = jdcFinalF.getDate();
+            LocalDate timedate1 = LocalDate.ofInstant(inicial.toInstant(), ZoneId.systemDefault());
+            LocalDate timedate2 = LocalDate.ofInstant(finall.toInstant(), ZoneId.systemDefault());
+            String f_inicialFormato = timedate1.format(formatter);
+            String f_finalFormato = timedate2.format(formatter);
+            System.out.println(f_inicialFormato);
+            System.out.println(f_finalFormato);
+            
+            Map parametros = new HashMap();
+            parametros.put("f_inicialF", f_inicialFormato);
+            parametros.put("f_finalF", f_finalFormato);
+            
             // Paso 3: Llenar el informe con datos desde la base de datos.
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, conn);
 
             // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
             JasperViewer.viewReport(jasperPrint);
 
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Servicios.pdf");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
+            fileChooser.setSelectedFile(new File("Reporte-Servicios.pdf"));
+
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+                    System.out.println("Exportación exitosa a PDF");
+                } catch (JRException e) {
+                    e.printStackTrace();
+                    System.err.println("Error al exportar a PDF: " + e.getMessage());
+                }
+            }
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3731,10 +3934,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint);
 
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "src\\Reportes\\TicketRecarga.pdf");
 
             //return jasperPrint;
-        } catch (JRException  err) {
+        } catch (JRException err) {
             err.printStackTrace();
             System.out.println("INGRESO AL CATCH ERROR");
             System.out.println("ERROR.... " + err);
@@ -3743,13 +3946,13 @@ public class Vistaadministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerTicketActionPerformed
 
     public static void enviarCorreo(String destinatario, String asunto, String cuerpo, String rutaArchivo) {
-        
+
         // Configuración para el servidor SMTP de Outlook
         String host = "smtp.office365.com";
         String port = "587";
         String username = "luchitozabalaga@outlook.es";
         String password = "Jorgezabalag@90";
-
+        System.out.println(destinatario);
         // Propiedades para la sesión
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -3792,18 +3995,17 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
             // Enviar el mensaje
             Transport.send(message);
-            
+
             JOptionPane.showMessageDialog(null, "Email enviado correctamente!!!");
-            
+
             System.out.println("Correo enviado correctamente.");
-            
 
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
+
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
 
         /*enviarCorreo(
@@ -3813,21 +4015,77 @@ public class Vistaadministrador extends javax.swing.JFrame {
             "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
         );*/
         enviarCorreo(
-            txtEmailDestino.getText(),
-            "Ticket de Recarga - EtravelEase",
-            "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
-            "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
+                txtEmailDestino.getText(),
+                "Ticket de Recarga - EtravelEase",
+                "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
+                "src\\Reportes\\TicketRecarga.pdf"
         );
 
     }//GEN-LAST:event_btnEnviarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnaddpersoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddpersoActionPerformed
+
+    }//GEN-LAST:event_btnaddpersoActionPerformed
+
+    private void txtnombrepersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombrepersonaKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtnombrepersonaKeyTyped
+
+    private void txtapepatpersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapepatpersonaKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtapepatpersonaKeyTyped
+
+    private void txtapematpersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtapematpersonaKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtapematpersonaKeyTyped
+
+    private void txtdnipersonaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdnipersonaKeyTyped
+        // COD numeros
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtdnipersona.getText().length() >= 8) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtdnipersonaKeyTyped
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Color color = Color.decode("#5856D6");
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("Temas");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
+        UIManager.put("Button.background", color);
         FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3988,10 +4246,18 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -4004,7 +4270,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private com.toedter.calendar.JDateChooser jdcFinal;
+    private com.toedter.calendar.JDateChooser jdcFinalF;
+    private com.toedter.calendar.JDateChooser jdcFinalP;
     private com.toedter.calendar.JDateChooser jdcInicial;
+    private com.toedter.calendar.JDateChooser jdcInicialF;
+    private com.toedter.calendar.JDateChooser jdcInicialP;
     public javax.swing.JFormattedTextField jdcfechacaducTarjeta;
     public javax.swing.JFormattedTextField jdcfechacreacionTarjeta;
     private Clases.CrazyPanel menuConsumos;
@@ -4056,7 +4326,6 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTarjeraopc2;
     private javax.swing.JPanel pnlTarjeraopc3;
     private javax.swing.JPanel pnlTarjeraopc4;
-    private javax.swing.JPanel pnlTarjeraopc5;
     private Clases.CrazyPanel pnlTarjetaForm;
     private Clases.CrazyPanel pnlTarjetaForm1;
     private Clases.CrazyPanel pnlTarjetaForm2;
@@ -4068,6 +4337,8 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private Clases.CrazyPanel pnlUnidadesForm2;
     private javax.swing.JPanel pnlUnidadesForm3;
     private Clases.CrazyPanel pnlUnidadesForm5;
+    private Clases.CrazyPanel pnlUnidadesForm6;
+    private Clases.CrazyPanel pnlUnidadesForm7;
     private Clases.CrazyPanel pnlUsuarioForm;
     private Clases.CrazyPanel pnlUsuarioForm1;
     private Clases.CrazyPanel pnlUsuarioForm2;
@@ -4111,6 +4382,10 @@ public class Vistaadministrador extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmailDestino;
     public javax.swing.JTextField txtIdRutaUnidad;
     public javax.swing.JTextField txtIdUser;
+    private javax.swing.JTextField txtMontoFinal;
+    private javax.swing.JTextField txtMontoInicial;
+    private javax.swing.JTextField txtRutas;
+    private javax.swing.JTextField txtTransportistas;
     public javax.swing.JTextField txtUserUsuario;
     public javax.swing.JTextField txtapematpersona;
     public javax.swing.JTextField txtapepatpersona;
@@ -4131,5 +4406,5 @@ public class Vistaadministrador extends javax.swing.JFrame {
     public javax.swing.JTextField txtrucempresa;
     public javax.swing.JTextField txtsaldo;
     // End of variables declaration//GEN-END:variables
-    
+
 }

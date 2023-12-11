@@ -157,7 +157,6 @@ public class ConstructorCajon extends SimpleDrawerBuilder{
                          main.pnlUnidades.setVisible(true);
                          main.pnlReportes.setVisible(false);
                     }
-
                     if (i == 4 && s == 0) {
                          System.out.println("Menu " + i + " " + s);
                          main.pnlPersonas.setVisible(false);

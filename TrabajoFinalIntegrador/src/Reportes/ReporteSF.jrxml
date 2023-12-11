@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa03044d-063d-4288-b449-b10e8632bcd9">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.1"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="f_inicialF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f_finalF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT e.RucEmpresa, e.NombreEmpresa, e.Color, r.NombreRuta, SUM(c.MontoConsumo) AS 'MontoConsumo', c.FechaConsumo FROM empresatransporte e
-INNER JOIN rutas r ON r.RucEmpresa = e.RucEmpresa
-INNER JOIN unidades u ON u.IdRuta = r.IdRuta
-INNER JOIN registroconsumos c ON c.CodUnidad = u.CodUnidad 
-GROUP BY e.RucEmpresa;]]>
+		<![CDATA[CALL reporteServiciosPorFechas($P{f_inicialF}, $P{f_finalF})]]>
 	</queryString>
 	<field name="RucEmpresa" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -42,10 +44,6 @@ GROUP BY e.RucEmpresa;]]>
 				</textElement>
 				<text><![CDATA[Reporte de Servicios por Fechas]]></text>
 			</staticText>
-			<image>
-				<reportElement x="10" y="10" width="50" height="50" uuid="1fc1a963-5775-4b5d-b46e-008603d99710"/>
-				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

@@ -1,6 +1,8 @@
 package VideoPanel;
 
 import Gestor.FormsGestor;
+import Vistas.VistaConductor;
+import Vistas.VistaUsuario;
 import Vistas.Vistaadministrador;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.util.UIScale;
@@ -11,42 +13,48 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import modelos.UsuarioDAO;
+import modelos.Usuarios;
 
 public class Login extends JPanel {
+
     public JTextField txtUsuario = new JTextField();
     public JPasswordField txtContrasena = new JPasswordField();
     public JCheckBox chRecuerdame = new JCheckBox("Recuerdame");
     public JButton cmdLogin = new JButton("Login");
     public JButton btnCancelar = new JButton("Cancelar");
-    public boolean estado =false;
-    
-    public Login(){
+    public boolean estado = false;
+    private Usuarios us;
+    private UsuarioDAO UsDao;
+
+    public Login() {
         init();
+
     }
 
-    public void init(){
+    public void init() {
+        us = new Usuarios();
+        UsDao = new UsuarioDAO();
         setOpaque(false);
         setLayout(new MigLayout("wrap,fillx,insets 60 60 40 60", "[fill]"));
-        JLabel title = new JLabel("              Inicia Sesion            ",SwingConstants.CENTER);
-        
-        
-        
-        title.putClientProperty(FlatClientProperties.STYLE,"" + "font:bold +10");
-        txtUsuario.putClientProperty(FlatClientProperties.STYLE,"" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0");
-        txtContrasena.putClientProperty(FlatClientProperties.STYLE,"" +
-                "margin:5,10,5,10;" +
-                "focusWidth:1;" +
-                "innerFocusWidth:0;" +
-                "showRevealButton:true");
-        cmdLogin.putClientProperty(FlatClientProperties.STYLE,"" +
-                "background:$Component.accentColor;" +
-                "borderWidth:0;" +
-                "focusWidth:0;" +
-                "innerFocusWidth:0");
-        
+        JLabel title = new JLabel("              Inicia Sesion            ", SwingConstants.CENTER);
+
+        title.putClientProperty(FlatClientProperties.STYLE, "" + "font:bold +10");
+        txtUsuario.putClientProperty(FlatClientProperties.STYLE, ""
+                + "margin:5,10,5,10;"
+                + "focusWidth:1;"
+                + "innerFocusWidth:0");
+        txtContrasena.putClientProperty(FlatClientProperties.STYLE, ""
+                + "margin:5,10,5,10;"
+                + "focusWidth:1;"
+                + "innerFocusWidth:0;"
+                + "showRevealButton:true");
+        cmdLogin.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:$Component.accentColor;"
+                + "borderWidth:0;"
+                + "focusWidth:0;"
+                + "innerFocusWidth:0");
+
         txtUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Ingrese usuario");
         txtContrasena.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Ingrese contraseña");
 
@@ -64,21 +72,60 @@ public class Login extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Acciones a realizar cuando se presiona el botón
                 System.out.println("¡Botón presionado en el panel!");
-                
-                 Vistaadministrador vistaadmin =new Vistaadministrador();
-               vistaadmin.setVisible(true);
+                if (txtUsuario.getText().equals("") || String.valueOf(txtContrasena.getPassword()).equals("")) {
+                    JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+                } else {
+                    String usuario = txtUsuario.getText();
+                    String contra = String.valueOf(txtContrasena.getPassword());
+                    us = UsDao.login(usuario, contra);
+                    if (us.getUser() != null) {
+                        int tipusu = UsDao.obtenerTipoUsuario(us);
+                        switch (tipusu) {
+                            case 1:
+                                Vistaadministrador vistaadmin = new Vistaadministrador();
+                                vistaadmin.setVisible(true);
+
+                                break;
+                            case 2:
+                                VistaConductor vistaconduc = new VistaConductor(us.getDni());
+                                vistaconduc.setVisible(true);
+
+                                break;
+                            case 3:
+                                VistaUsuario vistusu = new VistaUsuario();
+                                vistusu.setVisible(true);
+
+                                break;
+                            default:
+                                throw new AssertionError();
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos");
+
+                    }
+                }
 
             }
-        });}
-     
-    private Component createSignupLabel(){
+        });
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        //fin init
+    }
+
+    private Component createSignupLabel() {
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        panel.putClientProperty(FlatClientProperties.STYLE, "" +
-                "background:null");
+        panel.putClientProperty(FlatClientProperties.STYLE, ""
+                + "background:null");
         JButton cmdRegister = new JButton("<html><a href=\"#\">Registrate</a></html>");
-        cmdRegister.putClientProperty(FlatClientProperties.STYLE, "" +
-                "border:3,3,3,3");
+        cmdRegister.putClientProperty(FlatClientProperties.STYLE, ""
+                + "border:3,3,3,3");
         cmdRegister.setContentAreaFilled(false);
         cmdRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cmdRegister.addActionListener(e -> {
@@ -92,7 +139,7 @@ public class Login extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         int arc = UIScale.scale(20);
@@ -101,6 +148,15 @@ public class Login extends JPanel {
         g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), arc, arc));
         g2.dispose();
         super.paintComponent(g);
+    }
+
+    public void agregarListenerBotonCerrar(ActionListener listener) {
+        // Agrega el ActionListener al botón de cerrar
+        // Este método podría ser llamado desde el Frmlogin
+        // para establecer el ActionListener necesario.
+        // Puedes usar getBtnCancelar() o cualquier otro botón
+        // que quieras que realice la acción de cerrar.
+        getBtnCancelar().addActionListener(listener);
     }
 
     public JTextField getTxtUsuario() {
@@ -150,5 +206,5 @@ public class Login extends JPanel {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
+
 }

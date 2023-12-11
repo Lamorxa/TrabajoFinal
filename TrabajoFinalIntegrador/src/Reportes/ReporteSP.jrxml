@@ -3,10 +3,20 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT r.CodConsumo, t.Saldo, t.FechaCreacion, p.Dni, p.Nombres, p.ApellidoPaterno, p.ApellidoMaterno, p.Telefono FROM registroconsumos r
-INNER JOIN tarjetas t ON t.CodTarjeta = r.CodTarjeta
-INNER JOIN personas p ON p.Dni = t.Dni;]]>
+	<parameter name="f_inicialS" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f_finalS" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="m_inicial" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="m_final" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[CALL reporteServiciosPasajero($P{f_inicialS}, $P{f_finalS}, $P{m_inicial}, $P{m_final});]]>
 	</queryString>
 	<field name="CodConsumo" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -17,7 +27,7 @@ INNER JOIN personas p ON p.Dni = t.Dni;]]>
 	<field name="FechaCreacion" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="Dni" class="java.lang.Integer">
+	<field name="Dni" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="Nombres" class="java.lang.String">
@@ -29,7 +39,7 @@ INNER JOIN personas p ON p.Dni = t.Dni;]]>
 	<field name="ApellidoMaterno" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="Telefono" class="java.lang.Integer">
+	<field name="Telefono" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -48,10 +58,6 @@ INNER JOIN personas p ON p.Dni = t.Dni;]]>
 				</textElement>
 				<text><![CDATA[Reporte de Servicios por Pasajeros]]></text>
 			</staticText>
-			<image>
-				<reportElement x="10" y="10" width="50" height="50" uuid="84c92710-0c82-4180-a7d1-46c6dde77cd8"/>
-				<imageExpression><![CDATA["C:\\Users\\LuisDev\\Pictures\\logotransporte.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.Personas;
 import modelos.PersonasDAO;
+import raven.toast.Notifications;
 /**
  *
  * @author LamorxaXD
@@ -49,7 +50,7 @@ public class ControladorPersonas implements ActionListener{
             views.txtemail.getText().equals("")
                 )
         {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         }else   {
             per.setDni(views.txtdnipersona.getText());
             per.setNombres(views.txtnombrepersona.getText());
@@ -67,9 +68,9 @@ public class ControladorPersonas implements ActionListener{
             if (perDao.registrarPersona(per)) {
                 limpiarTabla();
                 listar();
-                JOptionPane.showMessageDialog(null, "persona Registrado Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Agregado correctamente");
             } else {
-                 JOptionPane.showMessageDialog(null, "Error a resgistrar persona");
+                Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al agregar");
                    }
                 }  
         }
@@ -84,7 +85,7 @@ public class ControladorPersonas implements ActionListener{
             views.txtemail.getText().equals("")
                 )
         {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         }else   {
             per.setDni(views.txtdnipersona.getText());
             per.setNombres(views.txtnombrepersona.getText());
@@ -102,9 +103,9 @@ public class ControladorPersonas implements ActionListener{
             if (perDao.modificarPersona(per)) {
                 limpiarTabla();
                 listar();
-                JOptionPane.showMessageDialog(null, "persona Modificada Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se han aplicado los cambios");
             } else {
-                 JOptionPane.showMessageDialog(null, "Error a Modificar persona");
+                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al modificar");
                    }
                 }  
         }
@@ -119,7 +120,7 @@ public class ControladorPersonas implements ActionListener{
             views.txtemail.getText().equals("")
                 )
         {
-            JOptionPane.showMessageDialog(null, "Los campos son obligatorios");
+            Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         }else   {
             per.setDni(views.txtdnipersona.getText());
             per.setNombres(views.txtnombrepersona.getText());
@@ -137,9 +138,9 @@ public class ControladorPersonas implements ActionListener{
             if (perDao.eliminarPersona(per)) {
                 limpiarTabla();
                 listar();
-                JOptionPane.showMessageDialog(null, "persona eliminada Con Exito");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Se a eliminado correctamente");
             } else {
-                 JOptionPane.showMessageDialog(null, "Error a eliminar persona");
+                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al Eliminar");
                    }
                 }  
         }
