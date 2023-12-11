@@ -518,6 +518,9 @@
                               <Properties>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtcelusuarioKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -681,6 +684,9 @@
                               <Properties>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtrucKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -1082,6 +1088,9 @@
                               <Properties>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDniUsersKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -1656,6 +1665,9 @@
                               </Constraints>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txtdnipersonatarjeta">
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtdnipersonatarjetaKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -2238,6 +2250,7 @@
                             <Component class="javax.swing.JTextField" name="txtmontorecarga">
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtmontorecargaActionPerformed"/>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtmontorecargaKeyTyped"/>
                               </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -2453,7 +2466,7 @@
                           <Component id="btnmenu5" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel26" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="918" max="32767" attributes="0"/>
+                          <EmptySpace pref="900" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2524,7 +2537,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="ConsumoBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
+                      <Component id="ConsumoBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane5" max="32767" attributes="0"/>
@@ -2692,6 +2705,9 @@
                               </Constraints>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txtCodTarjetaconsu">
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodTarjetaconsuKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -2926,7 +2942,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="806" max="32767" attributes="0"/>
+                                  <EmptySpace pref="788" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2995,7 +3011,7 @@
                           <Component id="btnmenu6" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel29" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="918" max="32767" attributes="0"/>
+                          <EmptySpace pref="900" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3066,7 +3082,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="RutasBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
+                      <Component id="RutasBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane6" max="32767" attributes="0"/>
@@ -3460,7 +3476,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="806" max="32767" attributes="0"/>
+                                  <EmptySpace pref="788" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3529,7 +3545,7 @@
                           <Component id="btnmenu7" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel34" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="918" max="32767" attributes="0"/>
+                          <EmptySpace pref="900" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3600,7 +3616,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="EmpresasBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
+                      <Component id="EmpresasBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane7" max="32767" attributes="0"/>
@@ -3739,6 +3755,9 @@
                               <Properties>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtrucempresaKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -3801,6 +3820,9 @@
                               <Properties>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtcolorempresaKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -4012,7 +4034,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="806" max="32767" attributes="0"/>
+                                  <EmptySpace pref="788" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4152,7 +4174,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="UnidadesBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
+                      <Component id="UnidadesBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane8" max="32767" attributes="0"/>
@@ -4359,6 +4381,9 @@
                               <Properties>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDniunidadKeyTyped"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
@@ -4614,7 +4639,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="806" max="32767" attributes="0"/>
+                                  <EmptySpace pref="788" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
