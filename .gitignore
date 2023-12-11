@@ -1,2 +1,7 @@
 /TrabajoFinalIntegrador/build/
 /TrabajoFinalIntegrador/nbproject/private/
+/TrabajoFinalIntegrador/dist/
+TrabajoFinalIntegrador/nbproject/private/private.properties
+*.xml
+*.xml
+*.properties
