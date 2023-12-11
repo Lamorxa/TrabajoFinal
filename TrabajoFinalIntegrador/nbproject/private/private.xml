@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Controladores/ControladorPersonas.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Vistas/Frmlogin.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/VideoPanel/Login.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/Controladores/ControladorLogin.java</file>
-            <file>file:/C:/Users/abela/OneDrive/Documents/GitHub/TrabajoFinal/TrabajoFinalIntegrador/src/modelos/PersonasDAO.java</file>
+            <file>file:/C:/Users/user/Documents/TrabajoFinal/TrabajoFinalIntegrador/src/Controladores/ControladorVistaUsuario.java</file>
+            <file>file:/C:/Users/user/Documents/TrabajoFinal/TrabajoFinalIntegrador/src/VideoPanel/Login.java</file>
+            <file>file:/C:/Users/user/Documents/TrabajoFinal/TrabajoFinalIntegrador/src/modelos/RegistroRecargasDAO.java</file>
+            <file>file:/C:/Users/user/Documents/TrabajoFinal/TrabajoFinalIntegrador/src/Vistas/VistaUsuario.java</file>
         </group>
     </open-files>
 </project-private>
