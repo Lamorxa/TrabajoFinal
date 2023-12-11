@@ -762,6 +762,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlPersonaForm2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         txtcelusuario.setEnabled(false);
+        txtcelusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcelusuarioKeyTyped(evt);
+            }
+        });
         pnlPersonaForm2.add(txtcelusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 150, -1));
 
         pnlPersonaForm.add(pnlPersonaForm2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 220, 160));
@@ -813,6 +818,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlPersonaForm4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         txtruc.setEnabled(false);
+        txtruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrucKeyTyped(evt);
+            }
+        });
         pnlPersonaForm4.add(txtruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 300, -1));
 
         btncancelper1.setText("Cancelar");
@@ -990,6 +1000,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlUsuarioForm2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtDniUsers.setEnabled(false);
+        txtDniUsers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniUsersKeyTyped(evt);
+            }
+        });
         pnlUsuarioForm2.add(txtDniUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 170, -1));
 
         jLabel15.setText("DNI");
@@ -1197,7 +1212,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(893, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuTarjetasLayout.setVerticalGroup(
             menuTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1265,6 +1280,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel19.setText("DNI");
         pnlTarjetaForm2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txtdnipersonatarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdnipersonatarjetaKeyTyped(evt);
+            }
+        });
         pnlTarjetaForm2.add(txtdnipersonatarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
 
         jLabel20.setText("Saldo");
@@ -1373,7 +1394,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda3Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(781, Short.MAX_VALUE))
+                .addContainerGap(788, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda3Layout.setVerticalGroup(
             pnlBotonesBusqueda3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1389,7 +1410,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaTarjetas.setLayout(tablaTarjetasLayout);
         tablaTarjetasLayout.setHorizontalGroup(
             tablaTarjetasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TarjetaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+            .addComponent(TarjetaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(tablaTarjetasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1509,6 +1530,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         jLabel50.setText("N\" de Tarjeta");
         pnlRecargasForm2.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txtCodTarjetaRecarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodTarjetaRecargaKeyTyped(evt);
+            }
+        });
         pnlRecargasForm2.add(txtCodTarjetaRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         jLabel53.setText("Monto");
@@ -1517,6 +1544,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtmontorecarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmontorecargaActionPerformed(evt);
+            }
+        });
+        txtmontorecarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmontorecargaKeyTyped(evt);
             }
         });
         pnlRecargasForm2.add(txtmontorecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
@@ -1732,6 +1764,12 @@ public class Vistaadministrador extends javax.swing.JFrame {
             }
         });
         pnlConsumosForm1.add(txtCodUnidadconsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+
+        txtCodTarjetaconsu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodTarjetaconsuKeyTyped(evt);
+            }
+        });
         pnlConsumosForm1.add(txtCodTarjetaconsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         pnlConsumosForm.add(pnlConsumosForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 340, 160));
@@ -2134,7 +2172,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 .addComponent(btnmenu7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(893, Short.MAX_VALUE))
+                .addContainerGap(900, Short.MAX_VALUE))
         );
         menuEmpresasLayout.setVerticalGroup(
             menuEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2195,6 +2233,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlEmpresasForm1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtrucempresa.setEnabled(false);
+        txtrucempresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrucempresaKeyTyped(evt);
+            }
+        });
         pnlEmpresasForm1.add(txtrucempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         jLabel37.setText("Nombre de Empresa");
@@ -2204,6 +2247,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         txtnombreempresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnombreempresaActionPerformed(evt);
+            }
+        });
+        txtnombreempresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreempresaKeyTyped(evt);
             }
         });
         pnlEmpresasForm1.add(txtnombreempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
@@ -2216,6 +2264,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlEmpresasForm2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtcolorempresa.setEnabled(false);
+        txtcolorempresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcolorempresaKeyTyped(evt);
+            }
+        });
         pnlEmpresasForm2.add(txtcolorempresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, -1));
 
         jLabel40.setText("Estado");
@@ -2362,7 +2415,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
             .addGroup(pnlBotonesBusqueda7Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(txtBuscar7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(781, Short.MAX_VALUE))
+                .addContainerGap(788, Short.MAX_VALUE))
         );
         pnlBotonesBusqueda7Layout.setVerticalGroup(
             pnlBotonesBusqueda7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2378,7 +2431,7 @@ public class Vistaadministrador extends javax.swing.JFrame {
         tablaEmpresas.setLayout(tablaEmpresasLayout);
         tablaEmpresasLayout.setHorizontalGroup(
             tablaEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(EmpresasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE)
+            .addComponent(EmpresasBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaEmpresasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7)
@@ -2498,6 +2551,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
                 txtCodSoatActionPerformed(evt);
             }
         });
+        txtCodSoat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodSoatKeyTyped(evt);
+            }
+        });
         pnlUnidadesForm1.add(txtCodSoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, -1));
 
         pnlUnidadesForm.add(pnlUnidadesForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 260, 160));
@@ -2508,6 +2566,11 @@ public class Vistaadministrador extends javax.swing.JFrame {
         pnlUnidadesForm2.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         txtDniunidad.setEnabled(false);
+        txtDniunidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniunidadKeyTyped(evt);
+            }
+        });
         pnlUnidadesForm2.add(txtDniunidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
 
         jLabel44.setText("ID de Ruta");
@@ -3972,6 +4035,144 @@ public class Vistaadministrador extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtdnipersonaKeyTyped
+
+    private void txtcelusuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcelusuarioKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtcelusuario.getText().length() >= 9) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtcelusuarioKeyTyped
+
+    private void txtrucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrucKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtruc.getText().length() >= 11) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtrucKeyTyped
+
+    private void txtDniUsersKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniUsersKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtDniUsers.getText().length() >= 8) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtDniUsersKeyTyped
+
+    private void txtdnipersonatarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdnipersonatarjetaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtdnipersonatarjeta.getText().length() >= 8) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtdnipersonatarjetaKeyTyped
+
+    private void txtCodTarjetaRecargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodTarjetaRecargaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtCodTarjetaRecarga.getText().length() >= 16) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtCodTarjetaRecargaKeyTyped
+
+    private void txtmontorecargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmontorecargaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtmontorecarga.getText().length() >= 3) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtmontorecargaKeyTyped
+
+    private void txtCodTarjetaconsuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodTarjetaconsuKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtCodTarjetaconsu.getText().length() >= 16) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtCodTarjetaconsuKeyTyped
+
+    private void txtrucempresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrucempresaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtrucempresa.getText().length() >= 11) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtrucempresaKeyTyped
+
+    private void txtnombreempresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreempresaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreempresaKeyTyped
+
+    private void txtcolorempresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcolorempresaKeyTyped
+        int key = evt.getKeyChar();
+        boolean isUpperCase = key >= 65 && key <= 90;
+        boolean isLowerCase = key >= 97 && key <= 122;
+
+        if (!(isUpperCase || isLowerCase)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtcolorempresaKeyTyped
+
+    private void txtCodSoatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodSoatKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtCodSoat.getText().length() >= 11) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+
+        }
+    }//GEN-LAST:event_txtCodSoatKeyTyped
+
+    private void txtDniunidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniunidadKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtDniunidad.getText().length() >= 8) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtDniunidadKeyTyped
 
     /**
      * @param args the command line arguments

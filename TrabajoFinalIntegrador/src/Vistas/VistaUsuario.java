@@ -62,9 +62,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         pnlRecargasForm = new Clases.CrazyPanel();
         pnlRecargasForm1 = new Clases.CrazyPanel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        txtRecargatarjetaUsuario = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        montoRecargausuario = new javax.swing.JTextField();
         pnlBotonesBusqueda4 = new Clases.CrazyPanel();
         txtBuscar4 = new javax.swing.JTextField();
         btnRecargar = new javax.swing.JButton();
@@ -304,17 +304,28 @@ public class VistaUsuario extends javax.swing.JFrame {
 
         jLabel22.setText("N\" de Tarjeta");
         pnlRecargasForm1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlRecargasForm1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
+
+        txtRecargatarjetaUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRecargatarjetaUsuarioKeyTyped(evt);
+            }
+        });
+        pnlRecargasForm1.add(txtRecargatarjetaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
 
         jLabel25.setText("Monto");
         pnlRecargasForm1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
 
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+        montoRecargausuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
+                montoRecargausuarioActionPerformed(evt);
             }
         });
-        pnlRecargasForm1.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+        montoRecargausuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                montoRecargausuarioKeyTyped(evt);
+            }
+        });
+        pnlRecargasForm1.add(montoRecargausuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
 
         pnlRecargasForm.add(pnlRecargasForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 340, 160));
 
@@ -553,9 +564,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         Drawer.getInstance().showDrawer();
     }//GEN-LAST:event_btnmenu4ActionPerformed
 
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
+    private void montoRecargausuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_montoRecargausuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
+    }//GEN-LAST:event_montoRecargausuarioActionPerformed
 
     private void txtBuscar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar4ActionPerformed
         // TODO add your handling code here:
@@ -584,6 +595,30 @@ public class VistaUsuario extends javax.swing.JFrame {
     private void ConsumoBotonesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_ConsumoBotonesComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsumoBotonesComponentAdded
+
+    private void txtRecargatarjetaUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRecargatarjetaUsuarioKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (txtRecargatarjetaUsuario.getText().length() >= 16) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+    }//GEN-LAST:event_txtRecargatarjetaUsuarioKeyTyped
+
+    private void montoRecargausuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoRecargausuarioKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!(numeros)) {
+            evt.consume(); // Consumir el evento para evitar que se procese
+        }
+        if (montoRecargausuario.getText().length() >= 16) {
+            evt.consume(); // Consumir el evento para evitar que se proceso
+        }
+    }//GEN-LAST:event_montoRecargausuarioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -625,11 +660,10 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
     private Clases.CrazyPanel menuConsumos;
     private Clases.CrazyPanel menuRecargas;
     private Clases.CrazyPanel menuTarjetas;
+    private javax.swing.JTextField montoRecargausuario;
     public raven.crazypanel.CrazyPanel paneles;
     private Clases.CrazyPanel pnlBotonesBusqueda3;
     private Clases.CrazyPanel pnlBotonesBusqueda4;
@@ -645,5 +679,6 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscar3;
     private javax.swing.JTextField txtBuscar4;
     private javax.swing.JTextField txtBuscar5;
+    private javax.swing.JTextField txtRecargatarjetaUsuario;
     // End of variables declaration//GEN-END:variables
 }
