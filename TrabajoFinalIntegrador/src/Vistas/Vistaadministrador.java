@@ -3717,8 +3717,22 @@ public class Vistaadministrador extends javax.swing.JFrame {
             JasperViewer.viewReport(jasperPrint);
             System.out.println("PASO LA PARTE DE VIEW");
             // O exportarlo a PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\LuisDev\\Documents\\Reporte-Transportistas.pdf");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar Reporte PDF");
+            fileChooser.setSelectedFile(new File("Reporte-Transportistas.pdf"));
 
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                try {
+                    JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+                    System.out.println("Exportación exitosa a PDF");
+                } catch (JRException e) {
+                    e.printStackTrace();
+                    System.err.println("Error al exportar a PDF: " + e.getMessage());
+                }
+            }
             //return jasperPrint;
         } catch (JRException err) {
             err.printStackTrace();

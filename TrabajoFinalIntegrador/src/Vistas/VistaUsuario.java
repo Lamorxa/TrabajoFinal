@@ -5,14 +5,75 @@
 package Vistas;
 
 import Cajon.ConstructorCajonUsuario;
+import Cajon.ConstructorCajon;
+import Controladores.ControladorEmpresaTransporte;
+import Controladores.ControladorPersonas;
+import Controladores.ControladorRutas;
+import Controladores.*;
+import Controladores.ControladorUnidades;
+import Controladores.ControladorUsuarios;
+import Controladores.Rellenarcombo;
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import conexion.Conexion;
+import java.sql.Connection;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.util.List;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import modelos.*;
+import modelos.EmpresaTransporteDAO;
+import modelos.Personas;
+import modelos.PersonasDAO;
+import modelos.Rutas;
+import modelos.RutasDAO;
+import modelos.TarjetaDAO;
+import modelos.Tarjetas;
+import modelos.UnidadDAO;
+import modelos.Unidades;
+import modelos.UsuarioDAO;
+import modelos.Usuarios;
+import net.miginfocom.swing.MigLayout;
 import raven.drawer.Drawer;
 import raven.popup.GlassPanePopup;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.management.Notification;
+import javax.swing.JFileChooser;
+import raven.toast.Notifications;
 
 /**
  *
@@ -52,23 +113,41 @@ public class VistaUsuario extends javax.swing.JFrame {
         txtBuscar3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         pnlRecargas = new raven.crazypanel.CrazyPanel();
-        menuRecargas = new Clases.CrazyPanel();
-        btnmenu4 = new javax.swing.JButton();
-        jLabel18 = new javax.swing.JLabel();
-        tablaRecargas = new Clases.CrazyPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        RecargaBotones = new Clases.CrazyPanel();
-        pnlRecargasForm = new Clases.CrazyPanel();
-        pnlRecargasForm1 = new Clases.CrazyPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
-        pnlBotonesBusqueda4 = new Clases.CrazyPanel();
-        txtBuscar4 = new javax.swing.JTextField();
-        btnRecargar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        menuRecargas1 = new Clases.CrazyPanel();
+        btnmenu6 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        tablaRecargas1 = new Clases.CrazyPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblRecargas = new javax.swing.JTable();
+        RecargaBotones1 = new Clases.CrazyPanel();
+        pnlRecargasForm2 = new Clases.CrazyPanel();
+        pnlRecargasForm3 = new Clases.CrazyPanel();
+        jLabel23 = new javax.swing.JLabel();
+        txtcodrecarga = new javax.swing.JTextField();
+        cbxestadoRecarga = new javax.swing.JComboBox<>();
+        jLabel54 = new javax.swing.JLabel();
+        pnlRecargasForm4 = new Clases.CrazyPanel();
+        jLabel50 = new javax.swing.JLabel();
+        txtCodTarjetaRecarga = new javax.swing.JTextField();
+        jLabel53 = new javax.swing.JLabel();
+        txtmontorecarga = new javax.swing.JTextField();
+        pnlTarjeraopc4 = new javax.swing.JPanel();
+        jButton9 = new javax.swing.JButton();
+        btnRegistrarRecarga = new javax.swing.JButton();
+        btnEditar14 = new javax.swing.JButton();
+        btnEliminar12 = new javax.swing.JButton();
+        btnModificarRecarga = new javax.swing.JButton();
+        btnEditar15 = new javax.swing.JButton();
+        btnEliminarRecarga = new javax.swing.JButton();
+        btnEliminar13 = new javax.swing.JButton();
+        btnEditar16 = new javax.swing.JButton();
+        btnVerTicket = new javax.swing.JButton();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        txtEmailDestino = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
+        pnlBotonesBusqueda6 = new Clases.CrazyPanel();
+        txtBuscar6 = new javax.swing.JTextField();
         pnlConsumos = new raven.crazypanel.CrazyPanel();
         menuConsumos = new Clases.CrazyPanel();
         btnmenu5 = new javax.swing.JButton();
@@ -220,172 +299,232 @@ public class VistaUsuario extends javax.swing.JFrame {
 
         pnlRecargas.setLayout(new java.awt.BorderLayout());
 
-        menuRecargas.setAlignmentX(1.0F);
-        menuRecargas.setPreferredSize(new java.awt.Dimension(100, 80));
+        menuRecargas1.setAlignmentX(1.0F);
+        menuRecargas1.setPreferredSize(new java.awt.Dimension(100, 80));
 
-        btnmenu4.setBackground(new java.awt.Color(30, 30, 30));
-        btnmenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icono/menu.png"))); // NOI18N
-        btnmenu4.setPreferredSize(new java.awt.Dimension(120, 123));
-        btnmenu4.addActionListener(new java.awt.event.ActionListener() {
+        btnmenu6.setBackground(new java.awt.Color(30, 30, 30));
+        btnmenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icono/menu.png"))); // NOI18N
+        btnmenu6.setPreferredSize(new java.awt.Dimension(120, 123));
+        btnmenu6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenu4ActionPerformed(evt);
+                btnmenu6ActionPerformed(evt);
             }
         });
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Recargas");
-        jLabel18.setAlignmentX(1.0F);
-        jLabel18.setPreferredSize(new java.awt.Dimension(262, 40));
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Recargas");
+        jLabel19.setAlignmentX(1.0F);
+        jLabel19.setPreferredSize(new java.awt.Dimension(262, 40));
 
-        javax.swing.GroupLayout menuRecargasLayout = new javax.swing.GroupLayout(menuRecargas);
-        menuRecargas.setLayout(menuRecargasLayout);
-        menuRecargasLayout.setHorizontalGroup(
-            menuRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuRecargasLayout.createSequentialGroup()
+        javax.swing.GroupLayout menuRecargas1Layout = new javax.swing.GroupLayout(menuRecargas1);
+        menuRecargas1.setLayout(menuRecargas1Layout);
+        menuRecargas1Layout.setHorizontalGroup(
+            menuRecargas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuRecargas1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnmenu4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnmenu6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(892, Short.MAX_VALUE))
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(900, Short.MAX_VALUE))
         );
-        menuRecargasLayout.setVerticalGroup(
-            menuRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuRecargasLayout.createSequentialGroup()
+        menuRecargas1Layout.setVerticalGroup(
+            menuRecargas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuRecargas1Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(menuRecargasLayout.createSequentialGroup()
+            .addGroup(menuRecargas1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnmenu4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnmenu6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlRecargas.add(menuRecargas, java.awt.BorderLayout.PAGE_START);
+        pnlRecargas.add(menuRecargas1, java.awt.BorderLayout.PAGE_START);
 
-        tablaRecargas.setPreferredSize(new java.awt.Dimension(1245, 530));
+        tablaRecargas1.setPreferredSize(new java.awt.Dimension(1245, 530));
+        tablaRecargas1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblRecargas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Codigo de Recarga", "Tarjeta", "Monto de Recarga", "Fecha de Recarga", "Estado"
+                "Codigo de Recarga", "Monto de Recarga", "Tarjeta", "Fecha de Recarga", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane6.setViewportView(tblRecargas);
 
-        RecargaBotones.setEnabled(false);
-        RecargaBotones.setPreferredSize(new java.awt.Dimension(900, 216));
-        RecargaBotones.addContainerListener(new java.awt.event.ContainerAdapter() {
+        tablaRecargas1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 244, 1245, 350));
+
+        RecargaBotones1.setEnabled(false);
+        RecargaBotones1.setPreferredSize(new java.awt.Dimension(900, 216));
+        RecargaBotones1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                RecargaBotonesComponentAdded(evt);
+                RecargaBotones1ComponentAdded(evt);
             }
         });
-        RecargaBotones.setLayout(new java.awt.BorderLayout());
+        RecargaBotones1.setLayout(new java.awt.BorderLayout());
 
-        pnlRecargasForm.setMinimumSize(new java.awt.Dimension(1220, 200));
-        pnlRecargasForm.setPreferredSize(new java.awt.Dimension(1217, 146));
-        pnlRecargasForm.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlRecargasForm2.setMinimumSize(new java.awt.Dimension(1220, 200));
+        pnlRecargasForm2.setPreferredSize(new java.awt.Dimension(1217, 146));
+        pnlRecargasForm2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlRecargasForm1.setPreferredSize(new java.awt.Dimension(200, 200));
-        pnlRecargasForm1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlRecargasForm3.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlRecargasForm3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel22.setText("N\" de Tarjeta");
-        pnlRecargasForm1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        pnlRecargasForm1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
+        jLabel23.setText("CodRecarga");
+        pnlRecargasForm3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        pnlRecargasForm3.add(txtcodrecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 190, -1));
 
-        jLabel25.setText("Monto");
-        pnlRecargasForm1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
+        cbxestadoRecarga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "inactivo" }));
+        pnlRecargasForm3.add(cbxestadoRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 186, -1));
 
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+        jLabel54.setText("Estado");
+        pnlRecargasForm3.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 101, -1));
+
+        pnlRecargasForm2.add(pnlRecargasForm3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 340, 160));
+
+        pnlRecargasForm4.setPreferredSize(new java.awt.Dimension(200, 200));
+        pnlRecargasForm4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel50.setText("N\" de Tarjeta");
+        pnlRecargasForm4.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        pnlRecargasForm4.add(txtCodTarjetaRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 280, -1));
+
+        jLabel53.setText("Monto");
+        pnlRecargasForm4.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, -1));
+
+        txtmontorecarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
+                txtmontorecargaActionPerformed(evt);
             }
         });
-        pnlRecargasForm1.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
+        pnlRecargasForm4.add(txtmontorecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 280, -1));
 
-        pnlRecargasForm.add(pnlRecargasForm1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 340, 160));
+        pnlRecargasForm2.add(pnlRecargasForm4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 340, 160));
 
-        RecargaBotones.add(pnlRecargasForm, java.awt.BorderLayout.CENTER);
+        pnlTarjeraopc4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtBuscar4.setMinimumSize(new java.awt.Dimension(650, 30));
-        txtBuscar4.setPreferredSize(new java.awt.Dimension(450, 30));
-        txtBuscar4.addActionListener(new java.awt.event.ActionListener() {
+        jButton9.setText("Agregar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscar4ActionPerformed(evt);
+                jButton9ActionPerformed(evt);
             }
         });
+        pnlTarjeraopc4.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 6, -1, -1));
 
-        btnRecargar.setText("Recargar");
-        btnRecargar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegistrarRecarga.setText("Recargar");
+        btnRegistrarRecarga.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRecargarMouseClicked(evt);
+                btnRegistrarRecargaMouseClicked(evt);
             }
         });
-        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarRecarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecargarActionPerformed(evt);
+                btnRegistrarRecargaActionPerformed(evt);
             }
         });
+        pnlTarjeraopc4.add(btnRegistrarRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 33, -1, -1));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnEditar14.setText("Cancelar");
+        btnEditar14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar14ActionPerformed(evt);
+            }
+        });
+        pnlTarjeraopc4.add(btnEditar14, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 33, -1, -1));
 
-        javax.swing.GroupLayout pnlBotonesBusqueda4Layout = new javax.swing.GroupLayout(pnlBotonesBusqueda4);
-        pnlBotonesBusqueda4.setLayout(pnlBotonesBusqueda4Layout);
-        pnlBotonesBusqueda4Layout.setHorizontalGroup(
-            pnlBotonesBusqueda4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBotonesBusqueda4Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(txtBuscar4, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
-                .addComponent(btnRecargar)
-                .addGap(17, 17, 17))
-        );
-        pnlBotonesBusqueda4Layout.setVerticalGroup(
-            pnlBotonesBusqueda4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBotonesBusqueda4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlBotonesBusqueda4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlBotonesBusqueda4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtBuscar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnRecargar)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        btnEliminar12.setText("Modificar");
+        btnEliminar12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar12ActionPerformed(evt);
+            }
+        });
+        pnlTarjeraopc4.add(btnEliminar12, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 62, -1, -1));
 
-        RecargaBotones.add(pnlBotonesBusqueda4, java.awt.BorderLayout.PAGE_START);
+        btnModificarRecarga.setText("Modificar");
+        btnModificarRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarRecargaActionPerformed(evt);
+            }
+        });
+        pnlTarjeraopc4.add(btnModificarRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 91, -1, -1));
 
-        javax.swing.GroupLayout tablaRecargasLayout = new javax.swing.GroupLayout(tablaRecargas);
-        tablaRecargas.setLayout(tablaRecargasLayout);
-        tablaRecargasLayout.setHorizontalGroup(
-            tablaRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(RecargaBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1237, Short.MAX_VALUE)
-            .addComponent(jScrollPane4)
-        );
-        tablaRecargasLayout.setVerticalGroup(
-            tablaRecargasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablaRecargasLayout.createSequentialGroup()
-                .addComponent(RecargaBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnEditar15.setText("Cancelar");
+        btnEditar15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar15ActionPerformed(evt);
+            }
+        });
+        pnlTarjeraopc4.add(btnEditar15, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 91, -1, -1));
 
-        pnlRecargas.add(tablaRecargas, java.awt.BorderLayout.CENTER);
+        btnEliminarRecarga.setText("Eliminar");
+        pnlTarjeraopc4.add(btnEliminarRecarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 149, -1, -1));
+
+        btnEliminar13.setText("Eliminar");
+        btnEliminar13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar13ActionPerformed(evt);
+            }
+        });
+        pnlTarjeraopc4.add(btnEliminar13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+
+        btnEditar16.setText("Cancelar");
+        pnlTarjeraopc4.add(btnEditar16, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 149, -1, -1));
+
+        pnlRecargasForm2.add(pnlTarjeraopc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 220, 180));
+
+        btnVerTicket.setText("Ver Ticket");
+        btnVerTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerTicketActionPerformed(evt);
+            }
+        });
+        pnlRecargasForm2.add(btnVerTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 130, 40));
+
+        jLabel66.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel66.setText("Enviar ticket a un Email");
+        pnlRecargasForm2.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 160, 30));
+
+        jLabel56.setText("Email de Destino");
+        pnlRecargasForm2.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 150, 30));
+        pnlRecargasForm2.add(txtEmailDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 180, 40));
+
+        btnEnviar.setText("Enviar Ticket ");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+        pnlRecargasForm2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 130, 100, 40));
+
+        RecargaBotones1.add(pnlRecargasForm2, java.awt.BorderLayout.CENTER);
+
+        pnlBotonesBusqueda6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtBuscar6.setMinimumSize(new java.awt.Dimension(650, 30));
+        txtBuscar6.setPreferredSize(new java.awt.Dimension(450, 30));
+        txtBuscar6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscar6ActionPerformed(evt);
+            }
+        });
+        pnlBotonesBusqueda6.add(txtBuscar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+
+        RecargaBotones1.add(pnlBotonesBusqueda6, java.awt.BorderLayout.PAGE_START);
+
+        tablaRecargas1.add(RecargaBotones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1245, -1));
+
+        pnlRecargas.add(tablaRecargas1, java.awt.BorderLayout.CENTER);
 
         paneles.add(pnlRecargas, "card2");
 
@@ -526,7 +665,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneles, javax.swing.GroupLayout.DEFAULT_SIZE, 1297, Short.MAX_VALUE)
+            .addComponent(paneles, javax.swing.GroupLayout.PREFERRED_SIZE, 1297, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,30 +688,6 @@ public class VistaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TarjetaBotonesComponentAdded
 
-    private void btnmenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu4ActionPerformed
-        Drawer.getInstance().showDrawer();
-    }//GEN-LAST:event_btnmenu4ActionPerformed
-
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
-
-    private void txtBuscar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscar4ActionPerformed
-
-    private void btnRecargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRecargarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRecargarMouseClicked
-
-    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRecargarActionPerformed
-
-    private void RecargaBotonesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_RecargaBotonesComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RecargaBotonesComponentAdded
-
     private void btnmenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu5ActionPerformed
         Drawer.getInstance().showDrawer();
     }//GEN-LAST:event_btnmenu5ActionPerformed
@@ -584,6 +699,97 @@ public class VistaUsuario extends javax.swing.JFrame {
     private void ConsumoBotonesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_ConsumoBotonesComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_ConsumoBotonesComponentAdded
+
+    private void btnmenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenu6ActionPerformed
+        Drawer.getInstance().showDrawer();
+    }//GEN-LAST:event_btnmenu6ActionPerformed
+
+    private void txtmontorecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmontorecargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmontorecargaActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void btnRegistrarRecargaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarRecargaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarRecargaMouseClicked
+
+    private void btnRegistrarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarRecargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarRecargaActionPerformed
+
+    private void btnEditar14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditar14ActionPerformed
+
+    private void btnEliminar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar12ActionPerformed
+
+    private void btnModificarRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarRecargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarRecargaActionPerformed
+
+    private void btnEditar15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditar15ActionPerformed
+
+    private void btnEliminar13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar13ActionPerformed
+
+    private void btnVerTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTicketActionPerformed
+        try {
+
+            Conexion con = new Conexion();
+            Connection conn = con.crearConexion();
+
+            // Compilar el archivo .jasper
+            JasperReport jasperReport = JasperCompileManager.compileReport("src\\Reportes\\TicketRecarga.jrxml");
+
+            // Paso 3: Llenar el informe con datos desde la base de datos.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+
+            // Paso 4: Mostrar el informe (puedes exportarlo a diferentes formatos también).
+            JasperViewer.viewReport(jasperPrint);
+
+            // O exportarlo a PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "src\\Reportes\\TicketRecarga.pdf");
+
+            //return jasperPrint;
+        } catch (JRException err) {
+            err.printStackTrace();
+            System.out.println("INGRESO AL CATCH ERROR");
+            System.out.println("ERROR.... " + err);
+            //return null;
+        }
+    }//GEN-LAST:event_btnVerTicketActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+
+        /*enviarCorreo(
+            "luchitozabalaga@outlook.es",
+            "Ticket de Recarga - EtravelEase",
+            "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
+            "C:\\Users\\LuisDev\\Documents\\TicketRecarga.pdf"
+        );*/
+        enviarCorreo(
+            txtEmailDestino.getText(),
+            "Ticket de Recarga - EtravelEase",
+            "En el archivo pdf encontrara información de la recarga realizada en nuestro sistema EtravelEase",
+            "src\\Reportes\\TicketRecarga.pdf"
+        );
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void txtBuscar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar6ActionPerformed
+
+    private void RecargaBotones1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_RecargaBotones1ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RecargaBotones1ComponentAdded
 
     /**
      * @param args the command line arguments
@@ -602,48 +808,126 @@ public class VistaUsuario extends javax.swing.JFrame {
             }
         });
     }
+        public static void enviarCorreo(String destinatario, String asunto, String cuerpo, String rutaArchivo) {
+
+        // Configuración para el servidor SMTP de Outlook
+        String host = "smtp.office365.com";
+        String port = "587";
+        String username = "luchitozabalaga@outlook.es";
+        String password = "Jorgezabalag@90";
+        System.out.println(destinatario);
+        // Propiedades para la sesión
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", port);
+
+        // Crear una sesión con autenticación
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Crear un mensaje de correo
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+            message.setSubject(asunto);
+
+            // Crear el cuerpo del mensaje
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(cuerpo);
+
+            // Crear la parte adjunta para el archivo PDF
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            String filePath = rutaArchivo; // Reemplazar con la ruta del archivo PDF
+            DataSource source = new FileDataSource(filePath);
+            attachmentPart.setDataHandler(new DataHandler(source));
+            attachmentPart.setFileName("TicketRecarga.pdf");
+
+            // Combinar las partes del mensaje
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            multipart.addBodyPart(attachmentPart);
+
+            // Establecer el contenido del mensaje como la combinación de partes
+            message.setContent(multipart);
+
+            // Enviar el mensaje
+            Transport.send(message);
+
+            JOptionPane.showMessageDialog(null, "Email enviado correctamente!!!");
+
+            System.out.println("Correo enviado correctamente.");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public Clases.CrazyPanel ConsumoBotones;
-    public Clases.CrazyPanel RecargaBotones;
+    public Clases.CrazyPanel RecargaBotones1;
     public Clases.CrazyPanel TarjetaBotones;
-    private javax.swing.JButton btnRecargar;
+    private javax.swing.JButton btnEditar14;
+    private javax.swing.JButton btnEditar15;
+    private javax.swing.JButton btnEditar16;
+    private javax.swing.JButton btnEliminar12;
+    private javax.swing.JButton btnEliminar13;
+    public javax.swing.JButton btnEliminarRecarga;
+    private javax.swing.JButton btnEnviar;
+    public javax.swing.JButton btnModificarRecarga;
+    public javax.swing.JButton btnRegistrarRecarga;
+    private javax.swing.JButton btnVerTicket;
     private javax.swing.JButton btnmenu3;
-    private javax.swing.JButton btnmenu4;
     private javax.swing.JButton btnmenu5;
+    private javax.swing.JButton btnmenu6;
+    public javax.swing.JComboBox<String> cbxestadoRecarga;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel66;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
     private Clases.CrazyPanel menuConsumos;
-    private Clases.CrazyPanel menuRecargas;
+    private Clases.CrazyPanel menuRecargas1;
     private Clases.CrazyPanel menuTarjetas;
     public raven.crazypanel.CrazyPanel paneles;
     private Clases.CrazyPanel pnlBotonesBusqueda3;
-    private Clases.CrazyPanel pnlBotonesBusqueda4;
     private Clases.CrazyPanel pnlBotonesBusqueda5;
+    private Clases.CrazyPanel pnlBotonesBusqueda6;
     public raven.crazypanel.CrazyPanel pnlConsumos;
     public raven.crazypanel.CrazyPanel pnlRecargas;
-    private Clases.CrazyPanel pnlRecargasForm;
-    private Clases.CrazyPanel pnlRecargasForm1;
+    private Clases.CrazyPanel pnlRecargasForm2;
+    private Clases.CrazyPanel pnlRecargasForm3;
+    private Clases.CrazyPanel pnlRecargasForm4;
+    private javax.swing.JPanel pnlTarjeraopc4;
     public raven.crazypanel.CrazyPanel pnlTarjetas;
     public Clases.CrazyPanel tablaConsumos;
-    public Clases.CrazyPanel tablaRecargas;
+    public Clases.CrazyPanel tablaRecargas1;
     public Clases.CrazyPanel tablaTarjetas;
+    public javax.swing.JTable tblRecargas;
     private javax.swing.JTextField txtBuscar3;
-    private javax.swing.JTextField txtBuscar4;
     private javax.swing.JTextField txtBuscar5;
+    private javax.swing.JTextField txtBuscar6;
+    public javax.swing.JTextField txtCodTarjetaRecarga;
+    private javax.swing.JTextField txtEmailDestino;
+    public javax.swing.JTextField txtcodrecarga;
+    public javax.swing.JTextField txtmontorecarga;
     // End of variables declaration//GEN-END:variables
 }
