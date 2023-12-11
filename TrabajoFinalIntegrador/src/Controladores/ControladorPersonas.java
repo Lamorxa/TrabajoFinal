@@ -6,11 +6,16 @@ package Controladores;
 
 import java.awt.event.ActionListener;
 import Vistas.Vistaadministrador;
+import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import modelos.Personas;
 import modelos.PersonasDAO;
@@ -44,7 +49,6 @@ public class ControladorPersonas implements ActionListener{
         if (views.txtapematpersona.getText().equals ("" )||
             views.txtdnipersona.getText().equals("")||
             views.txtnombrepersona.getText().equals("")||
-            views.txtapematpersona.getText().equals("")||
             views.txtapepatpersona.getText().equals("")||
             views.txtcelusuario.getText().equals("")||
             views.txtemail.getText().equals("")
