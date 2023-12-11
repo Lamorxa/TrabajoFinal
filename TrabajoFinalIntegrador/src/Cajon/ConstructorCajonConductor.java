@@ -34,7 +34,6 @@ public class ConstructorCajonConductor extends SimpleDrawerBuilder{
             {"~Administración~"},
             {"Consumos"},
             {"Rutas"},
-            {"Transporte", "Empresa", "Unidades"},
             {"~Configuración~"},
             {"Proximamente"}
                 
@@ -70,20 +69,7 @@ public class ConstructorCajonConductor extends SimpleDrawerBuilder{
                          main3.pnlUnidades.setVisible(false);
                          
                     }
-                    if (i == 2 && s == 1) {
-                         System.out.println("Menu " + i + " " + s);
-                         main3.pnlConsumos.setVisible(false);
-                         main3.pnlRutas.setVisible(false);
-                         main3.pnlEmpresas.setVisible(true);
-                         main3.pnlUnidades.setVisible(false);
-                    }
-                    if (i == 2 && s == 2) {
-                         System.out.println("Menu " + i + " " + s);
-                         main3.pnlConsumos.setVisible(false);
-                         main3.pnlRutas.setVisible(false);
-                         main3.pnlEmpresas.setVisible(false);
-                         main3.pnlUnidades.setVisible(true);
-                    }
+                   
                     
                 }
             });
