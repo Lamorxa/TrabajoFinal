@@ -785,7 +785,7 @@
                           <Component id="btnmenu2" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="918" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -856,7 +856,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="UsuarioBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="UsuarioBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="1191" max="-2" attributes="0"/>
@@ -1377,7 +1377,7 @@
                           <Component id="btnmenu3" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="893" max="32767" attributes="0"/>
+                          <EmptySpace pref="900" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1448,7 +1448,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="TarjetaBotones" alignment="1" pref="1238" max="32767" attributes="0"/>
+                      <Component id="TarjetaBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="1225" max="-2" attributes="0"/>
@@ -1698,12 +1698,12 @@
                             <Property name="useNullLayout" type="boolean" value="false"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="jButton2">
+                            <Component class="javax.swing.JButton" name="btnactaddtar">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Agregar"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnactaddtarActionPerformed"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1728,12 +1728,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnEditar11">
+                            <Component class="javax.swing.JButton" name="btncanctar">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditar11ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncanctarActionPerformed"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1741,12 +1741,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnEliminar10">
+                            <Component class="javax.swing.JButton" name="btnactmodtar">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Modificar"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminar10ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnactmodtarActionPerformed"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1770,12 +1770,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnEditar12">
+                            <Component class="javax.swing.JButton" name="btncanctar1">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditar12ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncanctar1ActionPerformed"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1796,12 +1796,12 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnEliminar11">
+                            <Component class="javax.swing.JButton" name="btnactdelltar">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Eliminar"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminar11ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnactdelltarActionPerformed"/>
                               </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -1809,7 +1809,7 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnEditar13">
+                            <Component class="javax.swing.JButton" name="btncanctar2">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                               </Properties>
@@ -1889,7 +1889,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="781" max="32767" attributes="0"/>
+                                  <EmptySpace pref="788" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2225,16 +2225,6 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtCodTarjetaRecarga">
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="20" y="40" width="280" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
                             <Component class="javax.swing.JLabel" name="jLabel53">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Monto"/>
@@ -2258,6 +2248,22 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
+                            <Component class="javax.swing.JComboBox" name="cbxtarjetasrecarga">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="0"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                              </AuxValues>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="20" y="50" width="280" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
                           </SubComponents>
                         </Container>
                         <Container class="javax.swing.JPanel" name="pnlTarjeraopc4">
@@ -2271,19 +2277,6 @@
                             <Property name="useNullLayout" type="boolean" value="false"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="jButton9">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Agregar"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
-                              </Events>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="78" y="6" width="-1" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
                             <Component class="javax.swing.JButton" name="btnRegistrarRecarga">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Recargar"/>
@@ -2298,32 +2291,6 @@
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="31" y="33" width="-1" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="btnEditar14">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Cancelar"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditar14ActionPerformed"/>
-                              </Events>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="126" y="33" width="-1" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="btnEliminar12">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Modificar"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminar12ActionPerformed"/>
-                              </Events>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="72" y="62" width="-1" height="-1"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
@@ -2343,19 +2310,6 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnEditar15">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Cancelar"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditar15ActionPerformed"/>
-                              </Events>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="126" y="91" width="-1" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
                             <Component class="javax.swing.JButton" name="btnEliminarRecarga">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Eliminar"/>
@@ -2366,29 +2320,6 @@
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="31" y="149" width="-1" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="btnEliminar13">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Eliminar"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminar13ActionPerformed"/>
-                              </Events>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="80" y="120" width="-1" height="-1"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="btnEditar16">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Cancelar"/>
-                              </Properties>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="126" y="149" width="-1" height="-1"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
@@ -2522,7 +2453,7 @@
                           <Component id="btnmenu5" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel26" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="918" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2593,7 +2524,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="ConsumoBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="ConsumoBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane5" max="32767" attributes="0"/>
@@ -2995,7 +2926,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="788" max="32767" attributes="0"/>
+                                  <EmptySpace pref="806" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3064,7 +2995,7 @@
                           <Component id="btnmenu6" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel29" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="900" max="32767" attributes="0"/>
+                          <EmptySpace pref="918" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3135,7 +3066,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="RutasBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="RutasBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane6" max="32767" attributes="0"/>
@@ -3529,7 +3460,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="788" max="32767" attributes="0"/>
+                                  <EmptySpace pref="806" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3598,7 +3529,7 @@
                           <Component id="btnmenu7" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel34" min="-2" pref="297" max="-2" attributes="0"/>
-                          <EmptySpace pref="893" max="32767" attributes="0"/>
+                          <EmptySpace pref="918" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3669,7 +3600,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="EmpresasBotones" alignment="1" pref="1238" max="32767" attributes="0"/>
+                      <Component id="EmpresasBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane7" max="32767" attributes="0"/>
@@ -4081,7 +4012,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="781" max="32767" attributes="0"/>
+                                  <EmptySpace pref="806" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4221,7 +4152,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="UnidadesBotones" alignment="1" pref="1245" max="32767" attributes="0"/>
+                      <Component id="UnidadesBotones" alignment="1" pref="1263" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane8" max="32767" attributes="0"/>
@@ -4253,9 +4184,9 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="0">
                             <Column editable="true" title="C&#xf3;digo de Unidad" type="java.lang.Integer"/>
-                            <Column editable="true" title="C&#xf3;digo de SOAT" type="java.lang.Integer"/>
-                            <Column editable="true" title="ID de Ruta" type="java.lang.Integer"/>
                             <Column editable="true" title="DNI" type="java.lang.Integer"/>
+                            <Column editable="true" title="ID de Ruta" type="java.lang.Integer"/>
+                            <Column editable="true" title="C&#xf3;digo de SOAT" type="java.lang.Integer"/>
                             <Column editable="true" title="Estado" type="java.lang.String"/>
                           </Table>
                         </Property>
@@ -4683,7 +4614,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Component id="txtBuscar8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="788" max="32767" attributes="0"/>
+                                  <EmptySpace pref="806" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

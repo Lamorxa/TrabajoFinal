@@ -32,19 +32,19 @@ public class ControladorRegistroRecargas implements ActionListener {
 @Override
 public void actionPerformed(ActionEvent e) {
     if (e.getSource() == views.btnRegistrarRecarga) {
-        if (views.txtCodTarjetaRecarga.getText().equals("") ||
-            views.txtmontorecarga.getText().equals("") ||
-            views.txtcodrecarga.getText().equals("")) {
+        if (views.cbxtarjetasrecarga.getSelectedItem().equals("") ||
+            views.txtmontorecarga.getText().equals("")) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         } else {
             registroRecargas.setCodRecarga(Integer.parseInt(views.txtcodrecarga.getText()));
-            registroRecargas.setCodTarjeta(views.txtCodTarjetaRecarga.getText());
+            registroRecargas.setCodTarjeta(views.cbxtarjetasrecarga.getSelectedItem().toString());
             registroRecargas.setMontoRecarga(Double.parseDouble(views.txtmontorecarga.getText()));
             registroRecargas.setEstado(views.cbxestadoRecarga.getSelectedItem().toString());
 
             if (registroRecargasDAO.registrarRecarga(registroRecargas)) {
                 Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_RIGHT, "Registrado corectamente");
                 limpiarTabla();
+                registroRecargasDAO.actualizarsaldoconsumo(registroRecargas);
                 listarRecargas();
             } else {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_RIGHT, "Error al registrar");
@@ -53,13 +53,13 @@ public void actionPerformed(ActionEvent e) {
     }
 
     if (e.getSource() == views.btnModificarRecarga) {
-        if (views.txtCodTarjetaRecarga.getText().equals("") ||
+        if (views.cbxtarjetasrecarga.getSelectedItem().equals("") ||
             views.txtmontorecarga.getText().equals("") ||
             views.txtcodrecarga.getText().equals("")) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         } else {
             registroRecargas.setCodRecarga(Integer.parseInt(views.txtcodrecarga.getText()));
-            registroRecargas.setCodTarjeta(views.txtCodTarjetaRecarga.getText());
+            registroRecargas.setCodTarjeta(views.cbxtarjetasrecarga.getSelectedItem().toString());
             registroRecargas.setMontoRecarga(Double.parseDouble(views.txtmontorecarga.getText()));
             registroRecargas.setEstado(views.cbxestadoRecarga.getSelectedItem().toString());
           
@@ -74,13 +74,12 @@ public void actionPerformed(ActionEvent e) {
     }
 
     if (e.getSource() == views.btnEliminarRecarga) {
-        if (views.txtCodTarjetaRecarga.getText().equals("") ||
-            views.txtmontorecarga.getText().equals("") ||
-            views.txtcodrecarga.getText().equals("")) {
+        if (views.cbxtarjetasrecarga.getSelectedItem().equals("") ||
+            views.txtmontorecarga.getText().equals("")) {
             Notifications.getInstance().show(Notifications.Type.WARNING, Notifications.Location.BOTTOM_RIGHT, "Los campos son obligatorios");
         } else {
             registroRecargas.setCodRecarga(Integer.parseInt(views.txtcodrecarga.getText()));
-            registroRecargas.setCodTarjeta(views.txtCodTarjetaRecarga.getText());
+            registroRecargas.setCodTarjeta(views.cbxtarjetasrecarga.getSelectedItem().toString());
             registroRecargas.setMontoRecarga(Double.parseDouble(views.txtmontorecarga.getText()));
             registroRecargas.setEstado(views.cbxestadoRecarga.getSelectedItem().toString());
           

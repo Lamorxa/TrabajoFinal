@@ -121,4 +121,34 @@ String sql = "UPDATE tarjetas SET Saldo = Saldo - ? WHERE CodTarjeta = ?";
     }
 
 }
+public List<RegistroConsumos> listarConsumosOrdenadosPorCampo(String dni) {
+    List<RegistroConsumos> consumosLista = new ArrayList<>();
+    String sql = "SELECT rc.* FROM registroconsumos rc JOIN unidades u ON rc.CodUnidad = u.CodUnidad WHERE u.Dni = ?";
+    Conexion cn = new Conexion();
+    try {
+        Connection con = cn.crearConexion();
+        PreparedStatement ps = con.prepareStatement(sql);
+        
+        // Establecer el valor del parámetro DNI de manera segura
+        ps.setString(1, dni);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            RegistroConsumos consumos = new RegistroConsumos();
+            consumos.setCodConsumo(rs.getInt("CodConsumo"));
+            consumos.setMontoConsumo(rs.getDouble("MontoConsumo"));
+            consumos.setCodTarjeta(rs.getString("CodTarjeta"));
+            consumos.setCodUnidad(rs.getString("CodUnidad"));
+            consumos.setFechaConsumo(rs.getString("FechaConsumo"));
+            consumos.setEstado(rs.getString("Estado"));
+            consumosLista.add(consumos);
+        }
+        
+        cn.cierraConsultas();
+    } catch (SQLException e) {
+        System.out.println("Error al listar consumos ordenados por campo: " + e.toString());
+    }
+    return consumosLista;
+}
 }

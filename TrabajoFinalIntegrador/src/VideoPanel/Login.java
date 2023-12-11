@@ -92,7 +92,7 @@ public class Login extends JPanel {
 
                                 break;
                             case 3:
-                                VistaUsuario vistusu = new VistaUsuario();
+                                VistaUsuario vistusu = new VistaUsuario(us.getDni());
                                 vistusu.setVisible(true);
 
                                 break;

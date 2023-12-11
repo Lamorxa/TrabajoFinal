@@ -47,6 +47,41 @@ public boolean registrarRecarga(RegistroRecargas registrorecargas){
         return false;
     }
 }   
+public List<RegistroRecargas> listarRecargasPorDni(String dni) {
+    List<RegistroRecargas> recargasLista = new ArrayList<>();
+    String sql = "SELECT rr.* FROM registrorecargas rr " +
+                 "JOIN tarjetas t ON rr.CodTarjeta = t.CodTarjeta " +
+                 "JOIN personas p ON t.Dni = p.Dni " +
+                 "WHERE p.Dni = ?";
+    
+    Conexion cn = new Conexion();
+    
+    try (Connection con = cn.crearConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        // Set the DNI parameter
+        ps.setString(1, dni);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                RegistroRecargas recarga = new RegistroRecargas();
+                recarga.setCodRecarga(rs.getInt("CodRecarga"));
+                recarga.setMontoRecarga(rs.getDouble("MontoRecarga"));
+                recarga.setCodTarjeta(rs.getString("CodTarjeta"));
+                recarga.setFechaRecarga(rs.getString("FechaRecarga"));
+                recarga.setEstado(rs.getString("estado"));
+                recargasLista.add(recarga);
+            }
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al listar recargas por DNI: " + e.toString());
+    } finally {
+        cn.cierraConsultas();
+    }
+    
+    return recargasLista;
+}
 
 public List<RegistroRecargas> listarRecargas() {
     List<RegistroRecargas> RecargasLista = new ArrayList<>();
